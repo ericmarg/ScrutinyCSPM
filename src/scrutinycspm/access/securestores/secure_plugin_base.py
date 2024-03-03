@@ -1,6 +1,6 @@
 import abc
 
-class SecretPluginBase(abc.ABC):
+class SecurePluginBase(abc.ABC):
 
     @abc.abstractmethod
     def get_provider_name(self):
