@@ -1,0 +1,21 @@
+# Virtual env folders
+.venv
+venv/
+ENV/
+scrutiny_env
+
+# Virtual env bytecode
+*.pyc
+
+# Virtual env packages
+.venv/lib/python*/site-packages/
+
+# Virtual env lock files
+pip-selfcheck.json
+
+# Cache dirs for packages
+.virtualenv/
+pip-wheel-metadata/
+
+# Log files
+*.log
