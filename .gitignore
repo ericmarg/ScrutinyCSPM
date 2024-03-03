@@ -3,6 +3,7 @@
 venv/
 ENV/
 scrutiny_env/
+.scrutiny_env
 
 # Virtual env bytecode
 *.pyc
