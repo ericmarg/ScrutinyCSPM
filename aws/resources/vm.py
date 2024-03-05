@@ -1,5 +1,6 @@
 import boto3
 from .security_group import SecurityGroup
+from .volume import Volume
 class EC2Resource:
     def __init__(self, region=None):
         self.client = boto3.client('ec2', region_name=region)
@@ -20,10 +21,7 @@ class EC2Resource:
                     for volume in volumes:
                         # Make sure 'Ebs' is present and then extract information
                         if 'Ebs' in volume:
-                            processed_volumes.append({
-                                'VolumeId': volume['Ebs'].get('VolumeId', 'N/A'),
-                                'State': volume['Ebs'].get('Status', 'N/A'),
-                            })
+                            processed_volumes.append(Volume(volume['Ebs']['VolumeId']))
 
                     all_instances.append({
                         'InstanceId': instance['InstanceId'],
