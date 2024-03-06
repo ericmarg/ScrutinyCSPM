@@ -1,3 +1,6 @@
+"""AWS Provider: Gets Public Access Block Configuration for S3 buckets"""
+
+import json
 import boto3
 import botocore.exceptions
 
@@ -18,6 +21,6 @@ for bucket in buckets_list['Buckets']:
     except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
         public_access_block_dict[bucket_name] = '{}'
 
-print('Public Access Block Configuration dictionary (S3 bucket names are the key:)')
-print(public_access_block_dict)
+print(json.dumps(public_access_block_dict))
+print()
 print('End of S3 Report\n')
