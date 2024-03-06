@@ -8,7 +8,7 @@ class SecurePluginBase(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def store_secret(self, name, value):
+    def store_secret(self, *args, **kwargs):
         """Store secret in backend provider"""
         pass
 

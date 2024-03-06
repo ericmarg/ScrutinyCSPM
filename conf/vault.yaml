@@ -1,0 +1,3 @@
+vault:
+  address: https://your-vault-address.com
+  private_path: ../../../conf/private
