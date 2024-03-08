@@ -1,15 +1,15 @@
-from .secure_plugin_base import SecurePluginBase
+from typing import Protocol
 from hvac import Client as HashicorpVaultClient
 import hydra
 from omegaconf import DictConfig
 import sys
 
-class HashicorpVaultPlugin(SecurePluginBase):
+class HashicorpVaultPlugin(Protocol):
     def __init__(self, cfg: DictConfig, *args, **kwargs):
         self.client = HashicorpVaultClient(url=cfg.vault.address)
 
     def get_provider_name(self):
-        return "aws"
+        return "hashicorp vault"
 
     def store_secret(self, name, value):
         # Writing a secret
