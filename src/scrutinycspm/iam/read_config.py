@@ -1,7 +1,7 @@
 import boto3
 from distutils.command.config import config
 import json
-from botocore.exceptions import ClientError
+import botocore.exceptions
 from datetime import datetime
 
 ACCOUNT_ID = '012345678901'
