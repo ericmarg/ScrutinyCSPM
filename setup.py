@@ -6,7 +6,9 @@ setup(
     packages=find_packages(),
     install_requires=[
         "hvac>=2.1.0",
-        "hydra-core >= 1.3.2"
+        "hydra-core >= 1.3.2",
+        "azure-identity>=1.6.0",
+        "azure-keyvault-secrets>=4.8.0",
         # other dependencies...
     ],
     # ...

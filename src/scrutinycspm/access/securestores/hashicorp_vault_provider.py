@@ -1,34 +1,8 @@
 import hvac
 from typing import Dict, Any
+import hvac.exceptions
 
 class HashicorpVaultProvider:
-    """
-    A class used to interact with Hashicorp Vault.
-
-    ...
-
-    Attributes
-    ----------
-    client : hvac.Client
-        a client instance to interact with the Hashicorp Vault
-
-    Methods
-    -------
-    __init__(self, vault_url: str, namespace: str) -> None:
-        Initializes the HashicorpVaultProvider with the given vault_url and namespace.
-
-    authenticate_with_username_password(self, username: str, password: str) -> None:
-        Authenticates the client with the given username and password.
-
-    authenticate_with_token(self, token: str) -> None:
-        Authenticates the client with the given token.
-
-    read_secret(self, secret_path: str) -> Dict[str, Any]:
-        Reads the secret at the given secret_path.
-
-    write_secret(self, secret_path: str, secret_data: Dict[str, Any]) -> None:
-        Writes the given secret_data at the given secret_path.
-    """
 
     def __init__(self, vault_url: str, namespace: str) -> None:
         """
@@ -59,9 +33,52 @@ class HashicorpVaultProvider:
         Exception
             If the authentication fails.
         """
-        auth_response = self.client.auth.userpass.login(username=username, password=password)
-        if self.client.is_authenticated():
-            print("authenticated successfully.")
+        try:
+            auth_response = self.client.auth.userpass.login(username=username, password=password)
             self.client.token = auth_response["auth"]["client_token"]
-        else:
-            raise Exception("Authentication failed.")
+        except hvac.exceptions.InvalidRequest as e:
+            raise ValueError("Invalid username or password") from e
+        except hvac.exceptions.Forbidden as e:
+            raise PermissionError("Insufficient permissions to authenticate") from e
+        except hvac.exceptions.VaultError as e:
+            raise Exception("Vault error occurred while authenticating") from e
+        except Exception as e:
+            raise Exception("An error occurred while authenticating") from e
+
+
+    def read_secret(self, path: str, mount_point: str = "secret", version: int = None, **kwargs: Any) -> Dict[
+        str, Any]:
+        try:
+            if version is None:
+                response = self.client.secrets.kv.v2.read_secret_version(path=path, mount_point=mount_point,
+                                                                         **kwargs)
+            else:
+                response = self.client.secrets.kv.v2.read_secret_version(path=path, mount_point=mount_point,
+                                                                         version=version, **kwargs)
+
+            if response:
+                return response["data"]["data"]
+            else:
+                raise ValueError(f"Secret not found at path: {path}")
+
+        except hvac.exceptions.InvalidPath as e:
+            raise ValueError(f"Invalid path: {path}") from e
+        except hvac.exceptions.Forbidden as e:
+            raise PermissionError(f"Insufficient permissions to read secret at path: {path}") from e
+        except hvac.exceptions.VaultError as e:
+            raise Exception(f"Vault error occurred while reading secret at path: {path}") from e
+        except Exception as e:
+            raise Exception(f"An error occurred while reading secret at path: {path}") from e
+
+    def is_authenticated(self) -> bool:
+        try:
+            # Perform a simple operation to check authentication
+            if self.client.token is None:
+                return False
+            else:
+                self.client.sys.read_health_status()
+                return True
+        except hvac.exceptions.Forbidden:
+            return False
+        except hvac.exceptions.VaultError:
+            return False

@@ -1,3 +1,4 @@
 vault:
   address: https://your-vault-address.com
   private_path: ../../../conf/private
+  namespace: admin/test_scrutinycspm
