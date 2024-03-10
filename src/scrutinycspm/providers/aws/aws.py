@@ -8,7 +8,6 @@ s3 = boto3.client('s3')
 
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
 public_access_block_dict = {}
-encryption_dict = {}
 bucket_versioning_dict = {}
 
 # loops through all buckets, obtaining the PublicAccessBlock Configuration
