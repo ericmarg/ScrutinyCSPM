@@ -24,7 +24,7 @@ for bucket in buckets_list['Buckets']:
     try:
         bucket_versioning_status = s3.get_bucket_versioning(Bucket=bucket_name)['Status']
         bucket_versioning_dict[bucket_name] = bucket_versioning_status
-    except KeyError: # handles case where 'Bucket versioning' is disabled
+    except KeyError: # handles case where 'Bucket versioning' has never been turned on
         bucket_versioning_dict[bucket_name] = '{}'
 
 print('Public Access Block report')
