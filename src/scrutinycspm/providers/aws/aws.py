@@ -22,12 +22,6 @@ for bucket in buckets_list['Buckets']:
         public_access_block_dict[bucket_name] = '{}'
 
     try:
-        response = s3.get_bucket_encryption(Bucket=bucket_name)
-        encryption_dict[bucket_name] = response['ServerSideEncryptionConfiguration']
-    except botocore.exceptions.ClientError: # handles case where 'Encryption' is disabled
-        encryption_dict[bucket_name] = '{}'
-
-    try:
         bucket_versioning_status = s3.get_bucket_versioning(Bucket=bucket_name)['Status']
         bucket_versioning_dict[bucket_name] = bucket_versioning_status
     except KeyError: # handles case where 'Bucket versioning' is disabled
@@ -35,9 +29,6 @@ for bucket in buckets_list['Buckets']:
 
 print('Public Access Block report')
 print(json.dumps(public_access_block_dict))
-print()
-print('Encryption Report')
-print(json.dumps(encryption_dict))
 print()
 print('Bucket Versioning report')
 print(json.dumps(bucket_versioning_dict))
