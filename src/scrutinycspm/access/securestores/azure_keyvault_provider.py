@@ -1,11 +1,34 @@
+from azure.core.exceptions import ClientAuthenticationError
 from azure.keyvault.secrets import SecretClient
-from azure.identity import DefaultAzureCredential
+from azure.identity import DefaultAzureCredential, CredentialUnavailableError
+from azure.identity import CertificateCredential
+import logging
 from typing import Dict, Any
+from omegaconf import DictConfig, OmegaConf
+
 
 class AzureKeyVaultProvider:
-    def __init__(self, vault_url: str):
+    def __init__(self, vault_url: str, log_config: DictConfig = OmegaConf.create({"logging": {"level": {"azure_key_vault_provider": "INFO"}}})):
         self.vault_url = vault_url
         self.client = SecretClient(vault_url=vault_url, credential=DefaultAzureCredential())
+
+        logger = logging.getLogger(__name__)
+    def authenticate_with_certificate(tenant_id: str, client_id: str, certificate_path: str):
+
+        try:
+            credential = CertificateCredential(
+                tenant_id=tenant_id,
+                client_id=client_id,
+                certificate_path=certificate_path
+            )
+            return credential
+        except CredentialUnavailableError as no_cert:
+
+            return None
+        except ClientAuthenticationError as credential_error:
+            return None
+
+
 
     def is_authenticated(self) -> bool:
         try:
