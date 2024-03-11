@@ -1,10 +1,10 @@
-package object_storage
+package obj_storage
 
 import rego.v1
 
-default storage_container_compliance := false
+default obj_storage_container_compliant := false
 
-storage_container_compliant if {
+obj_storage_container_compliant if {
     input.AllPublicAccessBlocked = true
-    input.Encrypted = true
+    input.VersioningEnabled= true
 }
