@@ -8,12 +8,11 @@ from omegaconf import DictConfig, OmegaConf
 
 
 class AzureKeyVaultProvider:
-    def __init__(self, vault_url: str, log_config: DictConfig = OmegaConf.create({"logging": {"level": {"azure_key_vault_provider": "INFO"}}})):
+    def __init__(self, vault_url: str, log_config: DictConfig = OmegaConf.create({"logging": {"level": {"azure_key_vault_provider": "ERROR"}}})):
         self.vault_url = vault_url
-        self.client = SecretClient(vault_url=vault_url, credential=DefaultAzureCredential())
-
         logger = logging.getLogger(__name__)
-    def authenticate_with_certificate(tenant_id: str, client_id: str, certificate_path: str):
+
+    def authenticate_with_certificate(self, tenant_id: str, client_id: str, certificate_path: str):
 
         try:
             credential = CertificateCredential(
@@ -27,7 +26,6 @@ class AzureKeyVaultProvider:
             return None
         except ClientAuthenticationError as credential_error:
             return None
-
 
 
     def is_authenticated(self) -> bool:
