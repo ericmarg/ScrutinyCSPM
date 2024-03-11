@@ -5,7 +5,7 @@ class Role:
     def __init__(self, region=None):
         self.client = boto3.client('iam')
 
-    def get_all_policies(self):
+    def get_all_roles(self):
         # Create a paginator
         paginator = self.client.get_paginator('list_roles')
 
