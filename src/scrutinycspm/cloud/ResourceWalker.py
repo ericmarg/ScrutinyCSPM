@@ -1,5 +1,5 @@
+from azure.identity import DefaultAzureCredential
 from typing import Protocol, List
-
 
 class ResourceInfo:
     def __init__(self, name: str, resource_type: str, location: str, resource_id: str):
