@@ -1,4 +1,4 @@
-"""AWS Provider: Gets Public Access Block Configuration for S3 buckets"""
+"""AWS Provider: Scan S3 Buckets"""
 
 import json
 import boto3
@@ -14,17 +14,24 @@ bucket_versioning_dict = {}
 for bucket in buckets_list['Buckets']:
     bucket_name = bucket['Name']
 
+    bucket_properties = {}
     try:
         response = s3.get_public_access_block(Bucket=bucket_name)
         public_access_block_dict[bucket_name] = response['PublicAccessBlockConfiguration']
     except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
         public_access_block_dict[bucket_name] = '{}'
 
+    versioning_config_dict = {}
     try:
         bucket_versioning_status = s3.get_bucket_versioning(Bucket=bucket_name)['Status']
-        bucket_versioning_dict[bucket_name] = bucket_versioning_status
+        if bucket_versioning_status == 'Enabled':
+            versioning_config_dict['VersioningEnabled'] = True
+        else:
+            versioning_config_dict['VersioningEnabled'] = False
+        bucket_versioning_dict[bucket_name] = versioning_config_dict
     except KeyError: # handles case where 'Bucket versioning' has never been turned on
-        bucket_versioning_dict[bucket_name] = '{}'
+        versioning_config_dict['VersioningEnabled'] = False
+        bucket_versioning_dict[bucket_name] = versioning_config_dict
 
 print('Public Access Block report')
 print(json.dumps(public_access_block_dict))
