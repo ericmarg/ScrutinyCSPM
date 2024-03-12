@@ -21,17 +21,16 @@ for bucket in buckets_list['Buckets']:
     except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
         public_access_block_dict[bucket_name] = '{}'
 
-    versioning_config_dict = {}
     try:
         bucket_versioning_status = s3.get_bucket_versioning(Bucket=bucket_name)['Status']
         if bucket_versioning_status == 'Enabled':
-            versioning_config_dict['VersioningEnabled'] = True
+            bucket_properties['VersioningEnabled'] = True
         else:
-            versioning_config_dict['VersioningEnabled'] = False
-        bucket_versioning_dict[bucket_name] = versioning_config_dict
+            bucket_properties['VersioningEnabled'] = False
+        bucket_versioning_dict[bucket_name] = bucket_properties
     except KeyError: # handles case where 'Bucket versioning' has never been turned on
-        versioning_config_dict['VersioningEnabled'] = False
-        bucket_versioning_dict[bucket_name] = versioning_config_dict
+        bucket_properties['VersioningEnabled'] = False
+        bucket_versioning_dict[bucket_name] = bucket_properties
 
 print('Public Access Block report')
 print(json.dumps(public_access_block_dict))
