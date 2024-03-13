@@ -33,10 +33,10 @@ for bucket in buckets_list['Buckets']:
             bucket_properties['VersioningEnabled'] = True
         else:
             bucket_properties['VersioningEnabled'] = False
-        bucket_scan_dict[bucket_name] = bucket_properties
     except KeyError: # handles case where 'Bucket versioning' has never been turned on
         bucket_properties['VersioningEnabled'] = False
-        bucket_scan_dict[bucket_name] = bucket_properties
+    
+    bucket_scan_dict[bucket_name] = bucket_properties
 
 print()
 print('Bucket Scan report')
