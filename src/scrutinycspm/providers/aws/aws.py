@@ -4,6 +4,7 @@ import json
 import boto3
 import botocore.exceptions
 from opa_client.opa import OpaClient
+from opa_client.errors import ConnectionsError
 
 s3 = boto3.client('s3')
 
@@ -26,7 +27,7 @@ for bucket in buckets_list['Buckets']:
             else:
                 bucket_properties['AllPublicAccessBlocked'] = False
                 break
-    except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF(doesn't exist)
+    except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
         bucket_properties['AllPublicAccessBlocked'] = False
 
     try:
@@ -49,4 +50,7 @@ print('End of S3 Report\n')
 # Tests connecting to OPA running in Server mode using OPA-python-client library
 print('Connecting to OPA...')
 client = OpaClient()
-print(client.check_connection())
+try:
+    print(client.check_connection())
+except ConnectionsError:
+    print("OPA Server Unreachable, please check to make sure OPA server is running.")
