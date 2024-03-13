@@ -3,6 +3,7 @@
 import json
 import boto3
 import botocore.exceptions
+from opa_client.opa import OpaClient 
 
 s3 = boto3.client('s3')
 
@@ -35,7 +36,7 @@ for bucket in buckets_list['Buckets']:
             bucket_properties['VersioningEnabled'] = False
     except KeyError: # handles case where 'Bucket versioning' has never been turned on
         bucket_properties['VersioningEnabled'] = False
-    
+   
     bucket_scan_dict[bucket_name] = bucket_properties
 
 print()
@@ -43,3 +44,7 @@ print('Bucket Scan report')
 print(json.dumps(bucket_scan_dict))
 print()
 print('End of S3 Report\n')
+
+print('Connecting to OPA...')
+client = OpaClient()
+print(client.check_connection())
