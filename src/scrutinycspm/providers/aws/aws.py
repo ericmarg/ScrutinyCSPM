@@ -7,7 +7,6 @@ import botocore.exceptions
 s3 = boto3.client('s3')
 
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
-public_access_block_dict = {}
 bucket_scan_dict = {}
 
 # loops through all buckets, obtaining the PublicAccessBlock Configuration
@@ -25,8 +24,6 @@ for bucket in buckets_list['Buckets']:
             else:
                 bucket_properties['AllPublicAccessBlocked'] = False
                 break
-            
-        public_access_block_dict[bucket_name] = response['PublicAccessBlockConfiguration']
     except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
         bucket_properties['AllPublicAccessBlocked'] = False
 
