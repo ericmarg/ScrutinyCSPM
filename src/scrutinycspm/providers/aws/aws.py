@@ -6,6 +6,19 @@ import botocore.exceptions
 from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
 
+obj_storage_policy = """
+package obj_storage
+
+import rego.v1
+
+default obj_storage_container_compliant := false
+
+obj_storage_container_compliant if {
+    input.AllPublicAccessBlocked = true
+    input.VersioningEnabled = true
+}
+"""
+
 s3 = boto3.client('s3')
 
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
@@ -48,9 +61,14 @@ print()
 print('End of S3 Report\n')
 
 # Tests connecting to OPA running in Server mode using OPA-python-client library
-print('Connecting to OPA...')
+print('Connecting to OPA Server...')
 client = OpaClient()
 try:
     print(client.check_connection())
+    for bucket in bucket_scan_dict:
+        bucket_input_data = json.dumps(bucket_scan_dict[bucket])
+        client.update_opa_policy_fromfile(filepath='object_storage.rego', endpoint='obj_storage')
+        opa_result = client.check_policy_rule(input_data=bucket_input_data, package_path='obj_storage', rule_name='obj_storage_container_compliant')
+        print(f'Object Storage Container: {bucket}, Compliant: {opa_result}')  
 except ConnectionsError:
     print("OPA Server Unreachable, please check to make sure OPA server is running.")
