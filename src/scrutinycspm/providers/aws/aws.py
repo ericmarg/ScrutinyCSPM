@@ -10,7 +10,8 @@ s3 = boto3.client('s3')
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
 bucket_scan_dict = {}
 
-# loops through all buckets, obtaining the PublicAccessBlock Configuration
+# loops through all buckets, obtains Public Access Block and Versioning info for each
+# Maps the appropriate AllPublicAccessBlocked and VersioningEnabled flags accordingly
 for bucket in buckets_list['Buckets']:
     bucket_name = bucket['Name']
 
@@ -25,7 +26,7 @@ for bucket in buckets_list['Buckets']:
             else:
                 bucket_properties['AllPublicAccessBlocked'] = False
                 break
-    except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF
+    except botocore.exceptions.ClientError: # handles case where 'Block All Public Access' is OFF(doesn't exist)
         bucket_properties['AllPublicAccessBlocked'] = False
 
     try:
@@ -45,6 +46,7 @@ print(json.dumps(bucket_scan_dict))
 print()
 print('End of S3 Report\n')
 
+# Tests connecting to OPA running in Server mode using OPA-python-client library
 print('Connecting to OPA...')
 client = OpaClient()
 print(client.check_connection())
