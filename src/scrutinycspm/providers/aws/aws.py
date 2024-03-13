@@ -3,7 +3,7 @@
 import json
 import boto3
 import botocore.exceptions
-from opa_client.opa import OpaClient 
+from opa_client.opa import OpaClient
 
 s3 = boto3.client('s3')
 
