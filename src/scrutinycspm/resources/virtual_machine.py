@@ -16,6 +16,9 @@ class VirtualMachine(Resource, ABC):
         type (str): The type or size of the VM.
         status (str): The status of the VM (e.g., running, stopped).
         provider_specific (dict): Provider-specific attributes and settings.
+
+        volumes (list(Volume)): The set of volumes attached to the VM.
+        security_groups (list(SecurityGroup)): The set of security groups associated with the VM.
     """
 
     def __init__(self, id, provider, region):
@@ -24,6 +27,8 @@ class VirtualMachine(Resource, ABC):
         self.type = None
         self.region = None
         self.status = None
+        self.volumes = []
+        self.security_groups = []
         self.provider_specific = {}
         super().__init__(id, provider, region)
 

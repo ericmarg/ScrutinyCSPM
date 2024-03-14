@@ -1,26 +1,41 @@
-import boto3
-class SecurityGroup:
-    def __init__(self, group_id):
-        self.group_id = group_id
-        self.client = boto3.client('ec2')
+from boto3 import client
 
-    def get_details(self):
-        response = self.client.describe_security_groups(GroupIds=[self.group_id])
-        return response['SecurityGroups'][0]
+from ....resources.secuitry_group import SecurityGroup
 
-    def formatRules(self, rule):
-        return {
-            'FromPort': rule.get('FromPort', 'N/A'),
-            'ToPort': rule.get('ToPort', 'N/A'),
-            'IpProtocol': rule.get('IpProtocol', 'N/A'),
-            'IpRanges': rule.get('IpRanges', [])
-        }
 
-    def to_dict(self):
-        sg = self.get_details()
-        return {
-            'GroupId': self.group_id,
-            'GroupName': sg.get('GroupName', 'N/A'),
-            'Inbound': list(map(self.formatRules,sg.get('IpPermissions', []))),
-            'Outbound': list(map(self.formatRules, sg.get('IpPermissionsEgress', [])))
-        }
+class AWSSecurityGroup(SecurityGroup):
+    def __init__(self, id, region):
+        self._client = client('ec2')
+        super().__init__(id=id, provider="AWS", region=region)
+
+    def fetch_data(self):
+        """
+        Fetch security group data from AWS.
+        """
+        response = self._client.describe_security_groups(GroupIds=[self.id])
+        if response['SecurityGroups']:
+            sg = response['SecurityGroups'][0]  # Assuming the ID uniquely identifies the security group
+            self.name = sg.get('GroupName')
+            self.description = sg.get('Description')
+            self.rules = self._parse_rules(sg.get('IpPermissions', []))
+            # Populate provider_specific with any additional details
+            self.provider_specific = {
+                "VpcId": sg.get('VpcId'),
+                "Tags": sg.get('Tags', [])
+            }
+
+    def _parse_rules(self, permissions):
+        """
+        Parse inbound rules from AWS format to a more generic format.
+        """
+        rules = []
+        for permission in permissions:
+            # Simplify and generalize the rule format
+            rule = {
+                "Protocol": permission['IpProtocol'],
+                "FromPort": permission.get('FromPort'),
+                "ToPort": permission.get('ToPort'),
+                "IpRanges": [ip_range['CidrIp'] for ip_range in permission.get('IpRanges', [])]
+            }
+            rules.append(rule)
+        return rules

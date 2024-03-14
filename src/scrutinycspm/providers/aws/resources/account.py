@@ -1,7 +1,7 @@
 import boto3
 
-from ....resources.cloud_account import CloudAccount
 from .vm import VM
+from ....resources.cloud_account import CloudAccount
 
 
 def get_account_id():
