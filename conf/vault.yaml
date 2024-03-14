@@ -1,4 +1,32 @@
-vault:
-  address: https://your-vault-address.com
-  private_path: ../../../conf/private
-  namespace: admin/test_scrutinycspm
+private_path: ../../../conf/private
+secrets:
+  hc_vault:
+    # Address of the Vault server (cloud or on-prem)
+    address: https://vault-cluster-public-vault-54fd150e.54fd150e.z1.hashicorp.cloud:8200
+    # Namespace of the Vault server to be accessed
+    namespace: admin/test_scrutinycspm
+    # Username defined in namespace for the Vault server
+    username: robert1
+    # Password defined in namespace for the Vault server
+    # This is a sensitive field and should be encrypted
+    # It is not recommended to store the password in plain text
+    # This for demonstration purposes only - Do not use in production
+    password: "password12345"
+  azure_key_vault:
+    certificate_authentication: true
+    certificate_path: /home/anypath/tmp1_xf3jfr.pem
+    # Azure Tenant ID and Subscription ID
+    tenant_id: fake_tenant_id
+    client_id: fake_client_id
+    url: https://scrutinycspmvault01test.vault.azure.net/
+  aws_secrets_manager:
+    access_key_id: fake_access_key_id
+    secret_access_key: fake_secret_access_key
+    session_token: fake_session_token
+    region: us-east-2
+repositories:
+  github_1:
+    address: https://github.com/robertfischer3/snarfswap
+    
+    token: placeholder_token
+
