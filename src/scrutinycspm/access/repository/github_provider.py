@@ -1,9 +1,13 @@
-from typing import List
+from typing import List, Optional
 from github import Github, Repository as GitHubRepo, GithubException
 
+
 class GitHubRepository:
-    def __init__(self, access_token: str, repo_name: str):
-        self.github = Github(access_token)
+    def __init__(self, repo_name: str, access_token: Optional[str] = None):
+        if access_token:
+            self.github = Github(access_token)
+        else:
+            self.github = Github()
         self.repo = self.github.get_repo(repo_name)
 
     @property
@@ -40,16 +44,24 @@ class GitHubRepository:
                 raise e
 
     def create_branch(self, branch_name: str) -> None:
+        if not self.github.get_user().get_repo(self.repo.full_name):
+            raise PermissionError("Access token is required to create a branch.")
         source_branch = self.repo.get_branch(self.repo.default_branch)
         self.repo.create_git_ref(ref=f"refs/heads/{branch_name}", sha=source_branch.commit.sha)
 
     def create_file(self, file_path: str, content: str, branch: str, commit_message: str) -> None:
+        if not self.github.get_user().get_repo(self.repo.full_name):
+            raise PermissionError("Access token is required to create a file.")
         self.repo.create_file(file_path, commit_message, content, branch=branch)
 
     def update_file(self, file_path: str, content: str, branch: str, commit_message: str) -> None:
+        if not self.github.get_user().get_repo(self.repo.full_name):
+            raise PermissionError("Access token is required to update a file.")
         contents = self.repo.get_contents(file_path, ref=branch)
         self.repo.update_file(file_path, commit_message, content, contents.sha, branch=branch)
 
     def delete_file(self, file_path: str, branch: str, commit_message: str) -> None:
+        if not self.github.get_user().get_repo(self.repo.full_name):
+            raise PermissionError("Access token is required to delete a file.")
         contents = self.repo.get_contents(file_path, ref=branch)
         self.repo.delete_file(file_path, commit_message, contents.sha, branch=branch)

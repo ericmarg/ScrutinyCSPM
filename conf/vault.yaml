@@ -25,8 +25,7 @@ secrets:
     session_token: fake_session_token
     region: us-east-2
 repositories:
-  github_1:
-    address: https://github.com/robertfischer3/snarfswap
-    
+  github:
+    repository: robertfischer3/snarfswap
     token: placeholder_token
 
