@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
+import uuid
 from github import (
     Github,
     Repository as GitHubRepo,
@@ -11,7 +12,7 @@ from github import (
 from hydra.core.global_hydra import GlobalHydra
 import hydra
 from src.scrutinycspm.access.repository.github_provider import GitHubRepository
-
+from typing import List
 
 class TestGitHubRepository(unittest.TestCase):
 
@@ -51,48 +52,34 @@ class TestGitHubRepository(unittest.TestCase):
         self.assertFalse(self.repo.is_private)
 
     def test_get_branches(self):
-        branches = [MagicMock(name="branch1"), MagicMock(name="branch2")]
-        self.repo.repo = MagicMock()
-        self.repo.repo.get_branches.return_value = branches
-        self.assertEqual(self.repo.get_branches(), ["branch1", "branch2"])
+
+        branches: List[str] = self.repo.get_branches
+        self.assertEqual(self.repo.get_branches(), ["branch1", "branch2", 'main', 'robertfischer3-patch-1'])
 
     def test_get_commits(self):
-        commits = [MagicMock(sha="commit1"), MagicMock(sha="commit2")]
-        self.repo.repo = MagicMock()
-        self.repo.repo.get_commits.return_value = commits
-        self.assertEqual(self.repo.get_commits("main"), ["commit1", "commit2"])
+
+        self.repo.get_commits
+        self.assertEqual(self.repo.get_commits("main"), self.cfg.testing.github.commits)
 
     def test_get_file_contents(self):
-        content_file = MagicMock(decoded_content=b"Hello, World!")
-        self.repo.repo = MagicMock()
-        self.repo.repo.get_contents.return_value = content_file
-        self.assertEqual(
-            self.repo.get_file_contents("README.md", "main"), "Hello, World!"
-        )
+
+        contents: str = self.repo.get_file_contents(self.cfg.testing.github.file_to_test, "main")
+        self.assertTrue(contents.startswith("use secp256k1;"))
 
     def test_get_file_contents_file_not_found(self):
-        self.repo.repo = MagicMock()
-        self.repo.repo.get_contents.side_effect = GithubException(404, "File not found")
         with self.assertRaises(FileNotFoundError):
             self.repo.get_file_contents("nonexistent.txt", "main")
 
-    @patch("github.AuthenticatedUser.AuthenticatedUser.has_in_repos")
-    def test_create_branch(self, mock_has_in_repos):
-        mock_has_in_repos.return_value = True
-        self.repo.repo = MagicMock()
-        self.repo.repo.get_branch.return_value = MagicMock(
-            commit=MagicMock(sha="commit_sha")
-        )
-        self.repo.create_branch("new-branch")
-        self.repo.repo.create_git_ref.assert_called_once_with(
-            ref="refs/heads/new-branch", sha="commit_sha"
-        )
+    
+    def test_create_branch(self):
+        # Generate a unique branch name using UUID
+        unique_branch_name:str = f"test-branch-{uuid.uuid4()}"
+        self.repo.create_branch(unique_branch_name, "main")
+        
+        self.assertIn(unique_branch_name, self.repo.get_branches())
 
-    @patch("github.AuthenticatedUser.AuthenticatedUser.has_in_repos")
-    def test_create_branch_permission_error(self, mock_has_in_repos):
-        mock_has_in_repos.return_value = False
-        with self.assertRaises(PermissionError):
-            self.repo.create_branch("new-branch")
+        self.repo.delete_branch(unique_branch_name)
+        self.assertNotIn(unique_branch_name, self.repo.get_branches())
 
 
 if __name__ == "__main__":

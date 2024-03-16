@@ -29,3 +29,13 @@ repositories:
     repository: robertfischer3/snarfswap
     token: placeholder_token
 
+testing:
+  github:
+    repository: robertfischer3/snarfswap
+    token: placeholder_token
+    # Here we want the SHA value of the commits to be tested
+    commits:
+      - f76de85d06297a11433efd03fa06b10c01a518c9
+      - 7d3a3bd05310bda4dc5698640bba85dbf159db99
+      - 5ce722aa3eb8aac6c331effd34822ca1cf7f5f53
+    file_to_test: src/main.rs

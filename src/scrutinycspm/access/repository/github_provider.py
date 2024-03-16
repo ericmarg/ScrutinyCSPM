@@ -1,6 +1,6 @@
 from typing import List, Optional
 from github import Github, Repository as GitHubRepo, GithubException
-
+from github.AuthenticatedUser import AuthenticatedUser
 
 class GitHubRepository:
     def __init__(self, repo_name: str, access_token: Optional[str] = None):
@@ -28,6 +28,10 @@ class GitHubRepository:
 
     def get_branches(self) -> List[str]:
         return [branch.name for branch in self.repo.get_branches()]
+    
+    def get_branch(self, branch_name) -> str:    
+        self.repo.get_branch(branch_name)
+
 
     def get_commits(self, branch: str) -> List[str]:
         commits = self.repo.get_commits(sha=branch)
@@ -43,11 +47,32 @@ class GitHubRepository:
             else:
                 raise e
 
-    def create_branch(self, branch_name: str) -> None:
-        if not self.github.get_user().get_repo(self.repo.full_name):
-            raise PermissionError("Access token is required to create a branch.")
+    def create_branch(self, branch_name: str, source_branch) -> None:
+        try:
+            user: AuthenticatedUser = self.github.get_user()
+        except GithubException as e:
+            if e.status == 401:
+                raise PermissionError("Access token is required to create a branch.")
+            else:
+                raise e
+        
         source_branch = self.repo.get_branch(self.repo.default_branch)
         self.repo.create_git_ref(ref=f"refs/heads/{branch_name}", sha=source_branch.commit.sha)
+
+    def delete_branch(self, branch_name: str) -> None:
+        try:
+            user: AuthenticatedUser = self.github.get_user()
+        except GithubException as e:
+            if e.status == 401:
+                raise PermissionError("Access token is required to delete a branch.")
+            else:
+                raise e
+        
+        branch = self.repo.get_branch(branch_name)
+        self.repo._requester.requestJsonAndCheck(
+            "DELETE",
+            self.repo.url + f"/git/refs/heads/{branch_name}"
+        )
 
     def create_file(self, file_path: str, content: str, branch: str, commit_message: str) -> None:
         if not self.github.get_user().get_repo(self.repo.full_name):

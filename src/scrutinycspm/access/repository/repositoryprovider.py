@@ -33,7 +33,7 @@ class Repository(Protocol):
         """Retrieves the contents of a file in the repository."""
         ...
 
-    def create_branch(self, branch_name: str) -> None:
+    def create_branch(self, branch_name: str, source_branch: str) -> None:
         """Creates a new branch in the repository."""
         ...
 
