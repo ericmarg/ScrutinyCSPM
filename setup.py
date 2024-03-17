@@ -9,7 +9,8 @@ setup(
         "hydra-core >= 1.3.2",
         "azure-identity>=1.6.0",
         "azure-keyvault-secrets>=4.8.0",
-        "PyGithub>=2.2.0"
+        "PyGithub>=2.2.0",
+        "cryptography>=42.0.5"
         # other dependencies...
     ],
     # ...
