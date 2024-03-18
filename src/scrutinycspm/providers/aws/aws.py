@@ -6,19 +6,6 @@ import botocore.exceptions
 from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
 
-obj_storage_policy = """
-package obj_storage
-
-import rego.v1
-
-default obj_storage_container_compliant := false
-
-obj_storage_container_compliant if {
-    input.AllPublicAccessBlocked
-    input.VersioningEnabled
-}
-"""
-
 s3 = boto3.client('s3')
 
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
@@ -65,7 +52,7 @@ print('Connecting to OPA Server...')
 client = OpaClient()
 try:
     print(client.check_connection())
-    client.update_opa_policy_fromstring(new_policy=obj_storage_policy, endpoint='obj_storage')
+    client.update_opa_policy_fromfile(filepath="object_storage.rego", endpoint="obj_storage")
     for bucket in bucket_scan_dict:
         bucket_input_data = bucket_scan_dict[bucket]
         opa_result = client.check_policy_rule(input_data=bucket_input_data, package_path='obj_storage', rule_name='obj_storage_container_compliant')
