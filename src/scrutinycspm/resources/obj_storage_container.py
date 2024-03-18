@@ -18,6 +18,8 @@ class ObjectStorageContainer(Resource, ABC):
         self.name = name
         self.region = region
         self.provider = provider
+        self.all_public_access_blocked = None
+        self.versioning_enabled = None
         self.provider_specific = {}
         super().__init__(id, provider, region)
 
