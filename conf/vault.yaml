@@ -1,0 +1,41 @@
+private_path: ../../../conf/private
+secrets:
+  hc_vault:
+    # Address of the Vault server (cloud or on-prem)
+    address: https://vault-cluster-public-vault-54fd150e.54fd150e.z1.hashicorp.cloud:8200
+    # Namespace of the Vault server to be accessed
+    namespace: admin/test_scrutinycspm
+    # Username defined in namespace for the Vault server
+    username: robert1
+    # Password defined in namespace for the Vault server
+    # This is a sensitive field and should be encrypted
+    # It is not recommended to store the password in plain text
+    # This for demonstration purposes only - Do not use in production
+    password: "password12345"
+  azure_key_vault:
+    certificate_authentication: true
+    certificate_path: /home/anypath/tmp1_xf3jfr.pem
+    # Azure Tenant ID and Subscription ID
+    tenant_id: fake_tenant_id
+    client_id: fake_client_id
+    url: https://scrutinycspmvault01test.vault.azure.net/
+  aws_secrets_manager:
+    access_key_id: fake_access_key_id
+    secret_access_key: fake_secret_access_key
+    session_token: fake_session_token
+    region: us-east-2
+repositories:
+  github:
+    repository: robertfischer3/snarfswap
+    token: placeholder_token
+
+testing:
+  github:
+    repository: robertfischer3/snarfswap
+    token: placeholder_token
+    # Here we want the SHA value of the commits to be tested
+    commits:
+      - f76de85d06297a11433efd03fa06b10c01a518c9
+      - 7d3a3bd05310bda4dc5698640bba85dbf159db99
+      - 5ce722aa3eb8aac6c331effd34822ca1cf7f5f53
+    file_to_test: src/main.rs

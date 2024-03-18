@@ -4,6 +4,8 @@ venv/
 ENV/
 scrutiny_env/
 .scrutiny_env
+# Don't commit your private config files
+config/private/
 
 # Virtual env bytecode
 *.pyc
@@ -20,3 +22,4 @@ pip-wheel-metadata/
 
 # Log files
 *.log
+cspm
