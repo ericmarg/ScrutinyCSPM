@@ -4,8 +4,10 @@ from ....resources.obj_storage_container import ObjectStorageContainer
 import botocore.exceptions
 
 class AWSObjectStorageContainer(ObjectStorageContainer):
-    def __init__(self, id, region):
+    def __init__(self, name, provider, region):
         self._client = client('s3')
+        self.name = name
+        self.provider = provider
         super().__init__(id=id, provider="AWS", region=region)
 
     def fetch_data(self):
