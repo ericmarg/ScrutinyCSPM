@@ -50,13 +50,13 @@ print('End of S3 Report\n')
 
 # Tests connecting to OPA running in Server mode using OPA-python-client library
 print('Connecting to OPA Server...')
-client = OpaClient()
+opa = OpaClient()
 try:
-    print(client.check_connection())
-    client.update_opa_policy_fromfile(filepath=f"{policy_directory}object_storage.rego", endpoint="obj_storage")
+    print(opa.check_connection())
+    opa.update_opa_policy_fromfile(filepath=f"{policy_directory}object_storage.rego", endpoint="obj_storage")
     for bucket in bucket_scan_dict:
         bucket_input_data = bucket_scan_dict[bucket]
-        opa_result = client.check_policy_rule(input_data=bucket_input_data, package_path='obj_storage', rule_name='obj_storage_container_compliant')
+        opa_result = opa.check_policy_rule(input_data=bucket_input_data, package_path='obj_storage', rule_name='obj_storage_container_compliant')
         print(f'Object Storage Container: {bucket}, Compliant: {opa_result}')  
 except ConnectionsError:
     print("OPA Server Unreachable, please check to make sure OPA server is running.")
