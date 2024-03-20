@@ -10,7 +10,15 @@ setup(
         "azure-identity>=1.6.0",
         "azure-keyvault-secrets>=4.8.0",
         "PyGithub>=2.2.0",
-        "cryptography>=42.0.5"
+        "cryptography>=42.0.5",
+        "stevedore>=5.2.0",
+        "azure-mgmt-resource>=23.0.1",
+        "msticpy>=2.10.0",
+        "azure.mgmt.network>=25.3.0",
+        "azure.mgmt.resource>=23.0.1",
+        "azure.mgmt.monitor>=6.0.2",
+        "azure.mgmt.compute>=30.6.0",
+        "pandas>=2.2.1"
         # other dependencies...
     ],
     # ...
