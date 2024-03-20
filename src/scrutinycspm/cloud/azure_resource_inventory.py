@@ -12,6 +12,8 @@ class AzureResourceInventory(CloudResourceInventory):
         pass
 
     def get_resource_inventory(self, tenant_id: str, subscription_id: str, credential):
+        
+        resource_inventory is None
         try:
             # Initialize the AzureData object with the provided credential
             azure_data = AzureData()
@@ -21,5 +23,8 @@ class AzureResourceInventory(CloudResourceInventory):
 
             # Get the resource inventory for the subscription
             resource_inventory = azure_data.get_resources(sub_id=subscription_id)
-
+        except Exception as e:
+            raise Exception(f"An error occurred while getting the resource inventory: {str(e)}") from e
+        
+        return resource_inventory
            
