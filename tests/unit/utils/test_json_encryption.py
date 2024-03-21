@@ -1,10 +1,19 @@
 import unittest
-from scrutinycspm.utils.encryption.certificate.json_encryption import JsonEncryption
-
-class TestJsonEncryption(unittest.TestCase):
+from src.scrutinycspm.utils.encryption.certificate.json_encryption import JSONEncryption
+from src.scrutinycspm.utils.encryption.certificate.certificate_utils import CertificateUtils
+class TestJSONEncryption(unittest.TestCase):
 
     def setUp(self):
-        self.encryption = JsonEncryption()
+        self.private_cert_path = "path/to/cert"
+        self.public_cert_path = "path/to/cert"
+
+        # Generate a new certificate
+        cert, private_key = CertificateUtils.generate_certificate(
+            common_name="test",
+            password="password"
+        )
+
+        self.encryption = JSONEncryption(private_key_path="", public_key_path="")
 
     def test_encrypt(self):
         # Test data

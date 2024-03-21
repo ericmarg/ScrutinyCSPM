@@ -2,7 +2,7 @@ import json
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
-from scrutinycspm.utils.encryption.certificate.encryption_protocol import EncryptionProtocol
+from src.scrutinycspm.utils.encryption.certificate.encryption_protocol import EncryptionProtocol
 
 class JSONEncryption (EncryptionProtocol):
     def __init__(self, public_key_path: str, private_key_path: str):
