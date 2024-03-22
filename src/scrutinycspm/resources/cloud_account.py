@@ -16,6 +16,7 @@ class CloudAccount(Resource, ABC):
     def __init__(self, id, provider, region):
         super().__init__(id, provider, region)
         self.vms = []
+        self.obj_storage_containers = []
         self.fetch_data()
 
     @abstractmethod
