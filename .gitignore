@@ -1,6 +1,7 @@
 # The following cannot be checked in
 conf/private/private_vault.yaml
 outputs/
+scrutinycspm.egg-info/
 
 # Virtual env folders
 .venv
