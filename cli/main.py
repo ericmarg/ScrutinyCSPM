@@ -1,30 +1,34 @@
-# cli/main.py
 import argparse
 import hydra
 from omegaconf import DictConfig
 from stevedore import driver
 
-@hydra.main(config_path="config", config_name="config")
+@hydra.main(config_path="config", config_name="conf")
 def main(cfg: DictConfig) -> None:
     parser = argparse.ArgumentParser(description="ScrutinyCSPM CLI")
-    
-    # Add command line arguments
-    parser.add_argument("command", help="The command to execute")
-    parser.add_argument("--param1", type=str, help="Parameter 1")
-    parser.add_argument("--param2", type=int, default=0, help="Parameter 2")
-    
-    # Parse the command line arguments
-    args = parser.parse_args()
-    
-    # Use Stevedore to load and execute the appropriate command plugin
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
     mgr = driver.DriverManager(
-        namespace="scrutinycspm.cli.commands",
+        namespace="cli.commands",
+        name="command1",
+        invoke_on_load=False,
+    )
+
+    for item in mgr.items():
+        print(item)
+    
+    # for command_name, command_class in mgr.list_commands():
+    #    command_instance = command_class(cfg, None)
+    #    command_instance.add_subparser(subparsers)
+
+    args = parser.parse_args()
+
+    mgr = driver.DriverManager(
+        namespace="cli.commands",
         name=args.command,
         invoke_on_load=True,
         invoke_args=(cfg, args),
     )
-    
-    # Execute the command
     mgr.driver.execute()
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+from cli.commands import command1
 
 setup(
     name="scrutinycspm",
@@ -21,5 +22,17 @@ setup(
         "pandas>=2.2.1"
         # other dependencies...
     ],
+    entry_points={
+        'cli.commands': [
+            'command1 = cli.commands.command1:Command1',
+        ],
+        'cli.commands.command1.subcommand1': [
+            'subcommand1 = cli.commands.command1_subcommand1:Command1Subcommand1',
+        ],
+        'cli.commands.command1.subcommand2': [
+            'subcommand2 = cli.commands.command1_subcommand2:Command1Subcommand2',
+        ],
+        # Add similar entry points for command2 sub-commands
+    },
     # ...
 )
