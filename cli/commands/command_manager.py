@@ -21,7 +21,8 @@ class CommandManager:
     def execute_command(self, name: str, *args, **kwargs):
         command_class = self.commands.get(name)
         if command_class:
-            command = command_class()
-            command.execute(*args, **kwargs)
+            command = command_class(*args, **kwargs)
+            return command
+            
         else:
             raise ValueError(f"Command '{name}' not found.")
