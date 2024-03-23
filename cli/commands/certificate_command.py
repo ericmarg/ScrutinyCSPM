@@ -1,5 +1,5 @@
 class CertificateCommand:
     def execute(self, *args, **kwargs):
-        print("Executing Command 2")
+        print("Executing Certificate Command")
         print(f"Args: {args}")
         print(f"Kwargs: {kwargs}")

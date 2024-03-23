@@ -1,2 +1,10 @@
 cli:
   test: value
+
+commands:
+  certificate: 
+    module: commands.certificate_command
+    class_name: CertificateCommand
+  inventory: 
+    module: commands.inventory_command
+    class_name: InventoryCommand
