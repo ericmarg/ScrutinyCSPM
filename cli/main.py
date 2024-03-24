@@ -11,6 +11,9 @@ import importlib
 
 @hydra.main(config_path="config", config_name="conf")
 def main(cfg: DictConfig) -> None:
+    
+    logging.basicConfig(level=cfg.logging.level, filename='app.log')
+
     parser = argparse.ArgumentParser(description="ScrutinyCSPM CLI")
     parser.add_argument("command", nargs="?", help="The command to execute")
     parser.add_argument("args", nargs="*", help="Additional arguments for the command")

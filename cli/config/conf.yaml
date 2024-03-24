@@ -1,6 +1,9 @@
 cli:
   test: value
 
+logging:
+  level: DEBUG
+
 commands:
   certificate: 
     module: commands.certificate_command
