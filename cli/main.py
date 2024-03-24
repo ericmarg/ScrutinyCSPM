@@ -32,7 +32,7 @@ def main(cfg: DictConfig) -> None:
         command_args = args.args
 
         try:
-            command_manager.execute_command(command_name, *command_args)
+            return command_manager.execute_command(command_name, *command_args)
         except ValueError as e:
             print(f"Error: {str(e)}")
             print("Available commands:")

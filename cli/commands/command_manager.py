@@ -4,7 +4,9 @@ from typing import Callable, Protocol
 
 
 class CommandPlugin(Protocol):
-    def execute(self, *args, **kwargs) -> None:
+    def execute(self, *args, **kwargs) -> any:
+        ...
+    def help(self) -> str:
         ...
 
 
@@ -19,10 +21,15 @@ class CommandManager:
         self.commands.pop(name, None)
 
     def execute_command(self, name: str, *args, **kwargs):
-        command_class = self.commands.get(name)
-        if command_class:
-            command = command_class(*args, **kwargs)
-            return command
-            
-        else:
+        if name not in self.commands:
             raise ValueError(f"Command '{name}' not found.")
+
+        command_class = self.commands[name]
+
+        if "--help" in args:
+            command = command_class()
+            return command.help()
+
+
+        command = command_class(*args, **kwargs)
+        return command.execute()

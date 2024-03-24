@@ -3,15 +3,11 @@ from typing import Protocol
 import unittest
 from unittest.mock import patch
 from omegaconf import OmegaConf
-from cli.commands.command_manager import CommandManager
+from cli.commands.command_manager import CommandManager, CommandPlugin
+from cli.commands.test_command import TestCommand
 
 import cli.main as main
-
-
-class CommandPlugin(Protocol):
-    def execute(self, *args, **kwargs) -> None:
-        ...
-
+    
 class TestCommandManager(unittest.TestCase):
     def setUp(self):
         self.command_manager = CommandManager()
@@ -37,13 +33,16 @@ class TestCommandManager(unittest.TestCase):
         self.command_manager.unregister_command("test_command")
         self.assertNotIn("test_command", self.command_manager.commands)
 
-    def test_execute_command(self):
-        def test_command(arg1, arg2):
-            return f"{arg1} {arg2}"
 
-        self.command_manager.register_command("test_command1", test_command)
+    def test_execute_command(self):
+        self.command_manager.register_command("test_command1", TestCommand)
         result = self.command_manager.execute_command("test_command1", "hello", "world")
         self.assertEqual(result, "hello world")
+    
+    def test_execute_command_with_help(self):
+        self.command_manager.register_command("test_command1", TestCommand)
+        result = self.command_manager.execute_command("test_command1", "--help")
+        self.assertEqual(result, "Usage: test_command1 <arg1> <arg2>\nThis command concatenates arg1 and arg2 and returns the result.")
 
     def test_execute_nonexistent_command(self):
         with self.assertRaises(ValueError):

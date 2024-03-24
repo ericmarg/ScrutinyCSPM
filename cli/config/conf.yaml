@@ -8,3 +8,6 @@ commands:
   inventory: 
     module: commands.inventory_command
     class_name: InventoryCommand
+  test:
+    module: commands.test_command
+    class_name: TestCommand

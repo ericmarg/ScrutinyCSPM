@@ -1,7 +1,6 @@
 from cli.commands.command_manager import CommandPlugin
 
-class CertificateCommand(CommandPlugin):
-
+class TestCommand(CommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
@@ -11,4 +10,4 @@ class CertificateCommand(CommandPlugin):
         return f"{arg1} {arg2}"
 
     def help(self):
-        return "Usage: certificate <arg1> <arg2>\nThis command concatenates arg1 and arg2 and returns the result."
+        return "Usage: test_command1 <arg1> <arg2>\nThis command concatenates arg1 and arg2 and returns the result."
