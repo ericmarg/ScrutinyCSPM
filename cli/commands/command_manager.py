@@ -1,7 +1,10 @@
 import importlib
 import inspect
 from typing import Callable, Protocol
+import sys
+
 from src.scrutinycspm.utils.logging_util import add_logging
+
 
 @add_logging
 class CommandPlugin(Protocol):

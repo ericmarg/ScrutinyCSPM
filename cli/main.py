@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import hydra
 from omegaconf import DictConfig
 from typing import Any, Dict
-from cli.commands.command_manager import CommandManager
+from commands.command_manager import CommandManager
 
 import logging
 import importlib
