@@ -7,7 +7,7 @@ from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
 
 s3 = boto3.client('s3')
-policy_directory = "../../../../policies/"
+policy_directory = "policies/"
 
 buckets_list = s3.list_buckets() # gathers all S3 buckets in target account
 bucket_scan_dict = {}
