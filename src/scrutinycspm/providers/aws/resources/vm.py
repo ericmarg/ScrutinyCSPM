@@ -7,7 +7,10 @@ from ....resources.virtual_machine import VirtualMachine
 
 class VM(VirtualMachine):
     def __init__(self, id, provider, region):
-        self._client = boto3.client('ec2', region_name=region)
+        if region:
+            self._client = boto3.client('ec2', region_name=region)
+        else:
+            self._client = boto3.client('ec2')
         super().__init__(id, provider, region)
 
     def fetch_data(self):
@@ -17,7 +20,6 @@ class VM(VirtualMachine):
         self.state = instance['State']['Name']
         self.type = instance['InstanceType']
         self.status = instance['State']['Name']
-        self.region = instance['Placement']['AvailabilityZone']
 
         volumes = []
 

@@ -13,14 +13,18 @@ def get_account_id():
 class AWSAccount(CloudAccount):
     def __init__(self, region=None):
         self.id = get_account_id()
-        super().__init__(self.id, 'AWS', region)
-        self.fetch_data(region)
+        self.region = region
+        super().__init__(self.id, 'AWS', self.region)
 
-    def fetch_data(self, region=None):
-        self.vms = self.get_vms(region)
+    def fetch_data(self):
+        self.vms = self.get_vms()
+        self.obj_storage_containers = self.get_obj_storage_containers()
 
-    def get_vms(self, region):
-        client = boto3.client('ec2', region_name=region)
+    def get_vms(self):
+        client = boto3.client('ec2')
+        if self.region:
+            client = boto3.client('ec2', region_name=self.region)
+        test = client.describe_instances()
         paginator = client.get_paginator('describe_instances')
         # Initialize a list to hold all instances
         all_instances = []
