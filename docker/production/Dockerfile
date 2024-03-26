@@ -12,7 +12,13 @@ WORKDIR /scrutinycspm
 # Copy the project files to the working directory
 COPY . .
 
-# Install the project dependencies
+# Create a virtual environment
+RUN python -m venv venv
+
+# Activate the virtual environment
+ENV PATH="/scrutinycspm/venv/bin:$PATH"
+
+# Install the project dependencies inside the virtual environment
 RUN pip install --no-cache-dir -e .
 
 # Set the default command to run the main script
