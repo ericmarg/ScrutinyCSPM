@@ -1,4 +1,4 @@
-import argparse
+
 from typing import Protocol
 import unittest
 from unittest.mock import patch
@@ -6,7 +6,6 @@ from omegaconf import OmegaConf
 from cli.commands.command_manager import CommandManager, CommandPlugin
 from cli.commands.test_command import TestCommand
 
-import cli.main as main
     
 class TestCommandManager(unittest.TestCase):
     def setUp(self):
