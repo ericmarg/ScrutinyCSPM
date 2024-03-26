@@ -27,4 +27,8 @@ pip-wheel-metadata/
 
 # Log files
 *.log
+
+# IDE configuration files
+/src/scrutinycspm/iam/.idea/
+
 cspm

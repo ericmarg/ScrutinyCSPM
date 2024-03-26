@@ -1,6 +1,7 @@
 import boto3
 
 from .vm import VM
+from .obj_storage_container import ObjectStorageContainer
 from ....resources.cloud_account import CloudAccount
 
 
@@ -29,3 +30,14 @@ class AWSAccount(CloudAccount):
                 for instance in reservation['Instances']:
                     all_instances.append(VM(instance['InstanceId'], self.provider, self.region))
         return all_instances
+  
+    def get_obj_storage_containers(self):
+        client = boto3.client('s3')
+        buckets = client.list_buckets()
+        # Initialize a list to hold all S3 buckets
+        all_buckets = []
+        for bucket in buckets:
+            all_buckets.append(ObjectStorageContainer(bucket, self.provider, self.region))
+
+        return all_buckets
+
