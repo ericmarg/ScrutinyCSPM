@@ -1,7 +1,7 @@
 import boto3
 
+from .obj_storage_container import AWSObjectStorageContainer as ObjectStorageContainer
 from .vm import VM
-from .obj_storage_container import ObjectStorageContainer
 from ....resources.cloud_account import CloudAccount
 
 
@@ -18,13 +18,11 @@ class AWSAccount(CloudAccount):
 
     def fetch_data(self):
         self.vms = self.get_vms()
-        self.obj_storage_containers = self.get_obj_storage_containers()
 
     def get_vms(self):
         client = boto3.client('ec2')
         if self.region:
             client = boto3.client('ec2', region_name=self.region)
-        test = client.describe_instances()
         paginator = client.get_paginator('describe_instances')
         # Initialize a list to hold all instances
         all_instances = []
@@ -34,7 +32,7 @@ class AWSAccount(CloudAccount):
                 for instance in reservation['Instances']:
                     all_instances.append(VM(instance['InstanceId'], self.provider, self.region))
         return all_instances
-  
+
     def get_obj_storage_containers(self):
         client = boto3.client('s3')
         buckets = client.list_buckets()
@@ -42,6 +40,5 @@ class AWSAccount(CloudAccount):
         all_buckets = []
         for bucket in buckets:
             all_buckets.append(ObjectStorageContainer(bucket, self.provider, self.region))
-
         return all_buckets
 

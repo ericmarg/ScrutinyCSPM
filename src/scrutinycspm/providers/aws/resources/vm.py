@@ -20,7 +20,7 @@ class VM(VirtualMachine):
         self.state = instance['State']['Name']
         self.type = instance['InstanceType']
         self.status = instance['State']['Name']
-
+        self.public_ip = instance.get('PublicIpAddress')
         volumes = []
 
         for mapping in instance.get('BlockDeviceMappings', []):
@@ -32,7 +32,7 @@ class VM(VirtualMachine):
             except Exception as e:
                 print(f"Failed to fetch volume data for {volume_id}: {e}")
 
-        self.volumns = volumes
+        self.volumes = volumes
 
         security_groups = []
 
