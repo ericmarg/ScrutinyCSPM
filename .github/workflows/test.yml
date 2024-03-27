@@ -20,7 +20,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run tests with coverage
-        run: pytest --cov=<your_package_or_module> tests/
+        run: pytest tests
 
       - name: Generate coverage report
         uses: codecov/codecov-action@v2
