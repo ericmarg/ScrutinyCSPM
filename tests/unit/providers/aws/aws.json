@@ -1,0 +1,7 @@
+{
+  "get_caller_identity": {
+    "UserId": "12345678910",
+    "Account": "12345678910",
+    "Arn": "arn:aws:iam::12345678910:root"
+  }
+}
