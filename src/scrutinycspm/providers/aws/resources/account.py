@@ -1,7 +1,7 @@
 import boto3
 
-from .obj_storage_container import AWSObjectStorageContainer as ObjectStorageContainer
 from .vm import VM
+from .obj_storage_container import AWSObjectStorageContainer
 from ....resources.cloud_account import CloudAccount
 
 
@@ -16,11 +16,9 @@ class AWSAccount(CloudAccount):
         self.region = region
         super().__init__(self.id, 'AWS', self.region)
 
-
     def fetch_data(self):
         self.vms = self.get_vms()
         self.obj_storage_containers = self.get_obj_storage_containers()
-
 
     def get_vms(self):
         client = boto3.client('ec2')
