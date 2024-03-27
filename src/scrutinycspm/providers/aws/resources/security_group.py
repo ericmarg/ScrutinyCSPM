@@ -1,6 +1,6 @@
 from boto3 import client
 
-from ....resources.secuitry_group import SecurityGroup
+from ....resources.security_group import SecurityGroup
 
 
 class AWSSecurityGroup(SecurityGroup):

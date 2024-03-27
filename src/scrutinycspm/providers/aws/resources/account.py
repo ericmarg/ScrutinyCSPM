@@ -16,8 +16,11 @@ class AWSAccount(CloudAccount):
         self.region = region
         super().__init__(self.id, 'AWS', self.region)
 
+
     def fetch_data(self):
         self.vms = self.get_vms()
+        self.obj_storage_containers = self.get_obj_storage_containers()
+
 
     def get_vms(self):
         client = boto3.client('ec2')
@@ -38,7 +41,6 @@ class AWSAccount(CloudAccount):
         buckets = client.list_buckets()
         # Initialize a list to hold all S3 buckets
         all_buckets = []
-        for bucket in buckets:
-            all_buckets.append(ObjectStorageContainer(bucket, self.provider, self.region))
+        for bucket in buckets['Buckets']:
+            all_buckets.append(AWSObjectStorageContainer(bucket['Name'], self.provider, self.region))
         return all_buckets
-

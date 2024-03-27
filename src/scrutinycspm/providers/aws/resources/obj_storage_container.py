@@ -9,7 +9,7 @@ class AWSObjectStorageContainer(ObjectStorageContainer):
         self._client = client('s3')
         self.name = name
         self.provider = provider
-        super().__init__(name, provider="AWS", region=region)
+        super().__init__(name=name, provider="AWS", region=region)
 
     def fetch_data(self):
         """
