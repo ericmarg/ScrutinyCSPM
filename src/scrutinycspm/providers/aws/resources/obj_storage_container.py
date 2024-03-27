@@ -1,7 +1,8 @@
+import botocore.exceptions
 from boto3 import client
 
 from ....resources.obj_storage_container import ObjectStorageContainer
-import botocore.exceptions
+
 
 class AWSObjectStorageContainer(ObjectStorageContainer):
     def __init__(self, name, provider, region):
