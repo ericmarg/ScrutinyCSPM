@@ -7,7 +7,10 @@ from ....resources.virtual_machine import VirtualMachine
 
 class VM(VirtualMachine):
     def __init__(self, id, provider, region):
-        self._client = boto3.client('ec2', region_name=region)
+        if region:
+            self._client = boto3.client('ec2', region_name=region)
+        else:
+            self._client = boto3.client('ec2')
         super().__init__(id, provider, region)
 
     def fetch_data(self):
@@ -17,8 +20,7 @@ class VM(VirtualMachine):
         self.state = instance['State']['Name']
         self.type = instance['InstanceType']
         self.status = instance['State']['Name']
-        self.region = instance['Placement']['AvailabilityZone']
-
+        self.public_ip = instance.get('PublicIpAddress')
         volumes = []
 
         for mapping in instance.get('BlockDeviceMappings', []):
@@ -30,7 +32,7 @@ class VM(VirtualMachine):
             except Exception as e:
                 print(f"Failed to fetch volume data for {volume_id}: {e}")
 
-        self.volumns = volumes
+        self.volumes = volumes
 
         security_groups = []
 

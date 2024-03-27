@@ -15,6 +15,7 @@ class Volume(Resource, ABC):
         size (int): The size of the volume in GB.
         status (str): The status of the volume (e.g., available, in-use).
         attached_to (str): The ID of the VM to which the volume is attached, if any.
+        encrypted (bool): Indicates whether the volume is encrypted.
         provider_specific (dict): Provider-specific attributes and settings.
     """
 
@@ -24,6 +25,7 @@ class Volume(Resource, ABC):
         self.status = None
         self.attached_to = None
         self.provider_specific = {}
+        self.encrypted = None
         super().__init__(id, provider, region)
 
     @abstractmethod
