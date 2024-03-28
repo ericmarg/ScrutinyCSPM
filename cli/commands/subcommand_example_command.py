@@ -23,7 +23,7 @@ class SubCommand2(SubCommandPlugin):
         else:
             return f"Executing SubCommand2 with arguments: {', '.join(self.args)}"
 
-class MyCommand(CommandPlugin):
+class MySubCommand(CommandPlugin):
     subcommands = {
         "subcommand1": SubCommand1,
         "subcommand2": SubCommand2,
