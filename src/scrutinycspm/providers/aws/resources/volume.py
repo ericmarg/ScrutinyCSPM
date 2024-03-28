@@ -19,6 +19,7 @@ class AWSVolume(Volume):
             self.size = volume.get('Size')
             self.status = volume.get('State')
             self.attached_to = volume['Attachments'][0]['InstanceId'] if volume['Attachments'] else None
+            self.encrypted = volume.get('Encrypted')
             # Populate provider_specific with any additional details
             self.provider_specific = {
                 "SnapshotId": volume.get('SnapshotId'),

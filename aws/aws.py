@@ -1,5 +1,6 @@
-from src.scrutinycspm.providers.aws.resources.account import AWSAccount
 import json
+
+from src.scrutinycspm.providers.aws.resources.account import AWSAccount
 
 
 def default_serializer(obj):

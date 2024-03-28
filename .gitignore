@@ -32,3 +32,4 @@ pip-wheel-metadata/
 /src/scrutinycspm/iam/.idea/
 
 cspm
+docs/_build

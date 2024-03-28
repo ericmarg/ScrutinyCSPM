@@ -21,7 +21,7 @@ class ObjectStorageContainer(Resource, ABC):
         self.all_public_access_blocked = None
         self.versioning_enabled = None
         self.provider_specific = {}
-        super().__init__(id, provider, region)
+        super().__init__(name, provider, region)
 
     @abstractmethod
     def fetch_data(self):
