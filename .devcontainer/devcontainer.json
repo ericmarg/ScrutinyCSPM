@@ -1,0 +1,15 @@
+{
+    "name": "ScrutinyCSPM Python Container",
+    "dockerFile": "../Dockerfile",
+    "workspaceFolder": "/scrutinycspm",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-azuretools.vscode-docker", "ms-vscode-remote.remote-containers", "ms-python.python"]
+        },
+        "settings": {
+            "python.pythonPath": "/usr/local/bin/python"
+        }
+    },
+    "appPort": [5678]
+    
+  }
