@@ -3,6 +3,14 @@ conf/private/private_vault.yaml
 outputs/
 scrutinycspm.egg-info/
 
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+
+# Excluding terraform.tfvars file to avoid checking in secrets
+terraform.tfvars
+
 # Virtual env folders
 .venv
 venv/
