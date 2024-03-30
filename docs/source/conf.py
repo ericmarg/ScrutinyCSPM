@@ -8,7 +8,7 @@
 
 project = 'ScrutinyCSPM'
 copyright = '2024, Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
-author = 'Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
+author = '2024, Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -16,7 +16,7 @@ author = 'Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
 extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = []
 
 
 
