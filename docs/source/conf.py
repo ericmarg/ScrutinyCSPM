@@ -16,7 +16,7 @@ author = '2024, Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
 extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
 
