@@ -13,8 +13,8 @@ author = '2024, Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
-
+extensions = ['sphinx.ext.autodoc','autoapi.extension']
+autoapi_dirs = ['../../src']
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
@@ -25,3 +25,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+# For Sphinx to find the source code
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src'))

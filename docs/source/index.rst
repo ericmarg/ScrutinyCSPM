@@ -11,7 +11,6 @@ Welcome to ScrutinyCSPM's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 
