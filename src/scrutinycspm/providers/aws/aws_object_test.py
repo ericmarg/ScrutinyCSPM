@@ -7,7 +7,7 @@ opa = OpaClient()
 policy_directory = "policies/"
 
 for container in new_account.obj_storage_containers:
-  print(f"Name: {container.name}, PublicAccessBlocked: {container.all_public_access_blocked}, VersioningEnabled: {container.versioning_enabled}")
+  print(f"Name: {container.name}, PublicAccessBlocked: {container.all_public_access_blocked}, VersioningEnabled: {container.versioning_enabled} , MFADeleteEnabled: {container.provider_specific['MFADeleteEnabled']}")
 
   container_dict = container.to_dict()
   try:
