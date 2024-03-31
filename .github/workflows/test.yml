@@ -19,6 +19,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Setup Hydra Config
+        run: |
+          mkdir -p conf/private
+          cp conf/vault.yaml conf/private/private_vault.yaml
+
       - name: Run tests with coverage
         run: pytest tests
 
