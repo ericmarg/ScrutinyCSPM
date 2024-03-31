@@ -1,5 +1,6 @@
 name: Python Tests with Coverage
-
+env:
+  PYTHONPATH: /scrutinycspm:/scrutinycspm/src:/scrutinycspm/cli
 on:
   push:
     branches:
