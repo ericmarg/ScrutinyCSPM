@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import json
+
 from src.scrutinycspm.providers.aws.resources.account import AWSAccount
 
 boto3_mock = MagicMock()
