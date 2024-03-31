@@ -1,0 +1,16 @@
+cli:
+  test: value
+
+logging:
+  level: DEBUG
+
+commands:
+  certificate: 
+    module: commands.certificate_command
+    class_name: CertificateCommand
+  inventory: 
+    module: commands.inventory_command
+    class_name: InventoryCommand
+  test:
+    module: commands.test_command
+    class_name: TestCommand
