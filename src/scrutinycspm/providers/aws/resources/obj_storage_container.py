@@ -31,20 +31,19 @@ class AWSObjectStorageContainer(ObjectStorageContainer):
 
         # Get Bucket Versioning and MFA Delete Status
         try:
-            bucket_versioning_response = self._client.get_bucket_versioning(Bucket=self.name)
-            bucket_versioning_status = bucket_versioning_response['Status']
-            mfa_delete_status = bucket_versioning_response['MFADelete']
+            bucket_versioning_status = self._client.get_bucket_versioning(Bucket=self.name)['Status']
+            #mfa_delete_status = bucket_versioning_response['MFADelete']
 
             if bucket_versioning_status == 'Enabled':
                 self.versioning_enabled = True
             else:
                 self.versioning_enabled = False
 
-            if mfa_delete_status == 'Enabled':
-                self.provider_specific['MFADeleteEnabled'] = True
-            else:
-                self.provider_specific['MFADeleteEnabled'] = False
+            #if mfa_delete_status == 'Enabled':
+                #self.provider_specific['MFADeleteEnabled'] = True
+            #else:
+                #self.provider_specific['MFADeleteEnabled'] = False
 
         except KeyError: # handles case where 'Bucket versioning' has never been turned on
             self.versioning_enabled = False
-            self.provider_specific['MFADeleteEnabled'] = False # Versioning has to be on for MFADelete to be active
+            # self.provider_specific['MFADeleteEnabled'] = False # Versioning has to be on for MFADelete to be active
