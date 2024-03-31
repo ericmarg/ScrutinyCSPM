@@ -28,7 +28,6 @@ repositories:
   github:
     repository: robertfischer3/snarfswap
     token: placeholder_token
-
 testing:
   github:
     repository: robertfischer3/snarfswap

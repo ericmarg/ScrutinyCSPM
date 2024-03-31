@@ -17,3 +17,10 @@ commands:
   opa_create:
     module: commands.opa_create_command
     class_name: OpaCreateCommand
+
+policies:
+  namespace: scrutiny-cspm
+    policy_repository_name: scrutiny-cspm
+    repository: https://github.com/ericmarg/ScrutinyCSPM
+    branch: main
+    path: policies

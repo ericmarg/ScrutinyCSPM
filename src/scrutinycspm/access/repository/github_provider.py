@@ -47,6 +47,24 @@ class GitHubRepository:
             else:
                 raise e
 
+    def get_files_by_extension(self, folder_path: str, file_extension: str) -> list:
+        try:
+            contents = self.repo.get_contents(folder_path)
+            filtered_files = []
+
+            while contents:
+                file_content = contents.pop(0)
+                if file_content.type == "dir":
+                    contents.extend(self.repo.get_contents(file_content.path))
+                elif file_content.type == "file" and file_content.path.endswith(file_extension):
+                    filtered_files.append(file_content.path)
+
+            return filtered_files
+
+        except GithubException as e:
+            print(f"Error: {e}")
+            return []
+        
     def create_branch(self, branch_name: str, source_branch) -> None:
         try:
             user: AuthenticatedUser = self.github.get_user()
