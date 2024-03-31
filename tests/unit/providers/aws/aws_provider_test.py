@@ -8,11 +8,11 @@ boto3_client_mock = boto3_mock.client
 patcher = patch('boto3.client', boto3_client_mock)
 patcher.start()
 
-with open('./aws.json') as f:
+with open('tests/unit/providers/aws/aws.json') as f:
     AWS_DATA = json.load(f)
 
 boto3_mock.client.return_value.get_caller_identity.return_value = AWS_DATA['get_caller_identity']
-boto3_mock.client.return_value.get_paginator.return_value.paginate.return_value = dict(AWS_DATA['describe_instances'])
+boto3_mock.client.return_value.get_paginator.return_value.paginate.return_value = [AWS_DATA.get('describe_instances', {})]
 
 account = AWSAccount()
 

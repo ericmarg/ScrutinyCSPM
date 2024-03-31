@@ -25,7 +25,7 @@ jobs:
           cp conf/vault.yaml conf/private/private_vault.yaml
 
       - name: Run tests with coverage
-        run: pytest tests
+        run: pytest --cov=src tests
 
       - name: Generate coverage report
         uses: codecov/codecov-action@v2
