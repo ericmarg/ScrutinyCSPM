@@ -14,14 +14,11 @@ commands:
   test:
     module: commands.test_command
     class_name: TestCommand
-  opa_create:
-    module: commands.opa_create_command
-    class_name: OpaCreateCommand
 
-policies:
-  namespace: 
-    - scrutiny-cspm
-  policy_repo: 
-      - https://github.com/ericmarg/ScrutinyCSPM
-  branch: main
-  path: policies
+policy:
+  github:
+    repository: robertfischer3/snarfswap
+    namespace: scrutiny-cspm-policy-test
+    policy_repo: robertfischer3/snarfswap
+    branch: main
+    path: policy
