@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -18,16 +21,20 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Create and activate virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install sphinx sphinx-rtd-theme
 
       - name: Build docs
-        run: |
-          sphinx-build -b html docs/ docs/_build/html
+        run: cd docs && sphinx-build -b html ./source ./_build/html
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
