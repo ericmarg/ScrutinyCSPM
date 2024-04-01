@@ -1,5 +1,5 @@
-import hydra
-from omegaconf import DictConfig
+from hydra import compose, initialize
+from omegaconf import DictConfig, OmegaConf
 from cli.commands.command_manager import CommandPlugin
 from src.scrutinycspm.utils.logging_util import add_logging
 from src.scrutinycspm.providers.aws.resources.account import AWSAccount
@@ -7,6 +7,7 @@ from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
 import logging
 from src.scrutinycspm.access.repository.github_provider import GitHubRepository
+import os
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -18,6 +19,10 @@ class InventoryCommand(CommandPlugin):
         logging.debug("Initialized InventoryCommand")
         self.args = args
         self.kwargs = kwargs
+        with initialize(version_base=None, config_path="../config", job_name="inventory_command"):
+            self.cfg = compose(config_name="conf")
+
+        
 
     @add_logging
     def execute(self):
@@ -28,8 +33,20 @@ class InventoryCommand(CommandPlugin):
 
     def help(self):
         return "Usage: inventory returns the result."
+    
+
+
+    def get_policies(self): 
+        
+        if self.cfg is not None:
+            github = GitHubRepository(self.cfg.policies.policy_repo)
+            policies = github.get_files_by_extension(self.cfg.policies.path, ".rego")
+            return policies
+    
+
 
     def get_inventory(self):
+
         aws = AWSAccount()
         opa = OpaClient()
 
