@@ -33,3 +33,4 @@ pip-wheel-metadata/
 
 cspm
 docs/_build
+.coverage
