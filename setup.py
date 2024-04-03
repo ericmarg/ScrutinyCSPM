@@ -18,6 +18,8 @@ setup(
         "azure-mgmt-network>=25.3.0",
         "azure-mgmt-monitor>=6.0.2",
         "azure-mgmt-compute>=30.6.0",
+        "OPA-python-client>=1.3.2",
+        "boto3>=1.0.0",
         # other dependencies...
     ],
     # ...
