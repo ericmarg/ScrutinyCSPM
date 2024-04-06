@@ -9,8 +9,14 @@ export const theme = createTheme({
     secondary: {
       main: '#6CCDEA'
     },
-    background: {
-      default: '#fef7e7'
+    text: {
+      primary: '#173a4d'
+    },
+    success: {
+      main: '#4caf50'
+    },
+    error: {
+      main: '#f44336'
     }
   },
   typography: {
@@ -38,6 +44,22 @@ export const theme = createTheme({
     h6: {
       fontFamily: 'Quicksand',
       fontWeight: 700
+    }
+  },
+  shape: {
+    borderRadius: 10
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: 50
+        }
+      },
+      defaultProps: {
+        color: 'secondary'
+      }
     }
   }
 });
