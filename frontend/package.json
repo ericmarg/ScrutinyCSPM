@@ -1,0 +1,26 @@
+{
+  "name": "scrutinty-cspm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start:dev": "next dev",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prettier": "prettier -l .",
+    "prettier:fix": "prettier -lw ."
+  },
+  "dependencies": {
+    "next": "14.1.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "prettier": "^3.2.5",
+    "typescript": "^5"
+  }
+}
