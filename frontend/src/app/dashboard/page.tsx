@@ -1,6 +1,6 @@
 'use client';
 import { Container } from '@mui/system';
-import { Box, Button, Card, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSatelliteDish } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,14 @@ const columns: GridColDef[] = [
     width: 200,
     renderCell: (params) => {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
+          }}
+        >
           <Typography>{format(new Date(params.value as string), 'yyyy-MM-dd HH:mm aa')}</Typography>
         </Box>
       );
@@ -29,7 +36,14 @@ const columns: GridColDef[] = [
     flex: 1,
     renderCell: (params) => {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
+          }}
+        >
           <Box sx={{ width: '100%', mr: 1 }}>
             <ProgressBar openIssues={params.value} totalResources={params.row.totalResources} />
           </Box>

@@ -8,7 +8,7 @@ export interface InfoCardProps {
 
 export const InfoCard: FC<InfoCardProps> = ({ title, children }) => {
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <CardHeader title={title} />
       <CardContent>{children}</CardContent>
     </Card>

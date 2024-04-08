@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { theme } from '@/theme/theme';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { Header } from '@/components/header';
+
 export const metadata: Metadata = {
   title: 'ScrutinyCSPM'
 };
