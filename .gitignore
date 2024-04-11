@@ -5,6 +5,7 @@ scrutinycspm.egg-info/
 src/scrutinycspm/utils/development/artifacts
 src/scrutinycspm/utils/development/env
 src/scrutinycspm/utils/development/inventory
+private_data_dir/artifacts
 
 .terraform
 .terraform.lock.hcl

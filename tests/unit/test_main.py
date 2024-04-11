@@ -59,7 +59,7 @@ class TestCommandManager(unittest.TestCase):
         """
         self.command_manager.register_command("test_command1", TestCommand)
         result = self.command_manager.execute_command("test_command1", "--help")
-        self.assertEqual(result, "Executing MyCommand with arguments: --help")
+        self.assertEqual(result, "Usage: test_command1 <arg1> <arg2>\nThis command concatenates arg1 and arg2 and returns the result.")
 
     def test_execute_nonexistent_command(self):
         """

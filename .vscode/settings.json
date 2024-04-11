@@ -10,5 +10,6 @@
     "python.testing.unittestEnabled": true,
     "python.analysis.extraPaths": [
         "./cli/commands"
-    ]
+    ],
+    "ansible.python.interpreterPath": "/home/robert/Documents/python_projects/scrutinycspm/ScrutinyCSPM/.scrutiny_env/bin/python"
 }

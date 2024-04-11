@@ -39,9 +39,6 @@ class Azure_IAM_Provider:
             return None
 
 
-    
-
-
 def main() -> int:
     # Azure subscription ID
     subscription_id = "6645551c-ec86-42a3-95bc-12f966b25d81"
