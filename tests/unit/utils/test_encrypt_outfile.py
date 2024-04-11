@@ -82,7 +82,7 @@ class TestJSONOutputFileCreator(unittest.TestCase):
         self.assertEqual(decrypted_data, self.sample_data)
 
     def tearDown(self):
-        os.remove('public_key.pem')
+        os.remove(PUBLIC_KEY_PATH)
         os.remove(PRIVATE_KEY_PATH)
         os.remove(OUTFILE_PATH)
 
