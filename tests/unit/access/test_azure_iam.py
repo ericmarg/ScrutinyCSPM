@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from scrutinycspm.access.azure_iam import authenticate
+from src.scrutinycspm.access.azure_iam import authenticate
 from azure.identity import InteractiveBrowserCredential
 from azure.mgmt.resource import ResourceManagementClient
 

@@ -1,0 +1,41 @@
+{
+  "get_caller_identity": {
+    "UserId": "12345678910",
+    "Account": "12345678910",
+    "Arn": "arn:aws:iam::12345678910:root"
+  },
+  "describe_instances": {
+    "Reservations": [
+      {
+        "Groups": [],
+        "Instances": [
+          {
+            "ImageId": "ami-1234",
+            "InstanceId": "i-1234",
+            "KeyName": "test",
+            "PublicDnsName": "ec2-10.10.10.10.compute-1.amazonaws.com",
+            "PublicIpAddress": "10.10.10.10",
+            "BlockDeviceMappings": [
+              {
+                "DeviceName": "/dev/xvda",
+                "Ebs": {
+                  "DeleteOnTermination": true,
+                  "Status": "attached",
+                  "VolumeId": "vol-15"
+                }
+              }
+            ],
+            "SecurityGroups": [
+              {
+                "GroupName": "launch-wizard-01",
+                "GroupId": "sg-12"
+              }
+            ]
+          }
+        ],
+        "OwnerId": "135854645631",
+        "ReservationId": "r-073ed66db6b6c5b89"
+      }
+    ]
+  }
+}

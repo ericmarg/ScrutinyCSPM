@@ -1,0 +1,41 @@
+name: Python Tests with Coverage
+env:
+  PYTHONPATH: /:/src:/cli
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test with pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Setup Hydra Config
+        run: |
+          mkdir -p conf/private
+          cp conf/vault.yaml conf/private/private_vault.yaml
+
+      - name: Run tests with coverage
+        run: pytest --cov=src tests
+
+      - name: Generate coverage report
+        uses: codecov/codecov-action@v2
+        with:
+          file: coverage.xml
+          fail_ci_if_error: true
