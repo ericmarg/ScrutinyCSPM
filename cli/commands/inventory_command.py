@@ -56,7 +56,7 @@ class InventoryCommand(CommandPlugin):
         Returns:
             The help message.
         """
-        return "Usage: inventory returns the security settings from cloud providers."
+        return "Usage: inventory returns the security settings from cloud providers. in this case, AWS."
 
     def get_policies(self):
         """
