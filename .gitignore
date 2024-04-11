@@ -2,6 +2,9 @@
 conf/private/private_vault.yaml
 outputs/
 scrutinycspm.egg-info/
+src/scrutinycspm/utils/development/artifacts
+src/scrutinycspm/utils/development/env
+src/scrutinycspm/utils/development/inventory
 
 .terraform
 .terraform.lock.hcl
