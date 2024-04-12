@@ -1,6 +1,6 @@
 'use server';
 import { Container } from '@mui/system';
-import { Box, Button, Card, Typography } from '@mui/material';
+import { Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSatelliteDish } from '@fortawesome/free-solid-svg-icons';
