@@ -1,39 +1,19 @@
 'use client';
 import React, { FC } from 'react';
-import { Scan } from '@/types/scan';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Typography } from '@mui/material';
-import { format } from 'date-fns';
-import { ProgressBar } from '@/components/progress-bar';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import { format, formatDistanceToNow } from 'date-fns';
 import Link from 'next/link';
+import { ScanListItem } from '@/types/scan-list-item';
 
 export interface ScanTableProps {
-  scans: Scan[];
+  scans: ScanListItem[];
 }
 
 const columns: GridColDef[] = [
   {
-    field: 'timestamp',
-    headerName: 'Timestamp',
-    width: 200,
-    renderCell: (params) => {
-      return (
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%'
-          }}
-        >
-          <Typography>{format(new Date(params.value as string), 'yyyy-MM-dd HH:mm aa')}</Typography>
-        </Box>
-      );
-    }
-  },
-  {
-    field: 'openIssues',
-    headerName: 'Open Issues',
+    field: 'name',
+    headerName: 'Scan Name',
     flex: 1,
     renderCell: (params) => {
       return (
@@ -41,17 +21,34 @@ const columns: GridColDef[] = [
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             height: '100%'
           }}
         >
-          <Box sx={{ width: '100%', mr: 1 }}>
-            <ProgressBar openIssues={params.value} totalResources={params.row.totalResources} />
-          </Box>
-          <Box sx={{ minWidth: 35 }}>
-            <Typography variant="h6">{params.value}</Typography>
-          </Box>
+          <Typography>
+            <strong>{params.value}</strong>
+          </Typography>
         </Box>
+      );
+    }
+  },
+  {
+    field: 'date',
+    headerName: 'Timestamp',
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <Stack
+          direction="row"
+          gap={2}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
+          }}
+        >
+          <Typography>{format(params.value, 'MM/dd/yyyy HH:mm aa')}</Typography>
+          <Typography variant="body2">{formatDistanceToNow(params.value)} ago</Typography>
+        </Stack>
       );
     }
   },
