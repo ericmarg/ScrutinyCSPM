@@ -8,12 +8,21 @@ import { usePathname, useRouter } from 'next/navigation';
 export default async function PrivateKey() {
   const router = useRouter();
   const path = usePathname();
+  const scanId = path.split('/')[2];
   return (
     <Container>
       <PageTitle title="Upload your Private Key" icon={faKey} />
       <FileUpload
-        onChange={() => {
-          router.push(`${path}/results`);
+        onChange={async ([file]) => {
+          const formData = new FormData();
+          formData.append('private_key', file);
+          formData.append('scan_id', scanId);
+          await fetch('/', {
+            method: 'POST',
+            body: formData
+          }).then(() => {
+            router.push(`${path}/results`);
+          });
         }}
         caption="Upload your private key"
         error={false}

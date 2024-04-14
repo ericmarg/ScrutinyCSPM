@@ -1,14 +1,16 @@
 'use server';
 
-import { Scan } from '@/types/scan';
-import { statSync, readdirSync } from 'node:fs';
+import { statSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { ScanListItem } from '@/types/scan-list-item';
 
 export async function getScans() {
   const scans: ScanListItem[] = [];
   try {
-    const files = readdirSync('scans');
+    if (existsSync('scans')) {
+      mkdirSync('scans', { recursive: true });
+    }
+    const files = readdirSync('scans').filter((file) => file.endsWith('.json'));
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
