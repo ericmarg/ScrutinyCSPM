@@ -23,7 +23,8 @@ setup(
         "azure-mgmt-authorization>=4.0.0",
         "azure-mgmt-subscription>=3.1.1",
         "ansible>=9.4.0",
-        "ansible-runner>=2.3.6"
+        "ansible-runner>=2.3.6",
+        "ansible-lint>=24.2.2"
         # other dependencies...
     ],
     # ...

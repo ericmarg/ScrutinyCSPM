@@ -1,0 +1,36 @@
+---
+- name: Get AWS EC2 Security Settings
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Get EC2 instances information
+      amazon.aws.ec2_instance_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: ec2_info
+
+    - name: Extract security settings from EC2 instances
+      set_fact:
+        ec2_security_settings: |
+          {% set security_settings = [] %}
+          {% for instance in ec2_info.instances %}
+          {%   set instance_settings = {
+                'instance_id': instance.instance_id,
+                'security_groups': instance.security_groups | map(attribute='group_id') | list,
+                'iam_instance_profile': instance.iam_instance_profile.arn if instance.iam_instance_profile is defined else None
+              } %}
+          {%   set _ = security_settings.append(instance_settings) %}
+          {% endfor %}
+          {{ security_settings }}
+
+    - name: Return security settings as JSON
+      set_fact:
+        ec2_security_json: "{{ ec2_security_settings | to_json }}"
+
+    - name: Store security settings in fact cache
+      set_fact:
+        ec2_security_cache: "{{ ec2_security_json }}"
+        cacheable: true
