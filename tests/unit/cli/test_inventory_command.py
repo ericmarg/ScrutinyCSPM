@@ -32,7 +32,7 @@ class TestInventoryCommand(unittest.TestCase):
         result = self.command_manager.execute_command("inventory")
         self.assertIsNotNone(result)
 
-    def test_execute_command_(self):
+    def test_execute_command_wo_args(self):
         """
         Test the execution of the Inventory command without any arguments.
         """
