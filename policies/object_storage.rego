@@ -40,9 +40,35 @@ import rego.v1
 #               [3] https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html#API_PutBucketVersioning_RequestSyntax
 #               [4] https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html
 #        azure: TBC
-obj_storage_container_compliant if {
-    input.all_public_access_blocked = true
-    input.versioning_enabled = true
+enforce_versioning_block_public_access := non_compliant_decision if {
+    versioning_or_block_public_access_not_compliant(input)
+
+    annotation := rego.metadata.rule()
+
+    if input.all_public_access_blocked == false {
+        public_access_block_remediation := [annotation.custom.remediation_guidance.enable_public_access_block.aws]
+    } else {
+        public_access_block_remediation := []
+    }
+
+    if input.versioning_enabled == false {
+        versioning_remediation := [annotation.custom.remediation_guidance.enable_versioning.aws]
+    } else {
+        versioning_remediation := []
+    }
+
+    non_compliant_decision := {
+        "message": annotation.description
+        "remediation_guidance": array.concat(public_access_block_remediation, versioning_remediation )
+    }
+}
+
+versioning_or_block_public_access_not_compliant(input_data) if {
+    input_data.all_public_access_blocked = false
+}
+
+versioning_or_block_public_access_not_compliant(input_data) if {
+    input_data.versioning_enabled = false
 }
 
 # METADATA
@@ -61,7 +87,13 @@ obj_storage_container_compliant if {
 #                           
 #              [1] https://repost.aws/knowledge-center/s3-bucket-mfa-delete
 #              [2] https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html
-aws_s3_mfa_enabled if {
+enforce_aws_s3_mfa_enabled := non_compliant_decision if {
     input.provider = "AWS"
-    input.provider_specific.MFADeleteEnabled = true
+    input.provider_specific.MFADeleteEnabled = false
+
+    annotation := rego.metadata.rule()
+    non_compliant_decision := {
+        "message": annotation.description
+        "remediation_guidance": annotation.custom.remediation_guidance.enable_mfa_delete.aws
+    }
 }
