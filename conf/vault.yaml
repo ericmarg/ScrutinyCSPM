@@ -1,4 +1,4 @@
-private_path: ../../../conf/private
+private_path: ../../conf/private
 secrets:
   hc_vault:
     # Address of the Vault server (cloud or on-prem)

@@ -32,6 +32,7 @@ ENV/
 scrutiny_env/
 .scrutiny_env
 .scrutiny_3
+.scrutinyx7
 
 # Don't commit your private config files
 config/private/
