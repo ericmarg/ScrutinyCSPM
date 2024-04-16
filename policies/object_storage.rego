@@ -27,6 +27,14 @@ enforce_versioning_enabled := non_compliant_decision if {
     }
 }
 
+# METADATA
+# title: Enforce Public Access Block
+# description: Object storage containers must have all public access options disabled.
+# custom:
+#   remediation_guidance:
+#     enable_public_access_block:
+#        aws: For S3 buckets, call the PutPublicAccessBlock API [1][2]
+#        azure: TBC
 enforce_public_access_block := non_compliant_decision if {
     input.all_public_access_blocked = false
     
