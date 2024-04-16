@@ -3,8 +3,8 @@ package obj_storage
 import rego.v1
 
 # METADATA
-# title: Enforce Public Access Block and Versioning
-# description: Object storage containers must have public internet access blocked and versioning enabled.
+# title: Enforce Object Storage Container Versioning
+# description: Object storage containers must have versioning enabled.
 # custom:
 #   remediation_guidance:
 #     enable_public_access_block:
@@ -13,27 +13,30 @@ import rego.v1
 #     enable_versioning:
 #        aws: For S3 buckets, call the PutBucketVersioning API [1][2] with Status of `Enabled`.
 #        azure: TBC
-enforce_versioning_block_public_access := non_compliant_decision if {
-	versioning_or_block_public_access_not_compliant(input)
-
+enforce_versioning_enabled := non_compliant_decision if {
+    input.versioning_enabled = false
+    
 	annotation := rego.metadata.rule()
 
 	public_access_block_remediation := annotation.custom.remediation_guidance.enable_public_access_block.aws
-	versioning_remediation := annotation.custom.remediation_guidance.enable_versioning.aws
 
 	non_compliant_decision := 
     {
      "message": annotation.description,
-     "remediation_guidance": concat(" ", [public_access_block_remediation, versioning_remediation])
+     "remediation_guidance": annotation.custom.remediation_guidance.enable_versioning.aws,
     }
 }
 
-versioning_or_block_public_access_not_compliant(input_data) if {
-	input_data.all_public_access_blocked = false
-}
+enforce_public_access_block := non_compliant_decision if {
+    input.all_public_access_blocked = false
+    
+	annotation := rego.metadata.rule()
 
-versioning_or_block_public_access_not_compliant(input_data) if {
-	input_data.versioning_enabled = false
+	non_compliant_decision := 
+    {
+     "message": annotation.description,
+     "remediation_guidance": annotation.custom.remediation_guidance.enable_public_access_block.aws,
+    }
 }
 
 # METADATA
