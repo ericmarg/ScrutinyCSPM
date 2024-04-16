@@ -17,7 +17,7 @@ export default async function PrivateKey() {
           const formData = new FormData();
           formData.append('private_key', file);
           formData.append('scan_id', scanId);
-          await fetch('/', {
+          await fetch('/api/upload', {
             method: 'POST',
             body: formData
           }).then(() => {
