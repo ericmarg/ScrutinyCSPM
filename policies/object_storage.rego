@@ -49,7 +49,7 @@ enforce_public_access_block := non_compliant_decision if {
 
 # METADATA
 # title: Enforce MFA Delete on S3 Buckets (AWS S3 specific rule)
-# description: S3 Buckets must have MFA delete enabled,\n
+# description: S3 Buckets must have MFA delete enabled
 # custom:
 #  remediation_guidance:
 #   enable_mfa_delete:
