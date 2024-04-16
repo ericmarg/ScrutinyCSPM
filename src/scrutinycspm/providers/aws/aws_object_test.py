@@ -4,7 +4,6 @@ from src.scrutinycspm.providers.aws.resources.account import AWSAccount
 
 new_account = AWSAccount()
 opa = OpaClient()
-policy_directory = "policies/"
 
 def format_decision(decision):
    if decision == {}:
@@ -17,7 +16,7 @@ for container in new_account.obj_storage_containers:
 
   container_dict = container.to_dict()
   try:
-    opa.update_opa_policy_fromfile(filepath=f"{policy_directory}object_storage.rego", endpoint="obj_storage")
+    opa.update_opa_policy_fromfile(filepath="policies/object_storage.rego", endpoint="obj_storage")
     versioning_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_versioning_enabled')
     public_access_block_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_public_access_block')
     mfa_delete_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_aws_s3_mfa_enabled')

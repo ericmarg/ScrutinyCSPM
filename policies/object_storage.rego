@@ -18,8 +18,6 @@ enforce_versioning_enabled := non_compliant_decision if {
     
 	annotation := rego.metadata.rule()
 
-	public_access_block_remediation := annotation.custom.remediation_guidance.enable_public_access_block.aws
-
 	non_compliant_decision := 
     {
      "message": annotation.description,
