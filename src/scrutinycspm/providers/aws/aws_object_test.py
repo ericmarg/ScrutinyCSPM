@@ -20,7 +20,7 @@ for container in new_account.obj_storage_containers:
     versioning_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_versioning_enabled')
     public_access_block_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_public_access_block')
     mfa_delete_decision = opa.check_policy_rule(input_data=container_dict, package_path='obj_storage', rule_name='enforce_aws_s3_mfa_enabled')
-    print(f'Object Storage Container: {container.name}, Versioning Decision: {format_decision(versioning_decision)}, PublicBlock Decision: {format_decision(public_access_block_decision)}, MFADelete Decision: {format_decision(mfa_delete_decision)}')
+    print(f'Object Storage Container: {container.name}, Versioning Decision: {versioning_decision}, PublicBlock Decision: {public_access_block_decision}, MFADelete Decision: {mfa_delete_decision}')
     print()
 
   except ConnectionsError:
