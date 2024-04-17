@@ -1,0 +1,14 @@
+For S3 buckets, call the PutPublicAccessBlock API [1][2] , and set the following configuration parameters to `true`: 
+
+"BlockPublicAcls"
+"IgnorePublicAcls" 
+"BlockPublicPolicy"
+"RestrictPublicBuckets"       
+
+NOTE: If you are managing resources with Infrastructure as Code software, please refer to your provider's documentation on how to safely remediate your resources to avoid configuration drift.
+
+For more information on blocking access to your S3 buckets, please see the S3 Documentation page "Blocking public access to your Amazon S3 storage" [3].
+
+[1] https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html
+[2] https://docs.aws.amazon.com/cli/latest/reference/s3api/put-public-access-block.html
+[3] https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html

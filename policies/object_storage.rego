@@ -7,22 +7,19 @@ import rego.v1
 # description: Object storage containers must have versioning enabled.
 # custom:
 #   remediation_guidance:
-#     enable_public_access_block:
-#        aws: For S3 buckets, call the PutPublicAccessBlock API [1][2]
-#        azure: TBC
 #     enable_versioning:
-#        aws: For S3 buckets, call the PutBucketVersioning API [1][2] with Status of `Enabled`.
+#        aws: obj_storage/aws/enable_versioning.txt
 #        azure: TBC
 enforce_versioning_enabled := non_compliant_decision if {
-    input.versioning_enabled = false
-    
+	input.versioning_enabled = false
+
 	annotation := rego.metadata.rule()
 
-	non_compliant_decision := 
-    {
-     "message": annotation.description,
-     "remediation_guidance": annotation.custom.remediation_guidance.enable_versioning.aws,
-    }
+	remediation_guidance := annotation.custom.remediation_guidance.enable_versioning.aws
+	non_compliant_decision := {
+		"message": annotation.description,
+		"remediation_guidance": remediation_guidance,
+	}
 }
 
 # METADATA
@@ -31,18 +28,19 @@ enforce_versioning_enabled := non_compliant_decision if {
 # custom:
 #   remediation_guidance:
 #     enable_public_access_block:
-#        aws: For S3 buckets, call the PutPublicAccessBlock API [1][2]
+#        aws: obj_storage/aws/enable_public_access_block.txt
 #        azure: TBC
 enforce_public_access_block := non_compliant_decision if {
-    input.all_public_access_blocked = false
-    
+	input.all_public_access_blocked = false
+
 	annotation := rego.metadata.rule()
 
-	non_compliant_decision := 
-    {
-     "message": annotation.description,
-     "remediation_guidance": annotation.custom.remediation_guidance.enable_public_access_block.aws,
-    }
+	remediation_guidance := annotation.custom.remediation_guidance.enable_public_access_block.aws
+
+	non_compliant_decision := {
+		"message": annotation.description,
+		"remediation_guidance": remediation_guidance,
+	}
 }
 
 # METADATA
@@ -51,7 +49,7 @@ enforce_public_access_block := non_compliant_decision if {
 # custom:
 #  remediation_guidance:
 #   enable_mfa_delete:
-#    aws: MFA Delete can only be activated through the CLI or AWS SDK using the AWS account root user.
+#    aws: obj_storage/aws/enable_mfa_delete.txt
 enforce_aws_s3_mfa_enabled := non_compliant_decision if {
 	input.provider = "AWS"
 	input.provider_specific.MFADeleteEnabled = false

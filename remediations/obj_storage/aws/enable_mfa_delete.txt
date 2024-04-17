@@ -1,0 +1,6 @@
+MFA Delete can only be activated through the CLI or AWS SDK using the AWS account root user. The AWS account root user must have an MFA device configured before activating MFA Delete on any S3 bucket.
+
+For a detailed guide on how to activate MFA delete for your S3 buckets, please see the relevant AWS documentation [1][2].
+                
+[1] https://repost.aws/knowledge-center/s3-bucket-mfa-delete
+[2] https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html
