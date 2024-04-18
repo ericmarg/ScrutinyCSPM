@@ -10,7 +10,7 @@
       register: s3_buckets
 
     - name: Set the variable in the fact cache
-      set_fact:
+      ansible.builtin.set_fact.set_fact:
         s3_buckets_info: "{{ s3_buckets.buckets }}"
         cacheable: yes
 

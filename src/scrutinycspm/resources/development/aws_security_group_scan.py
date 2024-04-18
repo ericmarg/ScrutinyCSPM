@@ -1,11 +1,7 @@
-
-import ansible_runner
 import json
-import configparser
-import os
+import ansible_runner
 
-# Define the S3Scanner class
-class S3Scanner:
+class AWSSecurityGroupScanner:
     def __init__(self, region, access_key, secret_key):
 
         self.access_key = access_key
@@ -13,11 +9,11 @@ class S3Scanner:
         self.region = region
 
     def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
-        """Run the S3 bucket scan using Ansible Runner"""
+        """Run the security group scan using Ansible Runner"""
         
         try:
             result = ansible_runner.run(
-                playbook='s3_scanning.yaml',
+                playbook='security_group_scanning.yaml',
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,
@@ -29,16 +25,12 @@ class S3Scanner:
             )
 
             # Retrieve the JSON data from the fact cache
-            ec2_security_json = result.get_fact_cache('localhost')['s3_buckets_info']
+            security_groups_json = result.get_fact_cache('localhost')['security_groups_json']
             
-            return ec2_security_json
+            return security_groups_json
 
         except Exception as e:
             # Handle the exception
             print(f"An error occurred during the EC2 scan: {str(e)}")
             return None
         
-
-
-
-

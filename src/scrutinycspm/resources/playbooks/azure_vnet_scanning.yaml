@@ -1,0 +1,17 @@
+---
+- name: Retrieve Azure VNETs and Subnets
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Retrieve Azure VNETs
+      azure_rm_virtualnetwork_info:
+        resource_group: my_resource_group  # Replace with your actual resource group
+        register: vnets
+
+    # Add more tasks here to process the retrieved data
+    # For example:
+    - name: Print VNETs
+      debug:
+        var: vnets

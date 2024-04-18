@@ -1,0 +1,24 @@
+---
+- name: Retrieve AWS Security Group Configurations
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+    - name: Retrieve All Security Groups
+      ec2_group_info:
+        region: "{{ aws_region }}"
+      register: security_groups_info
+    
+    - name: Display Security Group Configurations
+      debug:
+        var: security_groups_info
+    
+    - name: Store Security Group Configurations in Fact Cache
+      ansible.builtin.debug.set_fact:
+        security_groups_json: "{{ security_groups_info | to_nice_json }}"
+        cacheable: true
+
+    - name: Display Security Group Configurations from Fact Cache
+      debug:
+        var: security_groups_json
+

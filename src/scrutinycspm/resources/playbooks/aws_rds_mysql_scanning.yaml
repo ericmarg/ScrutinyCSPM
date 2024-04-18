@@ -1,0 +1,25 @@
+---
+- name: Retrieve AWS RDS MySQL Database Information
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+    - name: Retrieve AWS RDS MySQL Databases
+      rds_instance_info:
+        region: "{{ aws_region }}"
+        filters:
+          engine: mysql
+      register: rds_databases
+    
+    - name: Display AWS RDS MySQL Database Information
+      debug:
+        var: rds_databases
+    
+    - name: Store AWS RDS MySQL Database Information in Fact Cache
+      set_fact:
+        rds_databases_json: "{{ rds_databases | to_nice_json }}"
+        cacheable: true
+    
+    - name: Display AWS RDS MySQL Database Information from Fact Cache
+      debug:
+        var: rds_databases_json
