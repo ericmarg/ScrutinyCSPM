@@ -11,7 +11,7 @@ import importlib
 def main(cfg: DictConfig) -> None:
     logging.basicConfig(level=cfg.logging.level, filename="app.log")
     
-    print("Welcome to Scrutiny CSP CLI")
+    print("Welcome to Scrutiny CSPM CLI")
     
     command_manager = CommandManager()
 

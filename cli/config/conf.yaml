@@ -14,3 +14,11 @@ commands:
   test:
     module: commands.test_command
     class_name: TestCommand
+
+policy:
+  github:
+    repository: robertfischer3/snarfswap
+    namespace: scrutiny-cspm-policy-test
+    policy_repo: robertfischer3/snarfswap
+    branch: main
+    path: policy

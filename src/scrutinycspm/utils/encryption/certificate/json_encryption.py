@@ -24,7 +24,29 @@ class JSONEncryption (EncryptionProtocol):
             )
         )
         return encrypted_data
+    
+    def decrypt_from_file(self, file_path: str, password: str):
+        with open(file_path, "rb") as file:
+            encrypted_data = file.read()
 
+        with open(self.private_key_path, "rb") as key_file:
+            private_key = serialization.load_pem_private_key(
+                key_file.read(),
+                password=password.encode("utf-8"),
+                backend=default_backend()
+            )
+
+        decrypted_data = private_key.decrypt(
+            encrypted_data,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
+        return json.loads(decrypted_data)
+    
     def decrypt(self, encrypted_data: bytes, password: str) -> dict:
         with open(self.private_key_path, "rb") as key_file:
             private_key = serialization.load_pem_private_key(

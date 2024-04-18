@@ -1,4 +1,4 @@
-private_path: ../../../conf/private
+private_path: ../../conf/private
 secrets:
   hc_vault:
     # Address of the Vault server (cloud or on-prem)
@@ -24,11 +24,14 @@ secrets:
     secret_access_key: fake_secret_access_key
     session_token: fake_session_token
     region: us-east-2
+
+aws_credentials_file:
+    path: ~/.aws/credentials
+
 repositories:
   github:
     repository: robertfischer3/snarfswap
     token: placeholder_token
-
 testing:
   github:
     repository: robertfischer3/snarfswap

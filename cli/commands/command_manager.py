@@ -1,7 +1,5 @@
-import importlib
-import inspect
+
 from typing import Callable, Protocol
-import sys
 
 from src.scrutinycspm.utils.logging_util import add_logging
 from typing import Protocol, Type, Dict
@@ -37,7 +35,9 @@ class CommandManager:
 
         command_class = self.commands[name]
         command = command_class(*args, **kwargs)
-
+        if len(args) > 0 and args[0] == "--help":
+            return command.help()
+        
         if len(args) > 0 and args[0] in command.subcommands:
             subcommand_name = args[0]
             subcommand_args = args[1:]

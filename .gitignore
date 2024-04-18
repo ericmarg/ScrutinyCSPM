@@ -1,7 +1,29 @@
 # The following cannot be checked in
 conf/private/private_vault.yaml
+
 outputs/
+
 scrutinycspm.egg-info/
+
+src/scrutinycspm/utils/development/artifacts
+src/scrutinycspm/utils/development/env
+src/scrutinycspm/utils/development/inventory
+private_data_dir/artifacts
+
+.idea/inspectionProfiles/profiles_settings.xml
+.idea
+
+env/extravars
+
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
+
+
+# Excluding terraform.tfvars file to avoid checking in secrets
+terraform.tfvars
 
 # Virtual env folders
 .venv
@@ -9,6 +31,9 @@ venv/
 ENV/
 scrutiny_env/
 .scrutiny_env
+.scrutiny_3
+.scrutinyx7
+
 # Don't commit your private config files
 config/private/
 
