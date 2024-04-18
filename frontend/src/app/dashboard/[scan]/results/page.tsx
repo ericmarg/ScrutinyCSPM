@@ -9,8 +9,15 @@ import { faAws, faBitbucket, faWindows } from '@fortawesome/free-brands-svg-icon
 import { ResourceListItem } from '@/components/resource-list-item';
 import { ProgressBar } from '@/components/progress-bar';
 import { faServer, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { getScan } from '@/app/dashboard/[scan]/results/actions';
+import { usePathname } from 'next/navigation';
 
-export default function Dashboard() {
+export default function ScanResult() {
+  const path = usePathname();
+  const scanId = path.split('/')[2];
+  getScan(scanId).then((data) => {
+    console.log(data);
+  });
   return (
     <Container maxWidth="lg">
       <Stack spacing={3}>
