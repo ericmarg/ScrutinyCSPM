@@ -1,0 +1,8 @@
+For Azure Blob storage, blob versioning [1] is managed at the storage account level. 
+
+Blob versioning can be enabled using the Azure portal, PowerShell, Azure CLI, or an Azure Resource Manager template.
+
+For instructions on how to enable Blob versioning in your Azure storage account, please see the "Enable blob versioning" Azure documentation page [2].
+
+[1] https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
+[2] https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-enable?tabs=portal

@@ -1,0 +1,4 @@
+Preventing access to Azure blob storage is done at the Storage account level. The "Allow blob anonymous access" setting must be disabled, which can be done using the Azure Portal, Powershell, Azure CLI or an ARM Template [1][2].
+
+https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal#set-the-storage-accounts-allowblobpublicaccess-property
+https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-prevent?tabs=portal
