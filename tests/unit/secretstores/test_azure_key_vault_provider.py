@@ -6,27 +6,16 @@ from src.scrutinycspm.access.securestores.azure_keyvault_provider import (
 )
 
 from datetime import datetime
+from tests.unit.base_test_case import BaseTestCase
 
 
-class TestAzureKeyVaultProvider(TestCase):
+class TestAzureKeyVaultProvider(BaseTestCase):
     """
     This class contains unit tests for the AzureKeyVaultProvider class.
     """
 
     def setUp(self):
-        GlobalHydra.instance().clear()
-        hydra.initialize(
-            config_path="../../../conf", job_name="test_job", version_base="1.1"
-        )
-        self.cfg = hydra.compose(config_name="vault")
-
-        private_vault_config = self.cfg.private_path
-
-        GlobalHydra.instance().clear()
-        hydra.initialize(
-            config_path=private_vault_config, job_name="test_job_2", version_base="1.1"
-        )
-        self.cfg_secure = hydra.compose(config_name="private_vault")
+        super().setUp(config_path="../../conf", config_name="vault") 
 
     def test_certificate_authentication(self):
         akv_provider = AzureKeyVaultProvider(

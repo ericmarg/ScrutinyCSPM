@@ -5,7 +5,7 @@
   
   tasks:
     - name: Retrieve All Security Groups
-      ec2_group_info:
+      amazon.aws.ec2_group_info:
         region: "{{ aws_region }}"
       register: security_groups_info
     
@@ -14,7 +14,7 @@
         var: security_groups_info
     
     - name: Store Security Group Configurations in Fact Cache
-      ansible.builtin.debug.set_fact:
+      set_fact:
         security_groups_json: "{{ security_groups_info | to_nice_json }}"
         cacheable: true
 

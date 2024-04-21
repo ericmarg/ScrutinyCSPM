@@ -8,7 +8,7 @@ import os
 
 from tests.unit.base_test_case import BaseTestCase
 
-class TestAWSEc2Scan(BaseTestCase):
+class TestAWSSecurityGroupScan(BaseTestCase):
     def setUp(self):
         super().setUp(config_path="../../conf", config_name="vault") 
 

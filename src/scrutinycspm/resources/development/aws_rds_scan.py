@@ -18,7 +18,7 @@ class AWSRDSScanner:
         
         try:
             result = ansible_runner.run(
-                playbook='aws_rds_scanning.yaml',
+                playbook='aws_rds_mysql_scanning.yaml',
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,

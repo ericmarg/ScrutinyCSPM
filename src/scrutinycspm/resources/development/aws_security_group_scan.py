@@ -8,7 +8,7 @@ class AWSSecurityGroupScanner:
         self.secret_key = secret_key
         self.region = region
 
-    def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
+    def run_scan(self, private_data_dir='src/scrutinycspm/resources/playbooks/'):
         """Run the security group scan using Ansible Runner"""
         
         try:
