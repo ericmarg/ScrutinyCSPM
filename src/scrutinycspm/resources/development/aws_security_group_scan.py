@@ -13,7 +13,7 @@ class AWSSecurityGroupScanner:
         
         try:
             result = ansible_runner.run(
-                playbook='security_group_scanning.yaml',
+                playbook='aws_security_group_scanning.yaml',
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,
@@ -31,6 +31,6 @@ class AWSSecurityGroupScanner:
 
         except Exception as e:
             # Handle the exception
-            print(f"An error occurred during the EC2 scan: {str(e)}")
+            print(f"An error occurred during the Security Group scan: {str(e)}")
             return None
         

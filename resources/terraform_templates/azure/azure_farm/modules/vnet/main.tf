@@ -1,40 +1,73 @@
 # Provider configuration
 provider "azurerm" {
   features {}
+
+  tenant_id       = var.tenant_id
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  
+
 }
 
-# Resource Group
-resource "azurerm_resource_group" "rg" {
-  name     = "my-resource-group"
-  location = "eastus"
+variable "resource_group_name" {
+  description = "The name of the resource group"
+  type        = string
+}
+
+variable "rg_location" {
+  description = "The name of the resource location"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "Azure subscription ID"
+  type        = string
+}
+
+variable "client_id" {
+  description = "The client ID for the Azure service principal."
+  type        = string
+  
+}
+
+variable "client_secret" {
+  description = "The client secret for the Azure service principal."
+  type        = string
+  
+}
+
+variable "tenant_id" {
+  description = "Azure tenant ID"
+  type        = string
 }
 
 # Virtual Network (VNET)
 resource "azurerm_virtual_network" "vnet" {
   name                = "my-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 }
 
 # Subnets
 resource "azurerm_subnet" "web_subnet" {
   name                 = "web-subnet"
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_subnet" "app_subnet" {
   name                 = "app-subnet"
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_subnet" "db_subnet" {
   name                 = "db-subnet"
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
 }
@@ -42,8 +75,8 @@ resource "azurerm_subnet" "db_subnet" {
 # Network Security Groups (NSGs)
 resource "azurerm_network_security_group" "web_nsg" {
   name                = "web-nsg"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   security_rule {
     name                       = "allow-http"
@@ -60,8 +93,8 @@ resource "azurerm_network_security_group" "web_nsg" {
 
 resource "azurerm_network_security_group" "app_nsg" {
   name                = "app-nsg"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   security_rule {
     name                       = "allow-web"
@@ -78,8 +111,8 @@ resource "azurerm_network_security_group" "app_nsg" {
 
 resource "azurerm_network_security_group" "db_nsg" {
   name                = "db-nsg"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   security_rule {
     name                       = "allow-app"
@@ -97,16 +130,16 @@ resource "azurerm_network_security_group" "db_nsg" {
 # Azure Load Balancer
 resource "azurerm_public_ip" "lb_public_ip" {
   name                = "lb-public-ip"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
 resource "azurerm_lb" "web_lb" {
   name                = "web-lb"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
   sku                 = "Standard"
 
   frontend_ip_configuration {
@@ -143,8 +176,8 @@ resource "azurerm_lb_rule" "web_rule" {
 resource "azurerm_network_interface" "web_nic" {
   count               = 2
   name                = "web-nic-${count.index}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "web-ipconfig-${count.index}"
@@ -163,8 +196,8 @@ resource "azurerm_network_interface_backend_address_pool_association" "web_nic_l
 resource "azurerm_linux_virtual_machine" "web_vm" {
   count               = 2
   name                = "web-vm-${count.index}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
   size                = "Standard_B2s"
   admin_username      = "adminuser"
   network_interface_ids = [
@@ -193,8 +226,8 @@ resource "azurerm_linux_virtual_machine" "web_vm" {
 resource "azurerm_network_interface" "app_nic" {
   count               = 2
   name                = "app-nic-${count.index}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "app-ipconfig-${count.index}"
@@ -206,8 +239,8 @@ resource "azurerm_network_interface" "app_nic" {
 resource "azurerm_linux_virtual_machine" "app_vm" {
   count               = 2
   name                = "app-vm-${count.index}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
   size                = "Standard_B2s"
   admin_username      = "adminuser"
   network_interface_ids = [
@@ -235,8 +268,8 @@ resource "azurerm_linux_virtual_machine" "app_vm" {
 # Database Server
 resource "azurerm_network_interface" "db_nic" {
   name                = "db-nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "db-ipconfig"
@@ -247,8 +280,8 @@ resource "azurerm_network_interface" "db_nic" {
 
 resource "azurerm_linux_virtual_machine" "db_vm" {
   name                = "db-vm"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.resource_group_name
   size                = "Standard_B2s"
   admin_username      = "adminuser"
   network_interface_ids = [

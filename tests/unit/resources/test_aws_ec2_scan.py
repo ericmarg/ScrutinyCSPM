@@ -1,6 +1,6 @@
 import configparser
 import os
-from omegaconf import OmegaConf
+
 from src.scrutinycspm.resources.development.aws_ec2_scan import AWSEC2Scanner
 from hydra.core.global_hydra import GlobalHydra
 import json

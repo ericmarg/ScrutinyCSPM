@@ -33,6 +33,7 @@ scrutiny_env/
 .scrutiny_env
 .scrutiny_3
 .scrutinyx7
+.scrutinyx8
 
 # Don't commit your private config files
 config/private/
@@ -64,3 +65,4 @@ docs/_build
 env
 artifacts
 inventory
+*.tfvars

@@ -1,6 +1,5 @@
 import os
 import configparser
-from omegaconf import OmegaConf
 from hydra.core.global_hydra import GlobalHydra
 from src.scrutinycspm.utils.aws_credential_file import configure_aws_credentials
 from tests.unit.base_test_case import BaseTestCase

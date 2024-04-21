@@ -1,0 +1,30 @@
+---
+- name: Gather AWS S3 bucket information
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Get list of S3 buckets
+      amazon.aws.aws_s3:
+        list_buckets: true
+      register: s3_buckets
+
+    - name: Get S3 bucket details
+      amazon.aws.aws_s3:
+        bucket: "{{ item }}"
+      loop: "{{ s3_buckets.buckets }}"
+      register: s3_bucket_details
+
+    - name: Combine S3 bucket details into a single JSON object
+      set_fact:
+        s3_bucket_info: "{{ s3_bucket_info | default({}) | combine({item.item: item.bucket}) }}"
+      loop: "{{ s3_bucket_details.results }}"
+
+    - name: Store S3 bucket information in fact cache
+      set_fact:
+        s3_buckets_json: "{{ s3_bucket_info | to_nice_json }}"
+        cacheable: true
+
+    - name: Display S3 bucket information
+      debug:
+        var: s3_buckets_json

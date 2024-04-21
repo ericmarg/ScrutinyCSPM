@@ -13,11 +13,11 @@ class AWSS3Scanner:
         self.region = region
 
     def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
-        """Run the S3 bucket scan using Ansible Runner"""
+        """Run the RDS bucket scan using Ansible Runner"""
         
         try:
             result = ansible_runner.run(
-                playbook='aws_s3_scanning.yaml',
+                playbook='aws_rds_scanning.yaml',
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,
