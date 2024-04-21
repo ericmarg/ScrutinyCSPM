@@ -13,14 +13,14 @@ class AWSEC2Scanner:
         self.secret_key = secret_key
         self.region = region
 
-    def run_scan(self):
+    def run_scan(self, private_data_dir='src/scrutinycspm/resources/playbooks/'):
 
         test = os.getcwd()
         try:
             result = ansible_runner.run(
                 playbook='aws_ec2_scanning.yaml',
                 inventory=None,
-                private_data_dir='src/scrutinycspm/resources/playbooks/',
+                private_data_dir= private_data_dir,
                 quiet=True,
                 extravars={
                     'aws_access_key': self.access_key,

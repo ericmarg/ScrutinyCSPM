@@ -5,14 +5,15 @@ import configparser
 import os
 
 # Define the S3Scanner class
-class AWSS3Scanner:
+class AWSRDSScanner:
     def __init__(self, region, access_key, secret_key):
 
         self.access_key = access_key
         self.secret_key = secret_key
         self.region = region
 
-    def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
+    def run_scan(self, private_data_dir='src/scrutinycspm/resources/playbooks/'):
+        
         """Run the RDS bucket scan using Ansible Runner"""
         
         try:
@@ -29,9 +30,9 @@ class AWSS3Scanner:
             )
 
             # Retrieve the JSON data from the fact cache
-            s3_buckets_json = result.get_fact_cache('localhost')['s3_buckets_json']
+            rds_databases_json = result.get_fact_cache('localhost')['rds_databases_json']
             
-            return s3_buckets_json
+            return rds_databases_json
 
         except Exception as e:
             # Handle the exception
