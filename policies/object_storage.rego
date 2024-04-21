@@ -9,7 +9,7 @@ import rego.v1
 #   remediation_guidance:
 #     enable_versioning:
 #        aws: obj_storage/aws/enable_versioning.txt
-#        azure: TBC
+#        azure: obj_storage/azure/enable_versioning.txt
 enforce_versioning_enabled := non_compliant_decision if {
 	input.versioning_enabled = false
 
@@ -30,7 +30,7 @@ enforce_versioning_enabled := non_compliant_decision if {
 #   remediation_guidance:
 #     enable_versioning:
 #        aws: obj_storage/aws/enable_versioning.txt
-#        azure: TBC
+#        azure: obj_storage/azure/enable_versioning.txt
 enforce_versioning_enabled := compliant_decision if {
 	input.versioning_enabled = true
 
@@ -49,7 +49,7 @@ enforce_versioning_enabled := compliant_decision if {
 #   remediation_guidance:
 #     enable_public_access_block:
 #        aws: obj_storage/aws/enable_public_access_block.txt
-#        azure: TBC
+#        azure: obj_storage/azure/enable_public_access_block.txt
 enforce_public_access_block := non_compliant_decision if {
 	input.all_public_access_blocked = false
 
@@ -71,7 +71,7 @@ enforce_public_access_block := non_compliant_decision if {
 #   remediation_guidance:
 #     enable_public_access_block:
 #        aws: obj_storage/aws/enable_public_access_block.txt
-#        azure: TBC
+#        azure: obj_storage/azure/enable_public_access_block.txt
 enforce_public_access_block := compliant_decision if {
 	input.all_public_access_blocked = true
 
