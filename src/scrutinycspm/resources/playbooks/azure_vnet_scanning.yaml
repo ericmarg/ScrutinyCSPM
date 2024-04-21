@@ -1,0 +1,26 @@
+---
+- name: Retrieve Azure VNETs and Subnets
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Retrieve Azure VNETs
+      azure.azcollection.azure_rm_virtualnetwork_info:
+        subscription_id: "6645551c-ec86-42a3-95bc-12f966b25d81"
+
+    - name: Create a dictionary with VNET details
+      set_fact:
+        vnet_details: "{{ vnet_details | default({}) | combine({item.key: item.value}) }}"
+      loop: "{{ vnets.virtualnetworks | dict2items }}"
+
+    - name: Create a dictionary with subnet details
+      set_fact:
+        subnet_details: "{{ subnet_details | default({}) | combine({item.key: item.value.subnets}) }}"
+      loop: "{{ vnets.virtualnetworks | dict2items }}"
+
+    - name: Add VNET and subnet details to Ansible facts
+      set_fact:
+        ansible_facts:
+          azure_vnets: "{{ vnet_details }}"
+          azure_subnets: "{{ subnet_details }}"
+          cacheable: true

@@ -13,29 +13,13 @@ import hydra
 from src.scrutinycspm.access.repository.github_provider import GitHubRepository
 from typing import List
 
-class TestGitHubRepository(unittest.TestCase):
+from tests.unit.base_test_case import BaseTestCase
+
+class TestGitHubRepository(BaseTestCase):
 
     def setUp(self):
-        # Clear the global Hydra instance
-        GlobalHydra.instance().clear()
-        # Initialize Hydra with the configuration path, job name, and version base
-        hydra.initialize(
-            config_path="../../../conf", job_name="test_job", version_base="1.1"
-        )
-        # Compose the configuration using the "vault" config name
-        self.cfg = hydra.compose(config_name="vault")
-
-        # Get the private vault configuration path
-        private_vault_config = self.cfg.private_path
-
-        # Clear the global Hydra instance again
-        GlobalHydra.instance().clear()
-        # Initialize Hydra with the private vault configuration path, job name, and version base
-        hydra.initialize(
-            config_path=private_vault_config, job_name="test_job_2", version_base="1.1"
-        )
-        # Compose the configuration using the "private_vault" config name
-        self.cfg_secure = hydra.compose(config_name="private_vault")
+        
+        super().setUp(config_path="../../conf", config_name="vault")        
 
         # Get the repository name and access token from the configuration
         self.repo_name = self.cfg_secure.repositories.github.repository

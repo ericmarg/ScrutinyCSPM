@@ -5,19 +5,20 @@ import configparser
 import os
 
 # Define the S3Scanner class
-class S3Scanner:
+class AWSRDSScanner:
     def __init__(self, region, access_key, secret_key):
 
         self.access_key = access_key
         self.secret_key = secret_key
         self.region = region
 
-    def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
-        """Run the S3 bucket scan using Ansible Runner"""
+    def run_scan(self, private_data_dir='src/scrutinycspm/resources/playbooks/'):
+        
+        """Run the RDS bucket scan using Ansible Runner"""
         
         try:
             result = ansible_runner.run(
-                playbook='s3_scanning.yaml',
+                playbook='aws_rds_mysql_scanning.yaml',
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,
@@ -29,13 +30,13 @@ class S3Scanner:
             )
 
             # Retrieve the JSON data from the fact cache
-            ec2_security_json = result.get_fact_cache('localhost')['s3_buckets_info']
+            rds_databases_json = result.get_fact_cache('localhost')['rds_databases_json']
             
-            return ec2_security_json
+            return rds_databases_json
 
         except Exception as e:
             # Handle the exception
-            print(f"An error occurred during the EC2 scan: {str(e)}")
+            print(f"An error occurred during the S3 Bucket scan: {str(e)}")
             return None
         
 

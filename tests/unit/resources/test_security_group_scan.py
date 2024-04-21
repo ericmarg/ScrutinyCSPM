@@ -1,11 +1,14 @@
 import configparser
-from src.scrutinycspm.resources.development.aws_s3bucket_scan import AWSS3Scanner
+import os
+
+from src.scrutinycspm.resources.development.aws_security_group_scan import AWSSecurityGroupScanner
+from hydra.core.global_hydra import GlobalHydra
 import json
 import os
 
 from tests.unit.base_test_case import BaseTestCase
 
-class TestAWSEc2Scan(BaseTestCase):
+class TestAWSSecurityGroupScan(BaseTestCase):
     def setUp(self):
         super().setUp(config_path="../../conf", config_name="vault") 
 
@@ -20,7 +23,7 @@ class TestAWSEc2Scan(BaseTestCase):
         access_key = config["default"]["aws_access_key_id"]
         secret_key = config["default"]["aws_secret_access_key"]
         region = "us-east-2"
-        results = AWSS3Scanner(region, access_key, secret_key).run_scan()
+        results = AWSSecurityGroupScanner(region, access_key, secret_key).run_scan()
         print(json.dumps(results, indent=4))
         self.assertIsNotNone(results)
 

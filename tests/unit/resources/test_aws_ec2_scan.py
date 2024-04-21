@@ -1,5 +1,8 @@
 import configparser
-from src.scrutinycspm.resources.development.aws_s3bucket_scan import AWSS3Scanner
+import os
+
+from src.scrutinycspm.resources.development.aws_ec2_scan import AWSEC2Scanner
+from hydra.core.global_hydra import GlobalHydra
 import json
 import os
 
@@ -20,7 +23,7 @@ class TestAWSEc2Scan(BaseTestCase):
         access_key = config["default"]["aws_access_key_id"]
         secret_key = config["default"]["aws_secret_access_key"]
         region = "us-east-2"
-        results = AWSS3Scanner(region, access_key, secret_key).run_scan()
+        results = AWSEC2Scanner(region, access_key, secret_key).run_scan()
         print(json.dumps(results, indent=4))
         self.assertIsNotNone(results)
 

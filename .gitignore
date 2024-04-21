@@ -32,7 +32,9 @@ ENV/
 scrutiny_env/
 .scrutiny_env
 .scrutiny_3
-.scrutinyx7
+.scruntiyx7
+.scrutiyx7
+.scrutinyx8
 
 # Don't commit your private config files
 config/private/
@@ -59,3 +61,9 @@ pip-wheel-metadata/
 cspm
 docs/_build
 .coverage
+
+
+env
+artifacts
+inventory
+*.tfvars
