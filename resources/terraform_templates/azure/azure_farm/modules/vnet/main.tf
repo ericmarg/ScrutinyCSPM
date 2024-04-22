@@ -15,9 +15,11 @@ variable "resource_group_name" {
   type        = string
 }
 
+
 variable "rg_location" {
-  description = "The name of the resource location"
+  description = "The Azure region"
   type        = string
+  default     = "eastus"
 }
 
 variable "subscription_id" {
