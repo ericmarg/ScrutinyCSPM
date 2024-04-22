@@ -10,6 +10,11 @@ variable "rg_location" {
   default     = "eastus"
 }
 
+variable "resource_group_name_storage" {
+  description = "The name of the resource group"
+  type        = string
+  default = "scrutiny_storage_rg_101"
+}
 
 variable "validity_period_hours" {
   description = "The validity period of the certificate in hours"
