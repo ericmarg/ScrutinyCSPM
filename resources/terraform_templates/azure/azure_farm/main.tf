@@ -4,13 +4,11 @@ provider "azurerm" {
 
 
 module "keyvault" {
-  source = "./modules/keyvault"
+  source = "./modules/storage"
 
-  # Pass other required variables to the keyvault module
-    resource_group_name = var.resource_group_name
+  # Pass other required variables to the storage module
     rg_location = var.rg_location
-    key_vault_name = var.key_vault_name
-    validity_period_hours = var.validity_period_hours
+    resource_group_name_storage = var.resource_group_name_storage
 
 }
 

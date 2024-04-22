@@ -22,6 +22,11 @@ variable "key_vault_name" {
   type      = string
 }
 
+variable "client_id" {
+  description = "The ID of the service principal"
+  type        = string
+}
+
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_role_assignment" "scrutiny_role_assignment" {
@@ -60,24 +65,12 @@ resource "tls_self_signed_cert" "scrutiny_cert" {
   ]
 }
 
-resource "azuread_application" "example_app" {
-  display_name = "Example Service Principal"
-
-  required_resource_access {
-    resource_app_id = "00000003-0000-0000-c000-000000000000" # Microsoft Graph API
-    resource_access {
-      id   = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read.All
-      type = "Scope"
-    }
-  }
+resource "azuread_service_principal" "scrutiny_example_sp" {
+client_id = var.client_id
 }
 
-resource "azuread_service_principal" "example_sp" {
-client_id = azuread_application.example_app.client_id
-}
-
-resource "azuread_service_principal_certificate" "example_sp_cert" {
-  service_principal_id = azuread_service_principal.example_sp.id
+resource "azuread_service_principal_certificate" "scrutiny_example_sp_cert" {
+  service_principal_id = azuread_service_principal.scrutiny_example_sp.id
   type                 = "AsymmetricX509Cert"
   value                = tls_self_signed_cert.scrutiny_cert.cert_pem
 }
@@ -86,7 +79,7 @@ resource "azuread_service_principal_certificate" "example_sp_cert" {
 resource "azurerm_key_vault_access_policy" "example_sp_access_policy" {
   key_vault_id = azurerm_key_vault.scrutiny_vault_01.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azuread_service_principal.example_sp.object_id
+  object_id    = azuread_service_principal.scrutiny_example_sp.id
 
   certificate_permissions = [
     "Get",
