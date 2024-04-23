@@ -67,4 +67,4 @@ env
 artifacts
 inventory
 *.tfvars
-test_certificates
+test_certificate
