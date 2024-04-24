@@ -29,6 +29,8 @@ setup(
         "ansible-lint>=24.2.2",
         "ansible-creator",
         "ansible-dev-tools",
+        "azure-storage-blob",
+        
         # other dependencies...
     ],
     # ...
