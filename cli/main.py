@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+
 import hydra
 from omegaconf import DictConfig
 from typing import Any, Dict
@@ -41,7 +41,6 @@ def main(cfg: DictConfig) -> None:
             print("Available commands:")
             for cmd in command_manager.commands:
                 print(f"- {cmd}")
-
 
 if __name__ == "__main__":
     main()
