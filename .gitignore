@@ -4,6 +4,8 @@ common-name-test.crt
 
 outputs/
 
+vars.yaml
+
 scrutinycspm.egg-info/
 
 src/scrutinycspm/utils/development/artifacts
