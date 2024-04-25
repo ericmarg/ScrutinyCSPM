@@ -7,6 +7,7 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 ## Prerequisites
 
 - Docker installed on your system ([Install Docker](https://docs.docker.com/get-docker/))
+- Docker Compose installed on your system ([Install Docker Compose](https://docs.docker.com/compose/install/))
 
 ## How to Run
 
@@ -20,19 +21,19 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 
    ```bash
    cd ScrutinyCSPM
-   cp docker/production/Dockerfile .
    ```
 
-3. Build the Docker image:
+3. Run the Docker container and it's dependencies:
 
    ```bash
-   docker build -t scrutiny_cspm .
+   docker compose up -d
    ```
+   
 
-4. Run the Docker container in interactive mode and allocate a pseudo-TTY:
+4. You can now access the ScrutinyCSPM program by entering the following command:
 
    ```bash
-   docker run -it scrutiny_cspm
+   docker exec -it scrutiny-cspm /bin/bash -c "python /scrutinycspm/cli/main.py"
    ```
 
 5. You can now enter commands to interact with the program.

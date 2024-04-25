@@ -2,7 +2,7 @@ FROM nikolaik/python-nodejs:python3.11-nodejs20
 
 # Install Git and necessary dependencies
 RUN apt-get update && \
-    apt-get install -y git && \
+    apt-get install -y git libonig-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
