@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 
-module "keyvault" {
+module "storage" {
   source = "./modules/storage"
 
   # Pass other required variables to the storage module
@@ -11,7 +11,6 @@ module "keyvault" {
     resource_group_name_storage = var.resource_group_name_storage
 
 }
-
 
 module "vnet" {
     source = "./modules/vnet"
@@ -22,4 +21,3 @@ module "vnet" {
     tenant_id = var.tenant_id
     resource_group_name = var.resource_group_name
 }
-

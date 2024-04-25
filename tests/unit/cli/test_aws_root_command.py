@@ -38,7 +38,7 @@ class TestAWSRootCommand(unittest.TestCase):
 
 class TestAWSRootScan(BaseTestCase):
     def setUp(self):
-        super().setUp(config_path="../../conf", config_name="vault") 
+        super().setUp(config_path="../../conf", config_name="base-config") 
 
     def test_aws_scan(self):
 

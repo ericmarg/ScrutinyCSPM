@@ -1,5 +1,6 @@
 # The following cannot be checked in
 conf/private/private_vault.yaml
+common-name-test.crt
 
 outputs/
 
@@ -20,6 +21,8 @@ env/extravars
 terraform.tfstate
 terraform.tfstate.backup
 .terraform.tfstate.lock.info
+
+*.pem
 
 
 # Excluding terraform.tfvars file to avoid checking in secrets
@@ -67,4 +70,4 @@ env
 artifacts
 inventory
 *.tfvars
-test_certificate
+certificate

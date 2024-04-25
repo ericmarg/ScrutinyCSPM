@@ -4,6 +4,9 @@
   connection: local
   gather_facts: false
 
+  vars_files:
+  - vars.yaml
+
   tasks:
     - name: Get Azure Storage Accounts
       azure_rm_storageaccount_info:

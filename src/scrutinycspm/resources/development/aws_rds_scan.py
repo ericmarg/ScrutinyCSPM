@@ -1,8 +1,5 @@
 
 import ansible_runner
-import json
-import configparser
-import os
 
 # Define the S3Scanner class
 class AWSRDSScanner:

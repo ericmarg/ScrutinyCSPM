@@ -36,13 +36,13 @@ resource "tls_self_signed_cert" "azure" {
 
 # Save the private key to a file
 resource "local_file" "private_key" {
-  filename = "test_certificate/private_key.pem"
+  filename = "certificate/private_key.pem"
   content  = tls_private_key.scrutiny_azure_tls_cert.private_key_pem
 }
 
 # Save the self-signed certificate to a file
 resource "local_file" "self_signed_cert" {
-  filename = "test_certificate/self_signed_cert.pem"
+  filename = "certificate/self_signed_cert.pem"
   content  = tls_self_signed_cert.azure.cert_pem
 }
 

@@ -19,7 +19,7 @@ class TestGitHubRepository(BaseTestCase):
 
     def setUp(self):
         
-        super().setUp(config_path="../../conf", config_name="vault")        
+        super().setUp(config_path="../../conf", config_name="base-config")        
 
         # Get the repository name and access token from the configuration
         self.repo_name = self.cfg_secure.repositories.github.repository

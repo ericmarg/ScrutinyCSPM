@@ -15,7 +15,7 @@ class TestAzureKeyVaultProvider(BaseTestCase):
     """
 
     def setUp(self):
-        super().setUp(config_path="../../conf", config_name="vault") 
+        super().setUp(config_path="../../conf", config_name="base-config") 
 
     def test_certificate_authentication(self):
         akv_provider = AzureKeyVaultProvider(
