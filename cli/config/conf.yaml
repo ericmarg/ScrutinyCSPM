@@ -14,6 +14,9 @@ commands:
   test:
     module: commands.test_command
     class_name: TestCommand
+  aws:
+    module: commands.aws_root_command
+    class_name: AWSRootCommand
 
 policy:
   github:

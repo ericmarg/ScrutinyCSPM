@@ -1,4 +1,4 @@
-provider "vault" {
+provider "base-config" {
   address = var.vault_address  # Replace with your Vault server address
 }
 

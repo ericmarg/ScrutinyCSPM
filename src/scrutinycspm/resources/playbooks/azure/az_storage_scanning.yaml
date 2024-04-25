@@ -1,0 +1,22 @@
+---
+- name: Get Azure Storage Accounts
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+  - vars.yaml
+
+  tasks:
+    - name: Get Azure Storage Accounts
+      azure_rm_storageaccount_info:
+        subscription_id: "{{ subscription_id }}"
+        client_id: "{{ client_id }}"
+        secret: "{{ client_secret }}"
+        tenant: "{{ tenant_id }}"
+      register: storage_accounts
+
+    - name: Store Storage Accounts in Fact Cache
+      set_fact:
+        azure_storage_accounts: "{{ storage_accounts.storageaccounts }}"
+        cacheable: true

@@ -10,7 +10,7 @@ class BaseTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.default_config_path = "../../../conf"
-        cls.default_config_name = "vault"
+        cls.default_config_name = "base-config"
 
     def setUp(self, config_path=None, config_name=None):
         if config_path is None:

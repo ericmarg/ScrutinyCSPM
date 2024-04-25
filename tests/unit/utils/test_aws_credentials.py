@@ -7,7 +7,7 @@ from tests.unit.base_test_case import BaseTestCase
 class TestAWSCredentialsUtils(BaseTestCase):
     def setUp(self):
 
-        super().setUp(config_path="../../conf", config_name="vault")
+        super().setUp(config_path="../../conf", config_name="base-config")
 
     def test_generate_aws_credential_file(self):
 

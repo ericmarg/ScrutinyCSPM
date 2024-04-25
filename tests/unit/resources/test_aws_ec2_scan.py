@@ -10,7 +10,7 @@ from tests.unit.base_test_case import BaseTestCase
 
 class TestAWSEc2Scan(BaseTestCase):
     def setUp(self):
-        super().setUp(config_path="../../conf", config_name="vault") 
+        super().setUp(config_path="../../conf", config_name="base-config") 
 
     def test_ec2_scan(self):
 

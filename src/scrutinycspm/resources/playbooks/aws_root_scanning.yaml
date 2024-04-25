@@ -1,0 +1,54 @@
+---
+- name: Get AWS Account Information
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Get AWS Account ID
+      aws_caller_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: aws_account_info
+
+    - name: Get AWS EC2 Instance Count
+      ec2_instance_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: ec2_instances
+
+    - name: Get AWS S3 Bucket Count
+      aws_s3_bucket_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: s3_buckets
+
+    - name: Get AWS VPC Count
+      ec2_vpc_net_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: vpcs
+
+    - name: Get AWS Security Group Count
+      ec2_group_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: security_groups
+
+    - name: Store AWS Account Information in Fact Cache
+      set_fact:
+        aws_account_info:
+          account_id: "{{ aws_account_info.account }}"
+          ec2_instance_count: "{{ ec2_instances.instances | length }}"
+          s3_bucket_count: "{{ s3_buckets.buckets | length }}"
+          vpc_count: "{{ vpcs.vpcs | length }}"
+          security_group_count: "{{ security_groups.security_groups | length }}"
+        cacheable: true
+
+    - name: Display AWS Account Information
+      debug:
+        var: aws_account_info

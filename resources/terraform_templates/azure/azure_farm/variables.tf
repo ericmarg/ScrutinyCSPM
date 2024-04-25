@@ -1,8 +1,4 @@
-variable "key_vault_name" {
-  description = "The name of the Azure Key Vault"
-  type        = string
-  default     = "scrutiny-keyvault-01"
-}
+
 
 variable "rg_location" {
   description = "The Azure region where the Key Vault will be created"
