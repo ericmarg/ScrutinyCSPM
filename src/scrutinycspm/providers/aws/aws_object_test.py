@@ -32,9 +32,11 @@ for container in new_account.obj_storage_containers:
     
     print(f"Remediations for {container.name}")
     for decision in decisions:
-      if decision["result"]["status"] == "Not Compliant":
-         remediation_path = decision["result"]["remediation_guidance"]
-         remediation_file = open(f"remediations/{remediation_path}", "r")
+      result = decision["result"]
+      if result["status"] == "Not Compliant":
+         remediation_path = result["remediation_guidance"]
+         cloud_provider = result["provider"]
+         remediation_file = open(f"remediations/{cloud_provider}/{remediation_path}", "r")
          remediation_file_contents = remediation_file.read()
          print(remediation_file_contents)
 
