@@ -40,6 +40,7 @@ scrutiny_env/
 .scruntiyx7
 .scrutiyx7
 .scrutinyx8
+.recalcitrant2
 
 # Don't commit your private config files
 config/private/
