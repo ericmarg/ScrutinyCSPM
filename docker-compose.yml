@@ -9,6 +9,9 @@ services:
       - "3000:3000"
     volumes:
       - ./scans:/scans
+      - ~/.aws:/root/.aws
+    env_file:
+      - .env
   opa:
     container_name: opa
     image: openpolicyagent/opa:latest-debug
