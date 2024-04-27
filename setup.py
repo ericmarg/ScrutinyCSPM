@@ -30,6 +30,7 @@ setup(
         "ansible-creator",
         "ansible-dev-tools",
         "azure-storage-blob",
+        "azure-mgmt-storage",
         
         # other dependencies...
     ],
