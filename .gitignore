@@ -26,6 +26,8 @@ terraform.tfstate.backup
 .terraform.tfstate.lock.info
 
 *.pem
+.env
+private vault.yaml
 
 
 # Excluding terraform.tfvars file to avoid checking in secrets
