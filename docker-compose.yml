@@ -1,10 +1,30 @@
 version: '3.8'
+
 name: 'scrutiny-cspm'
 
 services:
-  frontend:
-    build: ./frontend
+  app:
+    build: .
+    container_name: scrutiny-cspm
     ports:
       - "3000:3000"
     volumes:
       - ./scans:/scans
+    depends_on:
+      - ansible
+
+  opa:
+    container_name: opa
+    image: openpolicyagent/opa:latest-debug
+    ports:
+      - "8181:8181"
+
+  ansible:
+    container_name: ansible
+    build:
+      context: docker/ansible
+      dockerfile: Dockerfile
+    command: sleep infinity
+    ports:
+      - "2222:22"
+      - "8080:8080"

@@ -1,5 +1,6 @@
 
 from typing import Callable, Protocol
+
 from src.scrutinycspm.utils.logging_util import add_logging
 from typing import Protocol, Type, Dict
 
