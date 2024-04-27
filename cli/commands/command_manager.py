@@ -34,15 +34,19 @@ class CommandManager:
             raise ValueError(f"Unknown command: {name}")
 
         command_class = self.commands[name]
-        command = command_class(*args, **kwargs)
-        if len(args) > 0 and args[0] == "--help":
+        command = command_class()
+
+        if "--help" in args:
             return command.help()
         
-        if len(args) > 0 and args[0] in command.subcommands:
+        if len(args) == 0:
+            return command.help()
+
+        if hasattr(command, 'subcommands') and len(args) > 0 and args[0] in command.subcommands:
             subcommand_name = args[0]
             subcommand_args = args[1:]
             subcommand_class = command.subcommands[subcommand_name]
-            subcommand = subcommand_class(*subcommand_args, **kwargs)
-            return subcommand.execute()
+            subcommand = subcommand_class()
+            return subcommand.execute(*subcommand_args, **kwargs)
         else:
             return command.execute(*args, **kwargs)

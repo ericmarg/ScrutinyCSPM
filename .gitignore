@@ -15,6 +15,7 @@ private_data_dir/artifacts
 
 .idea/inspectionProfiles/profiles_settings.xml
 .idea
+.recalcitrant
 
 env/extravars
 
