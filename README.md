@@ -4,6 +4,8 @@
 ScrutinyCSPM is an open-source Cloud Security Posture Management (CSPM) offering from a team of Harvard Extension School graduate students. 
 It provides resource scanning and remediation based on Rego policy rules. ScrutinyCSPM uses the Open Policy Agent (OPA) to evaluate policy decisions.
 
+[Documents (docs/markdown)](docs/markdown/)
+
 ## Prerequisites
 
 - Docker installed on your system ([Install Docker](https://docs.docker.com/get-docker/))
