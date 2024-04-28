@@ -28,7 +28,14 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
    ```bash
    docker compose up -d
    ```
-   
+4. Add credentials to the running container. 
+
+   Currently the Scrutiny CSPM application requires the deployment of AWS and Azure credentials.  These steps are documented in the following document prior to step 5
+
+   [Azure Environment Vars for Cloud Authentication](docs/markdown/azure_environment_vars.md)
+
+   [AWS Credentials File]()
+
 
 4. You can now access the ScrutinyCSPM program by entering the following command:
 
@@ -47,7 +54,21 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 6. To exit the program, type `quit` at the prompt.
 
 ## Commands
-[todo]
+Provided the Terraform Files found in the in Terraform folders [Terrform Test Azure Farm](resources/terraform_templates/azure/azure_farm/) and [Terraform Test AWS Farm](resources/terraform_templates/aws/vpc/) have been executed, then the following commands can be tested:
+
+```bash
+
+azure nsg
+azure vm
+azure vnet
+azure storage
+
+aws summary us-east-2
+aws ec2 us-east-2
+aws s3 us-east-2
+aws security-group us-east-2
+
+```
 
 ## Notes
 - ScrutinyCSPM ships with a set of security policies and Terraform plans to help with testing.

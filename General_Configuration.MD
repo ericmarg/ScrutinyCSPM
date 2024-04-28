@@ -2,6 +2,19 @@
 
 This application utilizes two configuration files: `base-config.yaml` and `private_vault.yaml`. These files are essential for setting up and running the application properly.
 
+## Notice:
+<div style="background-color: #f0f0f0; padding: 10px;">
+Additional configurations are also required in the current release of this application.
+
+If you are running this code in a image container, these configurations need to be applied insider the container. 
+
+[Azure Environment Variables](docs/markdown/azure_environment_vars.md)
+
+[AWS Credential File Script](docs/markdown/aws_credentials_script.md)
+
+[AWS Credentials (Manual)](docs/markdown/aws_credentials.MD)
+</div>
+
 ## File Locations
 
 1. `base-config.yaml`:
