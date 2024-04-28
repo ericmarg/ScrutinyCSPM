@@ -32,6 +32,8 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 
    Currently the Scrutiny CSPM application requires the deployment of AWS and Azure credentials.  These steps are documented in the following document prior to step 5
 
+   [General Configuration](General_Configuration.MD)
+
    [Azure Environment Vars for Cloud Authentication](docs/markdown/azure_environment_vars.md)
 
    [AWS Credentials File]()
