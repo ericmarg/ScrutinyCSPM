@@ -13,6 +13,9 @@ If you are running this code in a image container, these configurations need to 
 [AWS Credential File Script](docs/markdown/aws_credentials_script.md)
 
 [AWS Credentials (Manual)](docs/markdown/aws_credentials.MD)
+
+[Azure Enviromental Variables (manual)](docs/markdown/Azure_Authentication.MD)
+
 </div>
 
 ## File Locations
