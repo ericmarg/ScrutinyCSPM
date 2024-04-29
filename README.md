@@ -23,6 +23,7 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 
    ```bash
    cd ScrutinyCSPM
+   cp docker/production/Dockerfile .
    ```
 
 3. Run the Docker container and it's dependencies:
