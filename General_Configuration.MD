@@ -8,7 +8,7 @@ Additional configurations are also required in the current release of this appli
 
 If you are running this code in a image container, these configurations need to be applied insider the container. 
 
-### Preferred Method
+### Preferred Method (Container Image)
 [Configuring AWS and Azure Credentials for Scrutiny CSPM](docs/markdown/configuring_aws_azure_credentials.md)
 
 

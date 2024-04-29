@@ -37,11 +37,6 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 
    [General Configuration](General_Configuration.MD)
 
-   [Azure Environment Vars for Cloud Authentication](docs/markdown/azure_environment_vars.md)
-
-   [AWS Credentials File]()
-
-
 4. You can now access the ScrutinyCSPM program by entering the following command:
 
    ```bash
