@@ -26,24 +26,34 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
    cp docker/production/Dockerfile .
    ```
 
-3. Run the Docker container and it's dependencies:
+3. Create a .env file to store your Azure credentials        
+   ```bash
+   nano .env
+   ```
+Enter the following into your .env file:    \
+   AZURE_SUBSCRIPTION_ID=<your_subscription_id>\
+   AZURE_TENANT=<your_tenant_id>\
+   AZURE_CLIENT_ID=<your_client_id>\
+   AZURE_SECRET=<your_secret>\
+
+4. Run the Docker container and its dependencies:
 
    ```bash
    docker compose up -d
    ```
-4. Add credentials to the running container. 
+5. Add credentials to the running container. 
 
    Currently the Scrutiny CSPM application requires the deployment of AWS and Azure credentials.  These steps are documented in the following document prior to step 5
 
    [General Configuration](General_Configuration.MD)
 
-4. You can now access the ScrutinyCSPM program by entering the following command:
+6. You can now access the ScrutinyCSPM program by entering the following command:
 
    ```bash
    docker exec -it scrutiny-cspm /bin/bash -c "python /scrutinycspm/cli/main.py"
    ```
 
-5. You can now enter commands to interact with the program.
+7. You can now enter commands to interact with the program.
    
    Example:
    
@@ -54,7 +64,8 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 6. To exit the program, type `quit` at the prompt.
 
 ## Commands
-Provided the Terraform Files found in the in Terraform folders [Terrform Test Azure Farm](resources/terraform_templates/azure/azure_farm/) and [Terraform Test AWS Farm](resources/terraform_templates/aws/vpc/) have been executed, then the following commands can be tested:
+Provided the Terraform Files found in the in Terraform folders [Terrform Test Azure Farm](resources/terraform_templates/azure/azure_farm/) and [Terraform Test AWS Farm](resources/terraform_templates/aws/vpc/) 
+have been executed, then the following commands can be tested:
 
 ```bash
 
