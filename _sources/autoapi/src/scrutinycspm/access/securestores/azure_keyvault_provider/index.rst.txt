@@ -1,0 +1,35 @@
+:py:mod:`src.scrutinycspm.access.securestores.azure_keyvault_provider`
+======================================================================
+
+.. py:module:: src.scrutinycspm.access.securestores.azure_keyvault_provider
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.securestores.azure_keyvault_provider.AzureKeyVaultProvider
+
+
+
+
+.. py:class:: AzureKeyVaultProvider(vault_url: str, log_config: omegaconf.DictConfig = OmegaConf.create({'logging': {'level': {'azure_key_vault_provider': 'ERROR'}}}))
+
+
+   .. py:method:: authenticate_with_certificate(tenant_id: str, client_id: str, certificate_path: str)
+
+
+   .. py:method:: is_authenticated(credential) -> bool
+
+
+   .. py:method:: read_secret(secret_name: str, version: str = None, **kwargs: Any) -> Dict[str, Any]
+
+
+   .. py:method:: write_secret(secret_name: str, secret_value: str, **kwargs: Any) -> None
+
+
+

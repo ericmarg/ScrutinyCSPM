@@ -1,0 +1,35 @@
+:py:mod:`aws_s3bucket_scan`
+===========================
+
+.. py:module:: aws_s3bucket_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_s3bucket_scan.S3BucketRetriever
+
+
+
+
+.. py:class:: S3BucketRetriever(access_key, secret_key, region)
+
+
+   .. py:method:: setup_s3_client()
+
+
+   .. py:method:: get_s3_bucket_details(bucket_name)
+
+
+   .. py:method:: get_s3_buckets()
+
+
+   .. py:method:: run_scan()
+
+
+

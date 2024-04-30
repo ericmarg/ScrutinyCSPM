@@ -1,0 +1,15 @@
+:py:mod:`src.scrutinycspm.utils.policy_verification`
+====================================================
+
+.. py:module:: src.scrutinycspm.utils.policy_verification
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   verify_policy_integrity/index.rst
+
+

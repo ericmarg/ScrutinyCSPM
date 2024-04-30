@@ -1,0 +1,45 @@
+:py:mod:`src.scrutinycspm.resources.volume`
+===========================================
+
+.. py:module:: src.scrutinycspm.resources.volume
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.volume.Volume
+
+
+
+
+.. py:class:: Volume(id, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.resource.Resource`, :py:obj:`abc.ABC`
+
+   Represents a block storage volume across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the volume is provisioned.
+       id (str): The unique identifier for the volume.
+       region (str): The region where the volume is provisioned.
+       name (str): The name of the volume.
+       size (int): The size of the volume in GB.
+       status (str): The status of the volume (e.g., available, in-use).
+       attached_to (str): The ID of the VM to which the volume is attached, if any.
+       encrypted (bool): Indicates whether the volume is encrypted.
+       provider_specific (dict): Provider-specific attributes and settings.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch volume data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+

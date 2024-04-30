@@ -1,0 +1,45 @@
+:py:mod:`src.scrutinycspm.utils.encryption.outfile.encrypt_outfile`
+===================================================================
+
+.. py:module:: src.scrutinycspm.utils.encryption.outfile.encrypt_outfile
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.encryption.outfile.encrypt_outfile.OutputFileCreator
+   src.scrutinycspm.utils.encryption.outfile.encrypt_outfile.JSONOutputFileCreator
+
+
+
+
+.. py:class:: OutputFileCreator
+
+
+   Bases: :py:obj:`abc.ABC`
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+   .. py:method:: create_output_file(json_data: Dict, public_key_path: str, private_key_path: str, file_name: str) -> str
+      :abstractmethod:
+
+
+
+.. py:class:: JSONOutputFileCreator
+
+
+   Bases: :py:obj:`OutputFileCreator`
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+   .. py:method:: create_output_file(json_data: Dict, public_key_path: str, private_key_path: str, file_name='scrutiny_outfile.bin') -> str
+
+
+

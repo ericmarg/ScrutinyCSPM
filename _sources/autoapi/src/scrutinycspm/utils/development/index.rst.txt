@@ -1,0 +1,15 @@
+:py:mod:`src.scrutinycspm.utils.development`
+============================================
+
+.. py:module:: src.scrutinycspm.utils.development
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   resource_generator/index.rst
+
+

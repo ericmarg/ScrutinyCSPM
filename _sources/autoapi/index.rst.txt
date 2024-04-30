@@ -1,0 +1,23 @@
+API Reference
+=============
+
+This page contains auto-generated API reference documentation [#f1]_.
+
+.. toctree::
+   :titlesonly:
+
+   /autoapi/src/index
+   /autoapi/azure_policy_check/index
+   /autoapi/ansible_vault_encryption/index
+   /autoapi/resource_generator/index
+   /autoapi/aws_rds_scan/index
+   /autoapi/aws_security_group_scan/index
+   /autoapi/aws_ec2_scan/index
+   /autoapi/aws_root_scan/index
+   /autoapi/aws_s3bucket_scan/index
+   /autoapi/azure_nsg_scan/index
+   /autoapi/azure_vnet_scan/index
+   /autoapi/azure_virtual_machine_scan/index
+   /autoapi/azure_storage_scan/index
+
+.. [#f1] Created with `sphinx-autoapi <https://github.com/readthedocs/sphinx-autoapi>`_

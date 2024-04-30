@@ -1,0 +1,45 @@
+:py:mod:`src.scrutinycspm.iam.read_config`
+==========================================
+
+.. py:module:: src.scrutinycspm.iam.read_config
+
+
+Module Contents
+---------------
+
+.. py:data:: ACCOUNT_ID
+   :value: '012345678901'
+
+   
+
+.. py:data:: AGGREGATOR_NAME
+   :value: 'my_aggregator'
+
+   
+
+.. py:data:: REGION
+   :value: 'us-east-1'
+
+   
+
+.. py:data:: RESOURCE_TYPE
+   :value: 'AWS::IAM::Group'
+
+   
+
+.. py:data:: client
+
+   
+
+.. py:data:: response
+
+   
+
+.. py:data:: response
+
+   
+
+.. py:data:: response
+
+   
+

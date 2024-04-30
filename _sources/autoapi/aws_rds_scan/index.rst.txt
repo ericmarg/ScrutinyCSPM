@@ -1,0 +1,35 @@
+:py:mod:`aws_rds_scan`
+======================
+
+.. py:module:: aws_rds_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_rds_scan.RDSMySQLDatabaseRetriever
+
+
+
+
+.. py:class:: RDSMySQLDatabaseRetriever(access_key, secret_key, region)
+
+
+   .. py:method:: setup_rds_client()
+
+
+   .. py:method:: get_rds_mysql_database_details(db_instance_identifier)
+
+
+   .. py:method:: get_rds_mysql_databases()
+
+
+   .. py:method:: run_scan()
+
+
+

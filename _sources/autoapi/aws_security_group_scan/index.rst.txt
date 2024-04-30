@@ -1,0 +1,28 @@
+:py:mod:`aws_security_group_scan`
+=================================
+
+.. py:module:: aws_security_group_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_security_group_scan.AWSSecurityGroupScanner
+
+
+
+
+.. py:class:: AWSSecurityGroupScanner(region, access_key, secret_key)
+
+
+   .. py:method:: run_scan(private_data_dir='src/scrutinycspm/resources/playbooks/')
+
+      Run the security group scan using Ansible Runner
+
+
+

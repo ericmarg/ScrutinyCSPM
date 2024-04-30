@@ -1,0 +1,16 @@
+:py:mod:`src.scrutinycspm.access.repository`
+============================================
+
+.. py:module:: src.scrutinycspm.access.repository
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   github_provider/index.rst
+   repositoryprovider/index.rst
+
+

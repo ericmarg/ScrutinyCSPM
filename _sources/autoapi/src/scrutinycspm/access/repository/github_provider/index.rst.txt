@@ -1,0 +1,207 @@
+:py:mod:`src.scrutinycspm.access.repository.github_provider`
+============================================================
+
+.. py:module:: src.scrutinycspm.access.repository.github_provider
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.repository.github_provider.GitHubRepository
+
+
+
+
+.. py:class:: GitHubRepository(repo_name: str, access_token: Optional[str] = None)
+
+
+   Represents a GitHub repository.
+
+   Args:
+       repo_name (str): The name of the repository.
+       access_token (str, optional): The access token for authentication. Defaults to None.
+
+   .. py:property:: name
+      :type: str
+
+      Get the name of the repository.
+
+      Returns:
+          str: The name of the repository.
+
+
+   .. py:property:: description
+      :type: str
+
+      Get the description of the repository.
+
+      Returns:
+          str: The description of the repository.
+
+
+   .. py:property:: url
+      :type: str
+
+      Get the URL of the repository.
+
+      Returns:
+          str: The URL of the repository.
+
+
+   .. py:property:: is_private
+      :type: bool
+
+      Check if the repository is private.
+
+      Returns:
+          bool: True if the repository is private, False otherwise.
+
+
+   .. py:method:: get_branches() -> List[str]
+
+      Get a list of branch names in the repository.
+
+      Returns:
+          List[str]: A list of branch names.
+
+
+   .. py:method:: get_branch(branch_name) -> str
+
+      Get a specific branch in the repository.
+
+      Args:
+          branch_name (str): The name of the branch.
+
+      Returns:
+          str: The branch object.
+
+
+   .. py:method:: get_commits(branch: str) -> List[str]
+
+      Get a list of commit SHAs in a specific branch.
+
+      Args:
+          branch (str): The name of the branch.
+
+      Returns:
+          List[str]: A list of commit SHAs.
+
+
+   .. py:method:: get_file_contents(file_path: str, branch: str) -> str
+
+      Get the contents of a file in a specific branch.
+
+      Args:
+          file_path (str): The path of the file.
+          branch (str): The name of the branch.
+
+      Returns:
+          str: The contents of the file.
+
+      Raises:
+          FileNotFoundError: If the file is not found in the branch.
+          GithubException: If an error occurs while accessing the GitHub API.
+
+
+   .. py:method:: get_files_by_extension(folder_path: str, file_extension: str) -> list
+
+      Get a list of file paths with a specific file extension in a folder.
+
+      Args:
+          folder_path (str): The path of the folder.
+          file_extension (str): The file extension.
+
+      Returns:
+          list: A list of file paths.
+
+      Raises:
+          GithubException: If an error occurs while accessing the GitHub API.
+
+
+   .. py:method:: create_branch(branch_name: str, source_branch) -> None
+
+      Create a new branch in the repository.
+
+      Args:
+          branch_name (str): The name of the new branch.
+          source_branch: The source branch to create the new branch from.
+
+      Raises:
+          PermissionError: If the access token is required to create a branch.
+          GithubException: If an error occurs while accessing the GitHub API.
+
+      Returns:
+          None
+
+
+   .. py:method:: delete_branch(branch_name: str) -> None
+
+      Deletes a branch from the GitHub repository.
+
+      Args:
+          branch_name (str): The name of the branch to be deleted.
+
+      Raises:
+          PermissionError: If the access token is required to delete a branch.
+          GithubException: If an error occurs while accessing the GitHub API.
+
+      Returns:
+          None
+
+
+   .. py:method:: create_file(file_path: str, content: str, branch: str, commit_message: str) -> None
+
+      Create a new file in the repository.
+
+      Args:
+          file_path (str): The path of the new file.
+          content (str): The content of the new file.
+          branch (str): The name of the branch to create the file in.
+          commit_message (str): The commit message for the file creation.
+
+      Raises:
+          PermissionError: If the access token is required to create a file.
+
+      Returns:
+          None
+
+
+   .. py:method:: update_file(file_path: str, content: str, branch: str, commit_message: str) -> None
+
+      Update an existing file in the repository.
+
+      Args:
+          file_path (str): The path of the file to update.
+          content (str): The new content of the file.
+          branch (str): The name of the branch to update the file in.
+          commit_message (str): The commit message for the file update.
+
+      Raises:
+          PermissionError: If the access token is required to update a file.
+
+      Returns:
+          None
+
+
+   .. py:method:: delete_file(file_path: str, branch: str, commit_message: str) -> None
+
+      Delete an existing file from the repository.
+
+      Args:
+          file_path (str): The path of the file to delete.
+          branch (str): The name of the branch to delete the file from.
+          commit_message (str): The commit message for the file deletion.
+
+      Raises:
+          PermissionError: If the access token is required to delete a file.
+
+      Returns:
+          None
+
+
+

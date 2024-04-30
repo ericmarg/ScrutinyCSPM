@@ -1,0 +1,30 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources.volume`
+=========================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources.volume
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.volume.AWSVolume
+
+
+
+
+.. py:class:: AWSVolume(id, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.volume.Volume`
+
+   .. py:method:: fetch_data()
+
+      Fetch volume data from AWS.
+
+
+

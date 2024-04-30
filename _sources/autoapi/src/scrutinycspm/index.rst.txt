@@ -1,0 +1,20 @@
+:py:mod:`src.scrutinycspm`
+==========================
+
+.. py:module:: src.scrutinycspm
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   access/index.rst
+   iam/index.rst
+   providers/index.rst
+   resources/index.rst
+   rules_engine/index.rst
+   utils/index.rst
+
+

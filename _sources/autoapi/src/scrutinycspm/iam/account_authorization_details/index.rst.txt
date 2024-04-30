@@ -1,0 +1,6 @@
+:py:mod:`src.scrutinycspm.iam.account_authorization_details`
+============================================================
+
+.. py:module:: src.scrutinycspm.iam.account_authorization_details
+
+

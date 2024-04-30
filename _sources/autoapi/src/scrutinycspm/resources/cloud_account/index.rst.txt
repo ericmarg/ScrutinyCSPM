@@ -1,0 +1,40 @@
+:py:mod:`src.scrutinycspm.resources.cloud_account`
+==================================================
+
+.. py:module:: src.scrutinycspm.resources.cloud_account
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.cloud_account.CloudAccount
+
+
+
+
+.. py:class:: CloudAccount(id, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.resource.Resource`, :py:obj:`abc.ABC`
+
+   Represents a cloud account across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the VM is hosted.
+       id (str): The unique identifier for the VM.
+       vms (list): A list of VMs in the cloud account.
+       obj_storage_containers (list): A list of object storage containers in the cloud account.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch cloud account data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+

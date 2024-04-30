@@ -1,0 +1,29 @@
+:py:mod:`src.scrutinycspm.utils.policy_verification.verify_policy_integrity`
+============================================================================
+
+.. py:module:: src.scrutinycspm.utils.policy_verification.verify_policy_integrity
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.policy_verification.verify_policy_integrity.IntegrityChecker
+
+
+
+
+.. py:class:: IntegrityChecker(policy_path: str, public_key_path: str, hash_algorithm='SHA256')
+
+
+   .. py:method:: _load_public_key()
+
+
+   .. py:method:: verify_policy(digital_signature_path: str) -> bool
+
+
+

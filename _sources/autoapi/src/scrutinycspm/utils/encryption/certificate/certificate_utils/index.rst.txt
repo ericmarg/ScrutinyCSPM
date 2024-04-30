@@ -1,0 +1,31 @@
+:py:mod:`src.scrutinycspm.utils.encryption.certificate.certificate_utils`
+=========================================================================
+
+.. py:module:: src.scrutinycspm.utils.encryption.certificate.certificate_utils
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.encryption.certificate.certificate_utils.CertificateUtils
+
+
+
+
+.. py:class:: CertificateUtils
+
+
+   .. py:method:: generate_certificate(common_name: str, password: str, key_size: int = 2048, days_valid: int = 730) -> tuple
+      :staticmethod:
+
+
+   .. py:method:: generate_certificate_to_file(common_name: str, password: str, key_size: int = 2048, days_valid: int = 730) -> tuple
+      :staticmethod:
+
+
+

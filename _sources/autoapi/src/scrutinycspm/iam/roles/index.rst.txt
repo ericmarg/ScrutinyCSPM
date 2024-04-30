@@ -1,0 +1,26 @@
+:py:mod:`src.scrutinycspm.iam.roles`
+====================================
+
+.. py:module:: src.scrutinycspm.iam.roles
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.iam.roles.Role
+
+
+
+
+.. py:class:: Role(region=None)
+
+
+   .. py:method:: get_all_roles()
+
+
+

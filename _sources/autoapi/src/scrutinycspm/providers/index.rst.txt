@@ -1,0 +1,15 @@
+:py:mod:`src.scrutinycspm.providers`
+====================================
+
+.. py:module:: src.scrutinycspm.providers
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   aws/index.rst
+
+

@@ -1,0 +1,115 @@
+:py:mod:`src.scrutinycspm.access.repository.repositoryprovider`
+===============================================================
+
+.. py:module:: src.scrutinycspm.access.repository.repositoryprovider
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.repository.repositoryprovider.Repository
+
+
+
+
+.. py:class:: Repository
+
+
+   Bases: :py:obj:`Protocol`
+
+   Base class for protocol classes.
+
+   Protocol classes are defined as::
+
+       class Proto(Protocol):
+           def meth(self) -> int:
+               ...
+
+   Such classes are primarily used with static type checkers that recognize
+   structural subtyping (static duck-typing).
+
+   For example::
+
+       class C:
+           def meth(self) -> int:
+               return 0
+
+       def func(x: Proto) -> int:
+           return x.meth()
+
+       func(C())  # Passes static type check
+
+   See PEP 544 for details. Protocol classes decorated with
+   @typing.runtime_checkable act as simple-minded runtime protocols that check
+   only the presence of given attributes, ignoring their type signatures.
+   Protocol classes can be generic, they are defined as::
+
+       class GenProto(Protocol[T]):
+           def meth(self) -> T:
+               ...
+
+   .. py:property:: name
+      :type: str
+
+      The name of the repository.
+
+
+   .. py:property:: description
+      :type: str
+
+      The description of the repository.
+
+
+   .. py:property:: url
+      :type: str
+
+      The URL of the repository.
+
+
+   .. py:property:: is_private
+      :type: bool
+
+      Indicates whether the repository is private or public.
+
+
+   .. py:method:: get_branches() -> List[str]
+
+      Retrieves a list of branch names in the repository.
+
+
+   .. py:method:: get_commits(branch: str) -> List[str]
+
+      Retrieves a list of commit SHAs for the specified branch.
+
+
+   .. py:method:: get_file_contents(file_path: str, branch: str) -> str
+
+      Retrieves the contents of a file in the repository.
+
+
+   .. py:method:: create_branch(branch_name: str, source_branch: str) -> None
+
+      Creates a new branch in the repository.
+
+
+   .. py:method:: create_file(file_path: str, content: str, branch: str, commit_message: str) -> None
+
+      Creates a new file in the repository.
+
+
+   .. py:method:: update_file(file_path: str, content: str, branch: str, commit_message: str) -> None
+
+      Updates an existing file in the repository.
+
+
+   .. py:method:: delete_file(file_path: str, branch: str, commit_message: str) -> None
+
+      Deletes a file from the repository.
+
+
+

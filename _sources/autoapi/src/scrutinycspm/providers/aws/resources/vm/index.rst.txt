@@ -1,0 +1,28 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources.vm`
+=====================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources.vm
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.vm.VM
+
+
+
+
+.. py:class:: VM(id, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.virtual_machine.VirtualMachine`
+
+   .. py:method:: fetch_data()
+
+
+

@@ -1,0 +1,71 @@
+:py:mod:`src.scrutinycspm.access.securestores.secureprovider`
+=============================================================
+
+.. py:module:: src.scrutinycspm.access.securestores.secureprovider
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.securestores.secureprovider.SecureProvider
+
+
+
+
+.. py:class:: SecureProvider
+
+
+   Bases: :py:obj:`Protocol`
+
+   Base class for protocol classes.
+
+   Protocol classes are defined as::
+
+       class Proto(Protocol):
+           def meth(self) -> int:
+               ...
+
+   Such classes are primarily used with static type checkers that recognize
+   structural subtyping (static duck-typing).
+
+   For example::
+
+       class C:
+           def meth(self) -> int:
+               return 0
+
+       def func(x: Proto) -> int:
+           return x.meth()
+
+       func(C())  # Passes static type check
+
+   See PEP 544 for details. Protocol classes decorated with
+   @typing.runtime_checkable act as simple-minded runtime protocols that check
+   only the presence of given attributes, ignoring their type signatures.
+   Protocol classes can be generic, they are defined as::
+
+       class GenProto(Protocol[T]):
+           def meth(self) -> T:
+               ...
+
+   .. py:method:: authenticate_with_username_password(username: str, password: str) -> None
+
+
+   .. py:method:: authenticate_with_token(token: str) -> None
+
+
+   .. py:method:: authenticate_with_certificate(*args: Any, **kwargs: Any) -> object
+
+
+   .. py:method:: read_secret(*args: Any, **kwargs: Any) -> Dict[str, Any]
+
+
+   .. py:method:: write_secret(*args: Any, **kwargs: Any) -> None
+
+
+

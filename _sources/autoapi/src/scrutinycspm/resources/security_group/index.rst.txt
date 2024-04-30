@@ -1,0 +1,43 @@
+:py:mod:`src.scrutinycspm.resources.security_group`
+===================================================
+
+.. py:module:: src.scrutinycspm.resources.security_group
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.security_group.SecurityGroup
+
+
+
+
+.. py:class:: SecurityGroup(id, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.resource.Resource`, :py:obj:`abc.ABC`
+
+   Represents a Security Group across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the Security Group is defined.
+       id (str): The unique identifier for the Security Group.
+       region (str): The region where the Security Group is defined.
+       name (str): The name of the Security Group.
+       description (str): The description of the Security Group.
+       rules (list): The set of rules defined in the Security Group.
+       provider_specific (dict): Provider-specific attributes and settings.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch Security Group data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+

@@ -1,0 +1,48 @@
+:py:mod:`src.scrutinycspm.resources.virtual_machine`
+====================================================
+
+.. py:module:: src.scrutinycspm.resources.virtual_machine
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.virtual_machine.VirtualMachine
+
+
+
+
+.. py:class:: VirtualMachine(id, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.resource.Resource`, :py:obj:`abc.ABC`
+
+   Represents a Virtual Machine (VM) across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the VM is hosted.
+       id (str): The unique identifier for the VM.
+       region (str): The region where the VM is hosted.
+       name (str): The name of the VM.
+       state (str): The state of the VM.
+       type (str): The type or size of the VM.
+       status (str): The status of the VM (e.g., running, stopped).
+       public_ip (str): The public IP address of the VM.
+       provider_specific (dict): Provider-specific attributes and settings.
+
+       volumes (list(Volume)): The set of volumes attached to the VM.
+       security_groups (list(SecurityGroup)): The set of security groups associated with the VM.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch VM data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+

@@ -1,0 +1,25 @@
+:py:mod:`src.scrutinycspm.access`
+=================================
+
+.. py:module:: src.scrutinycspm.access
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   repository/index.rst
+   securestores/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   azure_iam/index.rst
+
+

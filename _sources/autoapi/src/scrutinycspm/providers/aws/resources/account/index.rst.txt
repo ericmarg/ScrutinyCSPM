@@ -1,0 +1,45 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources.account`
+==========================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources.account
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.account.AWSAccount
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.account.get_account_id
+
+
+
+.. py:function:: get_account_id()
+
+
+.. py:class:: AWSAccount(region=None)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.cloud_account.CloudAccount`
+
+   .. py:method:: fetch_data()
+
+
+   .. py:method:: get_vms()
+
+
+   .. py:method:: get_obj_storage_containers()
+
+
+

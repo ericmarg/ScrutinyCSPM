@@ -1,0 +1,22 @@
+:py:mod:`azure_policy_check`
+============================
+
+.. py:module:: azure_policy_check
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   azure_policy_check.vulernabilities
+
+
+
+.. py:function:: vulernabilities(configuration_data, resource_type: str, rego_policy: str)
+
+

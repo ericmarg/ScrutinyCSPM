@@ -1,0 +1,22 @@
+:py:mod:`src.scrutinycspm.utils.azure_credentials`
+==================================================
+
+.. py:module:: src.scrutinycspm.utils.azure_credentials
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.azure_credentials.get_azure_credentials
+
+
+
+.. py:function:: get_azure_credentials(azureProfilePath: str = '~/.azure/azureProfile.json') -> tuple
+
+

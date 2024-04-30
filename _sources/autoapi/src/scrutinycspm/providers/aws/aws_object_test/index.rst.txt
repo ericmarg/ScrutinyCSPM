@@ -1,0 +1,21 @@
+:py:mod:`src.scrutinycspm.providers.aws.aws_object_test`
+========================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.aws_object_test
+
+
+Module Contents
+---------------
+
+.. py:data:: new_account
+
+   
+
+.. py:data:: opa
+
+   
+
+.. py:data:: container_dict
+
+   
+

@@ -1,0 +1,46 @@
+:py:mod:`src.scrutinycspm.resources.resource`
+=============================================
+
+.. py:module:: src.scrutinycspm.resources.resource
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.resource.Resource
+
+
+
+
+.. py:class:: Resource(id, provider, region=None)
+
+
+   Bases: :py:obj:`abc.ABC`
+
+   Represents a cloud resource across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the VM is hosted.
+       id (str): The unique identifier for the VM.
+       region (str): The region where the VM is hosted.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch resource data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+   .. py:method:: to_dict()
+
+      Convert object to a dictionary, including nested objects
+      that also have a to_dict method, but skipping private attributes
+      (those starting with an underscore) and objects.
+
+
+

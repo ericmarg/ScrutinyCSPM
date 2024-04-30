@@ -1,0 +1,40 @@
+:py:mod:`src.scrutinycspm.resources.obj_storage_container`
+==========================================================
+
+.. py:module:: src.scrutinycspm.resources.obj_storage_container
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.obj_storage_container.ObjectStorageContainer
+
+
+
+
+.. py:class:: ObjectStorageContainer(name, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.resource.Resource`, :py:obj:`abc.ABC`
+
+   Represents an object storage container (Examples: AWS S3 Bucket, Azure Blob Storage Container) across different cloud service providers (CSPs).
+
+   Attributes:
+       provider (str): The cloud service provider (CSP) where the object storage container is provisioned.
+       name (str): The unique identifier for the object storage container.
+       region (str): The region where the container is provisioned.
+       provider_specific (dict): Provider-specific attributes and settings.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+      Fetch volume data from the cloud provider.
+      This method needs to be implemented by each subclass.
+
+
+

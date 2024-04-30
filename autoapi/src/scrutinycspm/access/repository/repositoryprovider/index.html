@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.scrutinycspm.access.repository.repositoryprovider &mdash; ScrutinyCSPM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="src.scrutinycspm.access.securestores" href="../../securestores/index.html" />
+    <link rel="prev" title="src.scrutinycspm.access.repository.github_provider" href="../github_provider/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ScrutinyCSPM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../azure_policy_check/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_policy_check</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ansible_vault_encryption/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansible_vault_encryption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../resource_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource_generator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../aws_rds_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_rds_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../aws_security_group_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_security_group_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../aws_ec2_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_ec2_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../aws_root_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_root_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../aws_s3bucket_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_s3bucket_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../azure_nsg_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_nsg_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../azure_vnet_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_vnet_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../azure_virtual_machine_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_virtual_machine_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../azure_storage_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_storage_scan</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ScrutinyCSPM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.access</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.access.repository</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.access.repository.repositoryprovider</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/autoapi/src/scrutinycspm/access/repository/repositoryprovider/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.scrutinycspm.access.repository.repositoryprovider">
+<span id="src-scrutinycspm-access-repository-repositoryprovider"></span><h1><a class="reference internal" href="#module-src.scrutinycspm.access.repository.repositoryprovider" title="src.scrutinycspm.access.repository.repositoryprovider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.access.repository.repositoryprovider</span></code></a><a class="headerlink" href="#module-src.scrutinycspm.access.repository.repositoryprovider" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository" title="src.scrutinycspm.access.repository.repositoryprovider.Repository"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Repository</span></code></a></p></td>
+<td><p>Base class for protocol classes.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.scrutinycspm.access.repository.repositoryprovider.</span></span><span class="sig-name descname"><span class="pre">Repository</span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Base class for protocol classes.</p>
+<p>Protocol classes are defined as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Proto</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Such classes are primarily used with static type checkers that recognize
+structural subtyping (static duck-typing).</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Proto</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">meth</span><span class="p">()</span>
+
+<span class="n">func</span><span class="p">(</span><span class="n">C</span><span class="p">())</span>  <span class="c1"># Passes static type check</span>
+</pre></div>
+</div>
+<p>See PEP 544 for details. Protocol classes decorated with
+&#64;typing.runtime_checkable act as simple-minded runtime protocols that check
+only the presence of given attributes, ignoring their type signatures.
+Protocol classes can be generic, they are defined as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GenProto</span><span class="p">(</span><span class="n">Protocol</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the repository.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.description" title="Link to this definition"></a></dt>
+<dd><p>The description of the repository.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.url" title="Link to this definition"></a></dt>
+<dd><p>The URL of the repository.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.is_private">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_private</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.is_private" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the repository is private or public.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.get_branches">
+<span class="sig-name descname"><span class="pre">get_branches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.get_branches" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a list of branch names in the repository.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.get_commits">
+<span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.get_commits" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a list of commit SHAs for the specified branch.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.get_file_contents">
+<span class="sig-name descname"><span class="pre">get_file_contents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.get_file_contents" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the contents of a file in the repository.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.create_branch">
+<span class="sig-name descname"><span class="pre">create_branch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.create_branch" title="Link to this definition"></a></dt>
+<dd><p>Creates a new branch in the repository.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.create_file">
+<span class="sig-name descname"><span class="pre">create_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.create_file" title="Link to this definition"></a></dt>
+<dd><p>Creates a new file in the repository.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.update_file">
+<span class="sig-name descname"><span class="pre">update_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.update_file" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing file in the repository.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.scrutinycspm.access.repository.repositoryprovider.Repository.delete_file">
+<span class="sig-name descname"><span class="pre">delete_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.scrutinycspm.access.repository.repositoryprovider.Repository.delete_file" title="Link to this definition"></a></dt>
+<dd><p>Deletes a file from the repository.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../github_provider/index.html" class="btn btn-neutral float-left" title="src.scrutinycspm.access.repository.github_provider" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../securestores/index.html" class="btn btn-neutral float-right" title="src.scrutinycspm.access.securestores" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Robert Fischer, Daniel Healy, Eric Margolis, Gregory Frasco.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

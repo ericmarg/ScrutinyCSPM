@@ -1,0 +1,22 @@
+:py:mod:`src.scrutinycspm.utils.development.resource_generator`
+===============================================================
+
+.. py:module:: src.scrutinycspm.utils.development.resource_generator
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.development.resource_generator.generate_resource_classes
+
+
+
+.. py:function:: generate_resource_classes(resource_info, resource_type)
+
+

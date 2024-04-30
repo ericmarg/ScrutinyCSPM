@@ -1,0 +1,26 @@
+:py:mod:`src.scrutinycspm.iam.policies`
+=======================================
+
+.. py:module:: src.scrutinycspm.iam.policies
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.iam.policies.Policy
+
+
+
+
+.. py:class:: Policy(region=None)
+
+
+   .. py:method:: get_all_policies()
+
+
+

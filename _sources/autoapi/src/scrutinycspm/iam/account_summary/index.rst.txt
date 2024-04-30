@@ -1,0 +1,26 @@
+:py:mod:`src.scrutinycspm.iam.account_summary`
+==============================================
+
+.. py:module:: src.scrutinycspm.iam.account_summary
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.iam.account_summary.AccountSummary
+
+
+
+
+.. py:class:: AccountSummary(region=None)
+
+
+   .. py:method:: get_acocunt_summary()
+
+
+

@@ -1,0 +1,19 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources`
+==================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   account/index.rst
+   obj_storage_container/index.rst
+   security_group/index.rst
+   vm/index.rst
+   volume/index.rst
+
+

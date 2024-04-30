@@ -1,0 +1,46 @@
+:py:mod:`src.scrutinycspm.access.securestores.hashicorp_vault_provider`
+=======================================================================
+
+.. py:module:: src.scrutinycspm.access.securestores.hashicorp_vault_provider
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.securestores.hashicorp_vault_provider.HashicorpVaultProvider
+
+
+
+
+.. py:class:: HashicorpVaultProvider(vault_url: str, namespace: str)
+
+
+   .. py:method:: authenticate_with_username_password(username: str, password: str) -> None
+
+      Authenticates the client with the given username and password.
+
+      Parameters
+      ----------
+      username : str
+          The username to use for authentication.
+      password : str
+          The password to use for authentication.
+
+      Raises
+      ------
+      Exception
+          If the authentication fails.
+
+
+   .. py:method:: read_secret(path: str, mount_point: str = 'secret', version: int = None, **kwargs: Any) -> Dict[str, Any]
+
+
+   .. py:method:: is_authenticated() -> bool
+
+
+

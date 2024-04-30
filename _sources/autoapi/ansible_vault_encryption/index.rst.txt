@@ -1,0 +1,26 @@
+:py:mod:`ansible_vault_encryption`
+==================================
+
+.. py:module:: ansible_vault_encryption
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   ansible_vault_encryption.encrypt_yaml
+   ansible_vault_encryption.decrypt_yaml
+
+
+
+.. py:function:: encrypt_yaml(file_path, output_file, password)
+
+
+.. py:function:: decrypt_yaml(file_path, output_file, password)
+
+

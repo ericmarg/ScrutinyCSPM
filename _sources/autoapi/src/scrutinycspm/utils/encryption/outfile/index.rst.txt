@@ -1,0 +1,15 @@
+:py:mod:`src.scrutinycspm.utils.encryption.outfile`
+===================================================
+
+.. py:module:: src.scrutinycspm.utils.encryption.outfile
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   encrypt_outfile/index.rst
+
+

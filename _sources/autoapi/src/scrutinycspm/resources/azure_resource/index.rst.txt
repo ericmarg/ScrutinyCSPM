@@ -1,0 +1,74 @@
+:py:mod:`src.scrutinycspm.resources.azure_resource`
+===================================================
+
+.. py:module:: src.scrutinycspm.resources.azure_resource
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.azure_resource.AzureResource
+
+
+
+
+.. py:class:: AzureResource
+
+
+   Bases: :py:obj:`Protocol`
+
+   Represents an Azure resource.
+
+   Attributes:
+       subscription_id (str): The subscription ID for the Azure resource.
+       tenant_id (str): The tenant ID for the Azure resource.
+       client_id (str): The client ID for accessing the Azure resource.
+       client_secret (str): The client secret for accessing the Azure resource.
+       client_certificate (str): The client certificate for accessing the Azure resource.
+
+   .. py:attribute:: subscription_id
+      :type: str
+
+      
+
+   .. py:attribute:: tenant_id
+      :type: str
+
+      
+
+   .. py:attribute:: client_id
+      :type: str
+
+      
+
+   .. py:attribute:: client_secret
+      :type: str
+
+      
+
+   .. py:attribute:: client_certificate
+      :type: str
+
+      
+
+   .. py:method:: fetch_data() -> None
+
+      Fetch resource data from Azure.
+
+      This method needs to be implemented by each subclass.
+
+
+   .. py:method:: to_dict() -> dict
+
+      Convert the resource object to a dictionary.
+
+      Returns:
+          dict: A dictionary representation of the resource object.
+
+
+

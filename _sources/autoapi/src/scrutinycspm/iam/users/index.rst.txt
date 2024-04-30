@@ -1,0 +1,56 @@
+:py:mod:`src.scrutinycspm.iam.users`
+====================================
+
+.. py:module:: src.scrutinycspm.iam.users
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.iam.users.UserResource
+
+
+
+
+.. py:class:: UserResource(region=None, path: str = None, username: str = None, userid: str = None, resource_name: str = None, create_date: datetime.datetime = None, password_last_used: datetime.datetime = None)
+
+
+   .. py:attribute:: path
+      :type: str
+
+      
+
+   .. py:attribute:: username
+      :type: str
+
+      
+
+   .. py:attribute:: userid
+      :type: str
+
+      
+
+   .. py:attribute:: resource_name
+      :type: str
+
+      
+
+   .. py:attribute:: create_date
+      :type: datetime.datetime
+
+      
+
+   .. py:attribute:: password_last_used
+      :type: datetime.datetime
+
+      
+
+   .. py:method:: get_all_users()
+
+
+

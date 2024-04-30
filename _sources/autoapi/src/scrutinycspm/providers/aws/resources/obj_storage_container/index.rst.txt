@@ -1,0 +1,30 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources.obj_storage_container`
+========================================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources.obj_storage_container
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.obj_storage_container.AWSObjectStorageContainer
+
+
+
+
+.. py:class:: AWSObjectStorageContainer(name, provider, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.obj_storage_container.ObjectStorageContainer`
+
+   .. py:method:: fetch_data()
+
+      Fetch object storage container (S3 bucket) data from AWS.
+
+
+

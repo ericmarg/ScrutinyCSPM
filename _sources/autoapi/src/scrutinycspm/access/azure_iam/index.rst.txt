@@ -1,0 +1,40 @@
+:py:mod:`src.scrutinycspm.access.azure_iam`
+===========================================
+
+.. py:module:: src.scrutinycspm.access.azure_iam
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.azure_iam.Azure_IAM_Provider
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.access.azure_iam.main
+
+
+
+.. py:class:: Azure_IAM_Provider(log_config: omegaconf.DictConfig = OmegaConf.create({'logging': {'level': {'AzureIAM_Provider': 'ERROR'}}}))
+
+
+   .. py:method:: certificate_login(tenant_id: str, client_id: str, certificate_path: str) -> azure.identity.CertificateCredential
+
+
+   .. py:method:: interactive_login()
+
+
+
+.. py:function:: main() -> int
+
+

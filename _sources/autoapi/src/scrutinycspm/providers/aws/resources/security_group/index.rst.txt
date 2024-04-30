@@ -1,0 +1,35 @@
+:py:mod:`src.scrutinycspm.providers.aws.resources.security_group`
+=================================================================
+
+.. py:module:: src.scrutinycspm.providers.aws.resources.security_group
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.providers.aws.resources.security_group.AWSSecurityGroup
+
+
+
+
+.. py:class:: AWSSecurityGroup(id, region)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.security_group.SecurityGroup`
+
+   .. py:method:: fetch_data()
+
+      Fetch security group data from AWS.
+
+
+   .. py:method:: _parse_rules(permissions)
+
+      Parse inbound rules from AWS format to a more generic format.
+
+
+

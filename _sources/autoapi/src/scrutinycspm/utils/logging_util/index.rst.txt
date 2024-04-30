@@ -1,0 +1,22 @@
+:py:mod:`src.scrutinycspm.utils.logging_util`
+=============================================
+
+.. py:module:: src.scrutinycspm.utils.logging_util
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.logging_util.add_logging
+
+
+
+.. py:function:: add_logging(cls)
+
+

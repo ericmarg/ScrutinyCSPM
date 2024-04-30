@@ -1,0 +1,29 @@
+:py:mod:`aws_root_scan`
+=======================
+
+.. py:module:: aws_root_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_root_scan.AWSRootScanner
+
+
+
+
+.. py:class:: AWSRootScanner(region, access_key, secret_key)
+
+
+   .. py:method:: run_scan()
+
+
+   .. py:method:: get_aws_account_info(aws_access_key, aws_secret_key, aws_region)
+
+
+

@@ -1,0 +1,51 @@
+:py:mod:`azure_nsg_scan`
+========================
+
+.. py:module:: azure_nsg_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   azure_nsg_scan.AzureNetworkSecurityGroup
+
+
+
+
+.. py:class:: AzureNetworkSecurityGroup(subscription_id, tenant_id, client_id, client_secret, client_certificate)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.azure_resource.AzureResource`
+
+   Represents an Azure Network Security Group resource.
+
+   Attributes:
+       subscription_id (str): The subscription ID for the Azure resource.
+       tenant_id (str): The tenant ID for the Azure resource.
+       client_id (str): The client ID for accessing the Azure resource.
+       client_secret (str): The client secret for accessing the Azure resource.
+       client_certificate (str): The client certificate for accessing the Azure resource.
+
+   .. py:method:: fetch_data()
+
+      Fetch Azure Network Security Group data from the Azure Management API.
+
+      Returns:
+          str: JSON string representing the list of Azure Network Security Groups and their details.
+
+
+   .. py:method:: get_all_network_security_groups(tenant_id, subscription_id, client_id, client_secret)
+      :staticmethod:
+
+      Retrieve all Azure Network Security Groups for the given Azure Tenant, Subscription, Client ID, and Secret.
+
+      Returns:
+          list: A list of Azure Network Security Group objects.
+
+
+

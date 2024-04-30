@@ -1,0 +1,35 @@
+:py:mod:`aws_ec2_scan`
+======================
+
+.. py:module:: aws_ec2_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_ec2_scan.EC2InstanceRetriever
+
+
+
+
+.. py:class:: EC2InstanceRetriever(access_key, secret_key, region)
+
+
+   .. py:method:: setup_ec2_client()
+
+
+   .. py:method:: get_ec2_instance_details(instance_id)
+
+
+   .. py:method:: get_ec2_instances()
+
+
+   .. py:method:: run_scan()
+
+
+

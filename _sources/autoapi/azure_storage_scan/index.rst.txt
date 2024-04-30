@@ -1,0 +1,51 @@
+:py:mod:`azure_storage_scan`
+============================
+
+.. py:module:: azure_storage_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   azure_storage_scan.AzureStorageAccount
+
+
+
+
+.. py:class:: AzureStorageAccount(subscription_id, tenant_id, client_id, client_secret, client_certificate)
+
+
+   Bases: :py:obj:`src.scrutinycspm.resources.azure_resource.AzureResource`
+
+   Represents an Azure Storage Account resource.
+
+   Attributes:
+       subscription_id (str): The subscription ID for the Azure resource.
+       tenant_id (str): The tenant ID for the Azure resource.
+       client_id (str): The client ID for accessing the Azure resource.
+       client_secret (str): The client secret for accessing the Azure resource.
+       client_certificate (str): The client certificate for accessing the Azure resource.
+
+   .. py:method:: fetch_data()
+
+      Fetch Azure Storage Account data from the Azure Management API.
+
+      Returns:
+          str: JSON string representing the list of Azure Storage Accounts and their details.
+
+
+   .. py:method:: get_all_storage_accounts(tenant_id, subscription_id, client_id, client_secret)
+      :staticmethod:
+
+      Retrieve all Azure Storage Accounts for the given Azure Tenant, Subscription, Client ID, and Secret.
+
+      Returns:
+          list: A list of Azure Storage Account objects.
+
+
+
