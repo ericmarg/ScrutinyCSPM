@@ -10,7 +10,13 @@ import argparse
 @hydra.main(config_path="config", config_name="conf", version_base=None)
 def main(cfg: DictConfig) -> None:
     logging.basicConfig(level=cfg.logging.level, filename="app.log")
-
+    print("""
+  ___              _   _             ___ ___ ___ __  __ 
+ / __| __ _ _ _  _| |_(_)_ _ _  _   / __/ __| _ \  \/  |
+ \__ \/ _| '_| || |  _| | ' \ || | | (__\__ \  _/ |\/| |
+ |___/\__|_|  \_,_|\__|_|_||_\_, |  \___|___/_| |_|  |_|
+                             |__/                       
+""")
     print("Welcome to Scrutiny CSPM CLI")
 
     command_manager = CommandManager()
