@@ -77,3 +77,4 @@ artifacts
 inventory
 *.tfvars
 certificate
+frontend/scans

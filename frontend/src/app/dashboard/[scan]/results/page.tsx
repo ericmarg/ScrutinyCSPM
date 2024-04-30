@@ -1,7 +1,7 @@
 'use client';
 import { Container } from '@mui/system';
 import { Grid, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { InfoCard } from '@/components/info-card';
 import { ResourceList } from '@/components/resource-list';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,17 +11,50 @@ import { ProgressBar } from '@/components/progress-bar';
 import { faServer, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { getScan } from '@/app/dashboard/[scan]/results/actions';
 import { usePathname } from 'next/navigation';
+import { Scan } from '@/types/scan';
+import { format, formatDistanceToNow } from 'date-fns';
+import { LoadingBackdrop } from '@/components/loading-backgrop';
 
 export default function ScanResult() {
   const path = usePathname();
   const scanId = path.split('/')[2];
-  getScan(scanId).then((data) => {
-    console.log(data);
-  });
+  const [scan, setScan] = useState<Scan>();
+  useEffect(() => {
+    getScan(scanId).then((data) => {
+      if (data) {
+        setScan(data);
+      }
+    });
+  }, [scanId]);
+
+  if (!scan) {
+    return <LoadingBackdrop />;
+  }
   return (
     <Container maxWidth="lg">
       <Stack spacing={3}>
-        <ProgressBar openIssues={17} totalResources={100} />
+        <ProgressBar openIssues={17} totalResources={scan.totalResources} />
+        <Stack direction="row" alignItems="center">
+          <Typography variant="h4" flex={1}>
+            Scan Results
+          </Typography>
+          <Stack flex={1}>
+            <Typography variant="h6" align="center">
+              Scan ID: {scanId}
+            </Typography>
+            <Typography variant="subtitle1" align="center">
+              Total Resources: {scan.totalResources}
+            </Typography>
+          </Stack>
+          <Stack flex={1}>
+            <Typography variant="h6" align="right">
+              {format(new Date(scan?.timestamp), 'MM/dd/yyyy hh:mm aa')}
+            </Typography>
+            <Typography variant="subtitle1" align="right">
+              {formatDistanceToNow(new Date(scan?.timestamp))} ago
+            </Typography>
+          </Stack>
+        </Stack>
         <Grid container spacing={3} display="flex">
           <Grid item xs={12} md={4}>
             <InfoCard title="Open Issues">
