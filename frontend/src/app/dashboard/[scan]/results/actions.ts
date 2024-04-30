@@ -1,7 +1,8 @@
 'use server';
 
 import { existsSync, readFileSync } from 'node:fs';
-import { Scan } from '@/types/scan';
+import { ResourceList, ResourceType, Scan } from '@/types/scan';
+import { subDays, isAfter } from 'date-fns';
 
 export async function getScan(id: string): Promise<Scan | null> {
   // Check if the scan exists
@@ -16,11 +17,25 @@ export async function getScan(id: string): Promise<Scan | null> {
   }
   // Read the inventory file
   const inventory = JSON.parse(readFileSync(`scans/${id}/inventory.json`, 'utf8'));
+  const vms = await getResources(inventory, 'vms');
+  const buckets = await getResources(inventory, 'buckets');
+  const securityGroups = await getResources(inventory, 'security_group');
+  const openIssues = vms.openIssues + buckets.openIssues + securityGroups.openIssues;
+  let avgAge = vms.avgAge.getTime() * vms.totalResources + buckets.avgAge.getTime() * buckets.totalResources + securityGroups.avgAge.getTime() * securityGroups.totalResources;
+  avgAge = avgAge / (vms.totalResources + buckets.totalResources + securityGroups.totalResources);
+  const recentIssues = vms.recentIssues + buckets.recentIssues + securityGroups.recentIssues;
+
   return {
     id,
-    timestamp: new Date(Number(id)).toISOString(),
     inventory,
-    totalResources: countTotalResources(inventory)
+    vms,
+    buckets,
+    securityGroups,
+    openIssues,
+    recentIssues,
+    timestamp: new Date(Number(id)).toISOString(),
+    totalResources: countTotalResources(inventory),
+    avgAge: new Date(avgAge)
   };
 }
 
@@ -34,4 +49,80 @@ function countTotalResources(inventory: Record<string, any>): number {
     count += Number(account.security_group_count);
   }
   return count;
+}
+
+async function getResources(inventory: Record<string, any>, type: ResourceType): Promise<ResourceList> {
+  let totalResources = 0;
+  let resources = [];
+  for (const provider in inventory) {
+    const provider_resources = inventory[provider][type] || [];
+    totalResources += provider_resources.length;
+    resources = provider_resources.map((r: any) => {
+      return {
+        id: r.Name || r.instanceId,
+        name: r.Name || (r.Tags ? r.Tags.find((t: any) => t.Key === 'Name')?.Value || null : null) || r.instanceId,
+        type,
+        provider,
+        age: !!r.CreatedAt || !!r.LaunchTime ? new Date(r.CreatedAt || r.LaunchTime) : new Date(),
+        issues: getIssues(r, provider, type)
+      };
+    });
+  }
+  resources.sort((a: any, b: any) => b.issues.length - a.issues.length);
+  let openIssues = 0;
+  let recentIssues = 0;
+  let avgAge = 0;
+  resources.forEach((r: any) => {
+    openIssues += r.issues.length;
+    avgAge += r.age.getTime();
+    if (isAfter(r.age, subDays(new Date(), 30))) {
+      recentIssues++;
+    }
+  });
+  if (resources.length > 0) {
+    avgAge = avgAge / resources.length;
+  }
+
+  return {
+    totalResources,
+    resources,
+    openIssues,
+    avgAge: new Date(avgAge),
+    recentIssues
+  };
+}
+
+function getIssues(resource: any, provider: string, type: ResourceType): string[] {
+  switch (type) {
+    case 'vms':
+      return getVmIssues(resource);
+    case 'buckets':
+      return getBucketIssues(resource);
+    case 'security_group':
+      return [];
+    default:
+      return [];
+  }
+}
+
+function getVmIssues(resource: any): string[] {
+  const issues: string[] = [];
+  if (resource.PublicIpAddress) {
+    issues.push('Public IP Address');
+  }
+  return issues;
+}
+
+function getBucketIssues(resource: any): string[] {
+  const issues: string[] = [];
+  if (!resource?.Details?.Encryption) {
+    issues.push('No Encryption');
+  }
+  if (resource?.Policy?.Statement.find((s: any) => s.Sid === 'AllowPublicRead')) {
+    issues.push('Public Read Access');
+  }
+  if (resource?.Policy?.Versioning) {
+    issues.push('No Versioning');
+  }
+  return issues;
 }

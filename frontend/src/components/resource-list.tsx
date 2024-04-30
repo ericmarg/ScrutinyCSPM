@@ -4,16 +4,16 @@ import { Avatar, Button, Card, CardContent, List, Stack, Typography, useTheme } 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { ProgressBar } from '@/components/progress-bar';
+import { ResourceList as ScanResourceList } from '@/types/scan';
+import { ResourceListItem } from '@/components/resource-list-item';
 
 export interface ResourceListProps {
-  name: string;
+  resourceList: ScanResourceList;
   icon?: React.ReactNode;
-  children?: React.ReactNode;
-  openIssues?: number;
-  total?: number;
+  name: string;
 }
 
-export const ResourceList: FC<ResourceListProps> = ({ name, icon, children, openIssues, total }) => {
+export const ResourceList: FC<ResourceListProps> = ({ resourceList, icon, name }) => {
   const { palette } = useTheme();
   return (
     <Stack gap={1}>
@@ -29,10 +29,14 @@ export const ResourceList: FC<ResourceListProps> = ({ name, icon, children, open
           </Typography>
         </Button>
       </Stack>
-      {openIssues && total && <ProgressBar openIssues={openIssues} totalResources={total} />}
+      {resourceList && <ProgressBar openIssues={resourceList.openIssues} totalResources={resourceList.totalResources} />}
       <Card>
         <CardContent>
-          <List>{children}</List>
+          <List dense>
+            {resourceList.resources.map((resource) => (
+              <ResourceListItem key={resource.id} resource={resource} />
+            ))}
+          </List>
         </CardContent>
       </Card>
     </Stack>

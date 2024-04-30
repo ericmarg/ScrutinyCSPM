@@ -5,14 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { InfoCard } from '@/components/info-card';
 import { ResourceList } from '@/components/resource-list';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAws, faBitbucket, faWindows } from '@fortawesome/free-brands-svg-icons';
-import { ResourceListItem } from '@/components/resource-list-item';
+import { faBitbucket } from '@fortawesome/free-brands-svg-icons';
 import { ProgressBar } from '@/components/progress-bar';
 import { faServer, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { getScan } from '@/app/dashboard/[scan]/results/actions';
 import { usePathname } from 'next/navigation';
 import { Scan } from '@/types/scan';
-import { format, formatDistanceToNow } from 'date-fns';
+import { differenceInDays, format, formatDistanceToNow } from 'date-fns';
 import { LoadingBackdrop } from '@/components/loading-backgrop';
 
 export default function ScanResult() {
@@ -22,6 +21,7 @@ export default function ScanResult() {
   useEffect(() => {
     getScan(scanId).then((data) => {
       if (data) {
+        console.log(data);
         setScan(data);
       }
     });
@@ -33,7 +33,7 @@ export default function ScanResult() {
   return (
     <Container maxWidth="lg">
       <Stack spacing={3}>
-        <ProgressBar openIssues={17} totalResources={scan.totalResources} />
+        <ProgressBar openIssues={scan.openIssues} totalResources={scan.totalResources} />
         <Stack direction="row" alignItems="center">
           <Typography variant="h4" flex={1}>
             Scan Results
@@ -58,43 +58,31 @@ export default function ScanResult() {
         <Grid container spacing={3} display="flex">
           <Grid item xs={12} md={4}>
             <InfoCard title="Open Issues">
-              <Typography variant="h3">17</Typography>
+              <Typography variant="h3">{scan.openIssues}</Typography>
             </InfoCard>
           </Grid>
           <Grid item xs={12} md={4}>
             <InfoCard title="Recent Issues">
-              <Typography variant="h3">6</Typography>
+              <Typography variant="h3">{scan.recentIssues}</Typography>
               <Typography variant="h6">last 30 days</Typography>
             </InfoCard>
           </Grid>
           <Grid item xs={12} md={4}>
             <InfoCard title="Issue Avg Age">
-              <Typography variant="h3">103</Typography>
-              <Typography variant="h6">days</Typography>
+              <Typography variant="h3">{differenceInDays(new Date(), scan.avgAge)}</Typography>
+              <Typography variant="h6">days ago</Typography>
             </InfoCard>
           </Grid>
         </Grid>
         <Grid container spacing={3} display="flex">
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList name="Object Storage Buckets" icon={<FontAwesomeIcon icon={faBitbucket} />} openIssues={5} total={24}>
-              <ResourceListItem name="aws-storage-bucket" icon={<FontAwesomeIcon icon={faAws} />} />
-              <ResourceListItem name="azure-storage-bucket" icon={<FontAwesomeIcon icon={faWindows} />} />
-              <ResourceListItem name="aws-storage-bucket" icon={<FontAwesomeIcon icon={faAws} />} />
-            </ResourceList>
+            <ResourceList resourceList={scan.buckets} name="Object Storage Buckets" icon={<FontAwesomeIcon icon={faBitbucket} />} />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList name="Virtual Machines" icon={<FontAwesomeIcon icon={faServer} />} openIssues={6} total={15}>
-              <ResourceListItem name="aws-vm-1" icon={<FontAwesomeIcon icon={faAws} />} />
-              <ResourceListItem name="azure-vm-2" icon={<FontAwesomeIcon icon={faWindows} />} />
-              <ResourceListItem name="aws-vm-3" icon={<FontAwesomeIcon icon={faAws} />} />
-            </ResourceList>
+            <ResourceList resourceList={scan.vms} name="Virtual Machines" icon={<FontAwesomeIcon icon={faServer} />} />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList name="Roles & Permissions" icon={<FontAwesomeIcon icon={faUserShield} />} openIssues={6} total={24}>
-              <ResourceListItem name="aws-iam-role" icon={<FontAwesomeIcon icon={faAws} />} />
-              <ResourceListItem name="azure-iam-role" icon={<FontAwesomeIcon icon={faWindows} />} />
-              <ResourceListItem name="aws-iam-role-2" icon={<FontAwesomeIcon icon={faAws} />} />
-            </ResourceList>
+            <ResourceList resourceList={scan.securityGroups} name="Security Groups" icon={<FontAwesomeIcon icon={faUserShield} />} />
           </Grid>
         </Grid>
       </Stack>
