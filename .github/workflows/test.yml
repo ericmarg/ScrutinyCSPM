@@ -29,7 +29,7 @@ jobs:
       - name: Setup Hydra Config
         run: |
           mkdir -p conf/private
-          cp conf/vault.yaml conf/private/private_vault.yaml
+          cp conf/base-config.yaml conf/private/private_vault.yaml
 
       - name: Run tests with coverage
         run: pytest --cov=src tests
