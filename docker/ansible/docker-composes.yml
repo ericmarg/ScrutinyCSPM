@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  awx:
+    image: ansible/awx:17.1.0
+    container_name: awx
+    ports:
+      - "8080:8052"  # Map AWX web interface port
+    depends_on:
+      - awx-postgres
+      - awx-rabbitmq
+      - ansible
+    environment:
+      - AWX_ADMIN_USER=admin
+      - AWX_ADMIN_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+      - AWX_PROJECTS_PATH=/var/lib/awx/projects
+      - AWX_SECRET_KEY=awxsecret
+      - DATABASE_NAME=awx
+      - DATABASE_USER=awx
+      - DATABASE_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+      - DATABASE_HOST=awx-postgres
+      - DATABASE_PORT=5432
+      - MEMCACHED_HOST=awx-memcached
+      - RABBITMQ_HOST=awx-rabbitmq
+      - REDIS_HOST=awx-redis
+    networks:
+      - awx-network
+
+  awx-postgres:
+    image: postgres:13
+    container_name: awx-postgres
+    environment:
+      - POSTGRES_DB=awx
+      - POSTGRES_USER=awx
+      - POSTGRES_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+    networks:
+      - awx-network
+
+  awx-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: awx-rabbitmq
+    ports:
+      - "15672:15672"  # Map RabbitMQ management port
+    networks:
+      - awx-network
+
+  ansible:
+    image: python:3.9
+    container_name: ansible
+    command: tail -f /dev/null  # Keep container running
+    networks:
+      - awx-network
+
+networks:
+  awx-network:
+    driver: bridge

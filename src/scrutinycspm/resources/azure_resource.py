@@ -18,6 +18,13 @@ class AzureResource(Protocol):
     client_secret: str
     client_certificate: str
 
+    def __init__(self, subscription_id: str, tenant_id: str, client_id: str, client_secret: str, client_certificate: str):
+        self.subscription_id = subscription_id
+        self.tenant_id = tenant_id
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.client_certificate = client_certificate
+
     def fetch_data(self) -> None:
         """
         Fetch resource data from Azure.

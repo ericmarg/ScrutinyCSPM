@@ -21,7 +21,7 @@ setup(
         "azure-mgmt-monitor",
         "azure-mgmt-compute>=30.6.0",
         "OPA-python-client>=1.3.2",
-        "boto3>=1.34.74",
+        "boto3",
         "azure-mgmt-authorization>=4.0.0",
         "azure-mgmt-subscription>=3.1.1",
         "ansible>=9.4.0",

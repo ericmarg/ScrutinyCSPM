@@ -58,7 +58,7 @@ resource "aws_subnet" "db_2" {
 
 # Database Subnet Group
 resource "aws_db_subnet_group" "default" {
-  name        = "main"
+  name        = "aws_db_subnet_group"
   subnet_ids  = [aws_subnet.db_1.id, aws_subnet.db_2.id]
 }
 

@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"  # Replace with your desired AWS region
+  region = "us-east-2"  # Replace with your desired AWS region
 }
 
 # Create a bucket with private access
