@@ -5,7 +5,7 @@ import unittest
 
 from omegaconf import OmegaConf
 from cli.commands.command_manager import CommandManager
-from aws_root_command import AWSRootCommand
+from cli.commands.aws_root_command import AWSRootCommand
 from src.scrutinycspm.resources.development.aws_root_scan import AWSRootScanner
 from tests.unit.base_test_case import BaseTestCase
 
