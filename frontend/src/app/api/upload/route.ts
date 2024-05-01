@@ -7,10 +7,10 @@ export async function POST(req: any) {
     const data = await req.formData();
     const file = data.get('private_key');
     const scanId = data.get('scan_id');
-    const fileName = scanId + '.pem';
-    const filePath = 'scans/keys/' + fileName;
-    if (!fs.existsSync('scans/keys')) {
-      fs.mkdirSync('scans/keys', { recursive: true });
+    const fileName = 'key.pem';
+    const filePath = `scans/${scanId}/` + fileName;
+    if (!fs.existsSync(`scans/${scanId}`)) {
+      fs.mkdirSync(`scans/${scanId}`, { recursive: true });
     }
     await pipeline(
       file.stream(), // Read from the file stream

@@ -1,19 +1,18 @@
 'use client';
 import React, { FC } from 'react';
-import { Avatar, Button, Card, CardContent, List, Stack, Typography, useTheme } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Avatar, Card, CardContent, List, Stack, Typography, useTheme } from '@mui/material';
 import { ProgressBar } from '@/components/progress-bar';
+import { Resource, ResourceList as ScanResourceList } from '@/types/scan';
+import { ResourceListItem } from '@/components/resource-list-item';
 
 export interface ResourceListProps {
-  name: string;
+  resourceList: ScanResourceList;
   icon?: React.ReactNode;
-  children?: React.ReactNode;
-  openIssues?: number;
-  total?: number;
+  name: string;
+  onResource: (resource: Resource) => void;
 }
 
-export const ResourceList: FC<ResourceListProps> = ({ name, icon, children, openIssues, total }) => {
+export const ResourceList: FC<ResourceListProps> = ({ resourceList, icon, name, onResource }) => {
   const { palette } = useTheme();
   return (
     <Stack gap={1}>
@@ -23,16 +22,18 @@ export const ResourceList: FC<ResourceListProps> = ({ name, icon, children, open
             {icon}
           </Avatar>
         )}
-        <Button endIcon={<FontAwesomeIcon icon={faChevronRight} color={palette.text.primary} />}>
-          <Typography variant="h6" color={palette.text.primary}>
-            {name}
-          </Typography>
-        </Button>
+        <Typography variant="h6" color={palette.text.primary}>
+          {name}
+        </Typography>
       </Stack>
-      {openIssues && total && <ProgressBar openIssues={openIssues} totalResources={total} />}
+      {resourceList && <ProgressBar openIssues={resourceList.openIssues} totalResources={resourceList.totalResources} />}
       <Card>
         <CardContent>
-          <List>{children}</List>
+          <List dense>
+            {resourceList.resources.map((resource) => (
+              <ResourceListItem key={resource.id} resource={resource} onClick={() => onResource(resource)} />
+            ))}
+          </List>
         </CardContent>
       </Card>
     </Stack>

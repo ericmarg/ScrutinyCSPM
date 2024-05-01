@@ -4,25 +4,34 @@ import { statSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { ScanListItem } from '@/types/scan-list-item';
 
-export async function getScans() {
-  const scans: ScanListItem[] = [];
+export async function getScans(): Promise<ScanListItem[]> {
   try {
     if (existsSync('scans')) {
       mkdirSync('scans', { recursive: true });
     }
-    const files = readdirSync('scans').filter((file) => file.endsWith('.json'));
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const filePath = path.join('scans', file);
-      const stats = statSync(filePath);
-      scans.push({
-        id: i,
-        name: file,
-        date: stats.birthtime
-      });
-    }
-    return scans;
+    // Read the scans directory and read the folders
+    const folders = readdirSync('scans');
+    // Check to see if the folder is valid
+    const validScans = folders.filter((folder) => {
+      // Check if the folder is a directory
+      const isDirectory = statSync(path.join('scans', folder)).isDirectory();
+      if (!isDirectory) {
+        return false;
+      }
+      // Check if the folder has a inventory.json file
+      const inventory = existsSync(path.join('scans', folder, 'inventory.json'));
+      if (!inventory) {
+        return false;
+      }
+      return true;
+    });
+    return validScans.map((folder): ScanListItem => {
+      return {
+        id: Number(folder),
+        name: folder,
+        date: new Date(Number(folder))
+      };
+    });
   } catch (error) {
     return [];
   }
