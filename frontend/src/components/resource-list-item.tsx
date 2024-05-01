@@ -8,12 +8,13 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export interface ResourceListItemProps {
   resource: Resource;
+  onClick?: () => void;
 }
 
-export const ResourceListItem: FC<ResourceListItemProps> = ({ resource }) => {
+export const ResourceListItem: FC<ResourceListItemProps> = ({ resource, onClick }) => {
   return (
     <ListItem disablePadding secondaryAction={<FontAwesomeIcon icon={faChevronRight} />}>
-      <ListItemButton>
+      <ListItemButton onClick={() => (onClick ? onClick() : null)}>
         <ListItemIcon>
           {resource.issues.length > 0 ? (
             <Badge color="error" variant="dot">
@@ -29,11 +30,11 @@ export const ResourceListItem: FC<ResourceListItemProps> = ({ resource }) => {
   );
 };
 
-const ResourceIcon: FC<{ provider: Provider }> = ({ provider }) => {
+export const ResourceIcon: FC<{ provider: Provider; color?: string }> = ({ provider, color }) => {
   switch (provider) {
     case 'aws':
-      return <FontAwesomeIcon icon={faAws} />;
+      return <FontAwesomeIcon icon={faAws} color={color ? color : '#ff9900'} />;
     case 'azure':
-      return <FontAwesomeIcon icon={faWindows} />;
+      return <FontAwesomeIcon icon={faWindows} color={color ? color : '#0080ff'} />;
   }
 };

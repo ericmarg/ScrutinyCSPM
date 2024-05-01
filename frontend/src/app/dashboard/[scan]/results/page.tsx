@@ -1,23 +1,25 @@
 'use client';
 import { Container } from '@mui/system';
-import { Grid, Stack, Typography } from '@mui/material';
+import { Box, Drawer, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { InfoCard } from '@/components/info-card';
 import { ResourceList } from '@/components/resource-list';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBitbucket } from '@fortawesome/free-brands-svg-icons';
 import { ProgressBar } from '@/components/progress-bar';
-import { faServer, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDownUpLock, faServer, faX } from '@fortawesome/free-solid-svg-icons';
 import { getScan } from '@/app/dashboard/[scan]/results/actions';
 import { usePathname } from 'next/navigation';
-import { Scan } from '@/types/scan';
+import { Resource, Scan } from '@/types/scan';
 import { differenceInDays, format, formatDistanceToNow } from 'date-fns';
 import { LoadingBackdrop } from '@/components/loading-backgrop';
+import { ResourceItem } from '@/components/resource-item';
 
 export default function ScanResult() {
   const path = usePathname();
   const scanId = path.split('/')[2];
   const [scan, setScan] = useState<Scan>();
+  const [selectedResource, setSelectedResource] = useState<Resource | null>();
   useEffect(() => {
     getScan(scanId).then((data) => {
       if (data) {
@@ -31,7 +33,7 @@ export default function ScanResult() {
     return <LoadingBackdrop />;
   }
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ pb: 10 }}>
       <Stack spacing={3}>
         <ProgressBar openIssues={scan.openIssues} totalResources={scan.totalResources} />
         <Stack direction="row" alignItems="center">
@@ -76,16 +78,38 @@ export default function ScanResult() {
         </Grid>
         <Grid container spacing={3} display="flex">
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList resourceList={scan.buckets} name="Object Storage Buckets" icon={<FontAwesomeIcon icon={faBitbucket} />} />
+            <ResourceList resourceList={scan.buckets} name="Object Storage Buckets" icon={<FontAwesomeIcon icon={faBitbucket} />} onResource={(r) => setSelectedResource(r)} />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList resourceList={scan.vms} name="Virtual Machines" icon={<FontAwesomeIcon icon={faServer} />} />
+            <ResourceList resourceList={scan.vms} name="Virtual Machines" icon={<FontAwesomeIcon icon={faServer} />} onResource={(r) => setSelectedResource(r)} />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <ResourceList resourceList={scan.securityGroups} name="Security Groups" icon={<FontAwesomeIcon icon={faUserShield} />} />
+            <ResourceList
+              resourceList={scan.securityGroups}
+              name="Security Groups"
+              icon={<FontAwesomeIcon icon={faArrowDownUpLock} />}
+              onResource={(r) => setSelectedResource(r)}
+            />
           </Grid>
         </Grid>
       </Stack>
+      <Drawer
+        open={!!selectedResource}
+        anchor="right"
+        onClose={() => setSelectedResource(null)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#fef7e7'
+          }
+        }}
+      >
+        <Box mt={2} ml={2}>
+          <IconButton onClick={() => setSelectedResource(null)}>
+            <FontAwesomeIcon icon={faX} />
+          </IconButton>
+        </Box>
+        {selectedResource && <ResourceItem resource={selectedResource} />}
+      </Drawer>
     </Container>
   );
 }

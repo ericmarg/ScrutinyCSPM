@@ -1,3 +1,5 @@
+import { IssueType } from '@/components/issue';
+
 export interface Scan {
   id: string;
   timestamp: string;
@@ -34,5 +36,5 @@ export type Resource = {
   type: ResourceType;
   provider: Provider;
   age: Date;
-  issues: string[];
+  issues: IssueType[];
 };

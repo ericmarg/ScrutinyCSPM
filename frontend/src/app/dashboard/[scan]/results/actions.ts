@@ -2,7 +2,8 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { ResourceList, ResourceType, Scan } from '@/types/scan';
-import { subDays, isAfter } from 'date-fns';
+import { isAfter, subDays } from 'date-fns';
+import { IssueType } from '@/components/issue';
 
 export async function getScan(id: string): Promise<Scan | null> {
   // Check if the scan exists
@@ -57,16 +58,18 @@ async function getResources(inventory: Record<string, any>, type: ResourceType):
   for (const provider in inventory) {
     const provider_resources = inventory[provider][type] || [];
     totalResources += provider_resources.length;
-    resources = provider_resources.map((r: any) => {
-      return {
-        id: r.Name || r.instanceId,
-        name: r.Name || (r.Tags ? r.Tags.find((t: any) => t.Key === 'Name')?.Value || null : null) || r.instanceId,
-        type,
-        provider,
-        age: !!r.CreatedAt || !!r.LaunchTime ? new Date(r.CreatedAt || r.LaunchTime) : new Date(),
-        issues: getIssues(r, provider, type)
-      };
-    });
+    resources.push(
+      ...provider_resources.map((r: any) => {
+        return {
+          id: r.Name || r.InstanceId || r.GroupId,
+          name: r.Name || (r.Tags ? r.Tags.find((t: any) => t.Key === 'Name')?.Value || null : null) || r.InstanceId || r.GroupName || r.GroupId,
+          type,
+          provider,
+          age: !!r.CreatedAt || !!r.LaunchTime ? new Date(r.CreatedAt || r.LaunchTime) : new Date(),
+          issues: getIssues(r, provider, type)
+        };
+      })
+    );
   }
   resources.sort((a: any, b: any) => b.issues.length - a.issues.length);
   let openIssues = 0;
@@ -108,7 +111,7 @@ function getIssues(resource: any, provider: string, type: ResourceType): string[
 function getVmIssues(resource: any): string[] {
   const issues: string[] = [];
   if (resource.PublicIpAddress) {
-    issues.push('Public IP Address');
+    issues.push(IssueType.PublicIP);
   }
   return issues;
 }
@@ -116,13 +119,13 @@ function getVmIssues(resource: any): string[] {
 function getBucketIssues(resource: any): string[] {
   const issues: string[] = [];
   if (!resource?.Details?.Encryption) {
-    issues.push('No Encryption');
+    issues.push(IssueType.UnencryptedBucket);
   }
-  if (resource?.Policy?.Statement.find((s: any) => s.Sid === 'AllowPublicRead')) {
-    issues.push('Public Read Access');
+  if (resource?.Details.Policy?.Statement.length > 0) {
+    issues.push(IssueType.OpenBucket);
   }
-  if (resource?.Policy?.Versioning) {
-    issues.push('No Versioning');
+  if (!resource?.Details.Policy?.Versioning) {
+    issues.push(IssueType.BucketVersioning);
   }
   return issues;
 }
