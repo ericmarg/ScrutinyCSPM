@@ -31,6 +31,7 @@ setup(
         "ansible-dev-tools",
         "azure-storage-blob",
         "azure-mgmt-storage",
+        "tabulate",
         
         # other dependencies...
     ],

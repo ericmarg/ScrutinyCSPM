@@ -7,7 +7,7 @@ from src.scrutinycspm.resources.development.azure.azure_storage_scan import Azur
 from src.scrutinycspm.resources.development.azure.azure_vnet_scan import AzureVirtualNetwork
 from src.scrutinycspm.resources.development.azure.azure_virtual_machine_scan import AzureVirtualMachine
 from src.scrutinycspm.utils.logging_util import add_logging
-from src.scrutinycspm.providers.azure.azure_policy_check import vulernabilities
+from src.scrutinycspm.providers.azure.policy_check import vulernabilities
 
 
 class Nsg(SubCommandPlugin):

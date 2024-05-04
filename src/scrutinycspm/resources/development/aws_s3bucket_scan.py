@@ -1,5 +1,10 @@
+import logging
 import boto3
 import json
+
+logging.basicConfig(
+    level=logging.WARN, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 class S3BucketRetriever:
     def __init__(self, access_key, secret_key, region):
@@ -27,7 +32,8 @@ class S3BucketRetriever:
             try:
                 policy = self.s3_client.get_bucket_policy(Bucket=bucket_name)
                 bucket_details['Policy'] = json.loads(policy['Policy'])
-            except self.s3_client.exceptions.NoSuchBucketPolicy:
+            except self.s3_client.exceptions.ClientError as e:
+                logging.debug(f"Error retrieving policy for bucket '{bucket_name}': {str(e)}")
                 bucket_details['Policy'] = None
 
             # Retrieve bucket ACL
@@ -51,7 +57,7 @@ class S3BucketRetriever:
         except self.s3_client.exceptions.NoSuchBucket:
             print(f"Bucket '{bucket_name}' does not exist.")
         except Exception as e:
-            print(f"Error retrieving details for bucket '{bucket_name}': {str(e)}")
+            bucket_details['Policy'] = None
 
         return bucket_details
 

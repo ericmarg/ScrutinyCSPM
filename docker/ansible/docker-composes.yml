@@ -5,26 +5,27 @@ services:
     image: ansible/awx:17.1.0
     container_name: awx
     ports:
-      - "8080:8052"  # Map AWX web interface port
+      - "8080:8052" 
     depends_on:
       - awx-postgres
       - awx-rabbitmq
       - ansible
     environment:
       - AWX_ADMIN_USER=admin
-      - AWX_ADMIN_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+      - AWX_ADMIN_PASSWORD=${AWX_ADMIN_PASSWORD}
       - AWX_PROJECTS_PATH=/var/lib/awx/projects
       - AWX_SECRET_KEY=awxsecret
       - DATABASE_NAME=awx
       - DATABASE_USER=awx
-      - DATABASE_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_HOST=awx-postgres
       - DATABASE_PORT=5432
       - MEMCACHED_HOST=awx-memcached
       - RABBITMQ_HOST=awx-rabbitmq
       - REDIS_HOST=awx-redis
     networks:
-      - awx-network
+      awx-network:
+        ipv4_address: 172.16.238.10
 
   awx-postgres:
     image: postgres:13
@@ -32,25 +33,34 @@ services:
     environment:
       - POSTGRES_DB=awx
       - POSTGRES_USER=awx
-      - POSTGRES_PASSWORD=NotYourPassword5^xKWC5Xa@W#y3R7otp
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
-      - awx-network
+      awx-network:
+        ipv4_address: 172.16.238.20
 
   awx-rabbitmq:
     image: rabbitmq:3-management
     container_name: awx-rabbitmq
     ports:
-      - "15672:15672"  # Map RabbitMQ management port
+      - "15672:15672" # Map RabbitMQ management port
     networks:
-      - awx-network
+      awx-network:
+        ipv4_address: 172.16.238.30
 
   ansible:
-    image: python:3.9
+    build:
+      context: ./ansible-svr
+      dockerfile: Dockerfile
+    image: python
     container_name: ansible
-    command: tail -f /dev/null  # Keep container running
+    command: tail -f /dev/null # Keep container running
     networks:
-      - awx-network
+      awx-network:
+        ipv4_address: 172.16.238.40
 
 networks:
   awx-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24

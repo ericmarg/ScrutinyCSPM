@@ -1,7 +1,7 @@
 import configparser
 import os
 
-from src.scrutinycspm.resources.development.aws_ec2_scan import AWSEC2Scanner
+from src.scrutinycspm.resources.development.ansible_scanning.aws_ec2_ansible_scan import AWSEC2Scanner
 from hydra.core.global_hydra import GlobalHydra
 import json
 import os

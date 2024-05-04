@@ -1,7 +1,7 @@
 import configparser
 import os
 
-from src.scrutinycspm.resources.development.aws_rds_scan import AWSRDSScanner
+from src.scrutinycspm.resources.development.ansible_scanning.aws_rds_mysql_scan import AwsRdsMySQLScanner
 from hydra.core.global_hydra import GlobalHydra
 import json
 import os
@@ -23,7 +23,7 @@ class TestAWSRDSScan(BaseTestCase):
         access_key = config["default"]["aws_access_key_id"]
         secret_key = config["default"]["aws_secret_access_key"]
         region = "us-east-2"
-        results = AWSRDSScanner(region, access_key, secret_key).run_scan()
+        results = AwsRdsMySQLScanner(region, access_key, secret_key).run_scan()
         print(json.dumps(results, indent=4))
         self.assertIsNotNone(results)
 

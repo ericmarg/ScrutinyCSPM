@@ -65,5 +65,4 @@ class EC2InstanceRetriever:
         }
         return json.dumps(scan_results, default=str)
 
-
-
+    

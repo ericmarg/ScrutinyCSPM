@@ -4,9 +4,6 @@
   gather_facts: false
   
   tasks:
-    - name: Import rds_instance_info module
-      import_tasks: rds_instance_info.yml
-      
     - name: Retrieve AWS RDS MySQL Databases
       rds_instance_info:
         region: "{{ aws_region }}"
