@@ -1,4 +1,4 @@
-from src.scrutinycspm.utils.development.resource_generator import generate_resource_classes
+
 import ansible_runner
 import json
 import configparser

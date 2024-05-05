@@ -1,14 +1,14 @@
 import configparser
 import os
 
-from src.scrutinycspm.resources.development.ansible_scanning.aws_rds_mysql_scan import AwsRdsMySQLScanner
 from hydra.core.global_hydra import GlobalHydra
 import json
 import os
+from src.scrutinycspm.resources.development.ansible_scanning.aws_rds_mysql_scan import AwsRdsMySQLScanner
 
 from tests.unit.base_test_case import BaseTestCase
 
-class TestAWSRDSScan(BaseTestCase):
+class TestAWSRDSAnsibleScan(BaseTestCase):
     def setUp(self):
         super().setUp(config_path="../../conf", config_name="base-config") 
 

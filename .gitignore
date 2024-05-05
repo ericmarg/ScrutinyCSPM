@@ -74,6 +74,6 @@ docs/_build
 
 env
 artifacts
-inventory
+
 *.tfvars
 certificate

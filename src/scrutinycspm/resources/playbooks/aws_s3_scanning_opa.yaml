@@ -42,33 +42,10 @@
       ansible.builtin.debug:
         msg: "{{ rego_policy_content }}"
 
-
-    - name: Format S3 bucket information
+    - name: Raw Results AWS S3 bucket information
       set_fact:
-        s3_bucket_info_evalutated: |
-          [
-          {% for bucket in s3_buckets.buckets %}
-            {
-              "provider": "aws",
-              "bucket_name": "{{ bucket.name }}",
-              "versioning_enabled": {{ bucket.bucket_versioning.enabled | default(false) }},
-              "all_public_access_blocked": {{ bucket.public_access_block.PublicAccessBlockConfiguration.BlockPublicAcls | default(false) and
-                                              bucket.public_access_block.PublicAccessBlockConfiguration.BlockPublicPolicy | default(false) and
-                                              bucket.public_access_block.PublicAccessBlockConfiguration.IgnorePublicAcls | default(false) and
-                                              bucket.public_access_block.PublicAccessBlockConfiguration.RestrictPublicBuckets | default(false) }},
-              "provider_specific": {
-                "MFADeleteEnabled": {{ bucket.mfa_delete.enabled | default(false) }}
-              }
-            }{% if not loop.last %},{% endif %}
-          {% endfor %}
-          ]
-
-    - name: Set Fact for S3 bucket information
-      set_fact:
-        s3_bucket_info_evalutated: "{{ s3_bucket_info_evalutated | from_json }}"
+        raw_s3_results: "{{ s3_buckets | to_json }}"
         cacheable: true
 
-    - name: Raw Results
-      set_fact:
-        raw_s3_results: "{{ s3_bucket_info | to_json }}"
-        cacheable: true
+
+

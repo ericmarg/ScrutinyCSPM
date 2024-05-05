@@ -11,12 +11,13 @@ class AWSS3Scanner:
         self.secret_key = secret_key
         self.region = region
 
-    def run_scan(self, private_data_dir='src/scrutinycspm/resources/development/playbooks/'):
+    def run_scan(self, private_data_dir='src/scrutinycspm/resources/playbooks/'):
         """Run the RDS bucket scan using Ansible Runner"""
 
         try:
             result = ansible_runner.run(
-                playbook='aws_s3_scanning_opa.yml',
+                playbook='aws_s3_scanning_opa.yaml',
+                suppress_ansible_output=True,
                 inventory=None,
                 private_data_dir= private_data_dir,
                 quiet=True,
@@ -28,9 +29,11 @@ class AWSS3Scanner:
             )
 
             # Retrieve the JSON data from the fact cache
-            s3_buckets_json = result.get_fact_cache('localhost')['s3_buckets_json']
+            rego_policy_content = result.get_fact_cache('localhost')['rego_policy_content']
 
-            return s3_buckets_json
+            raw_s3_results = result.get_fact_cache('localhost')['raw_s3_results']
+
+            return  raw_s3_results, rego_policy_content
 
         except Exception as e:
             # Handle the exception

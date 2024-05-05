@@ -1,0 +1,2 @@
+[ansible_container]
+172.16.238.40 ansible_connection=docker

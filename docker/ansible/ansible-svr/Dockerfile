@@ -3,8 +3,7 @@ FROM python
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     ssh \
-    sshpass \
-    && rm -rf /var/lib/apt/lists/*
+    sshpass
 
 # Install Ansible and other Python dependencies
 RUN pip install --no-cache-dir \

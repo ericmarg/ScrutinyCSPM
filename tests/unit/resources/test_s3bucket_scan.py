@@ -1,5 +1,5 @@
 import configparser
-from src.scrutinycspm.resources.development.ansible_scanning.aws_s3_bucket_ansible_scan import AWSS3Scanner
+from src.scrutinycspm.resources.development.aws_s3bucket_scan import S3BucketRetriever
 import json
 import os
 
@@ -20,7 +20,7 @@ class TestAWSEc2Scan(BaseTestCase):
         access_key = config["default"]["aws_access_key_id"]
         secret_key = config["default"]["aws_secret_access_key"]
         region = "us-east-2"
-        results = AWSS3Scanner(region, access_key, secret_key).run_scan()
+        results = S3BucketRetriever(region=region, access_key=access_key, secret_key=secret_key).run_scan()
         print(results)
         self.assertIsNotNone(results)
 
