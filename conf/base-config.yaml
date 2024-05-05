@@ -1,4 +1,6 @@
 private_path: ../../conf/private
+ansible:
+  unit_testing: false
 secrets:
   hc_vault:
     # Address of the Vault server (cloud or on-prem)

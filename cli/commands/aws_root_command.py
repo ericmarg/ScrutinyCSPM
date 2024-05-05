@@ -75,7 +75,7 @@ class RDSMySQL(SubCommandPlugin):
 
     def execute(self, *args, **kwargs):
         access_key, secret_key, profile_name = get_aws_credentials()
-        region = args[0]
+        region = args[1]
         rds = RDSMySQLDatabaseRetriever(region=region, access_key=access_key, secret_key=secret_key)
         json_data = rds.run_scan()
 
