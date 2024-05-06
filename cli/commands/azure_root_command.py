@@ -1,5 +1,7 @@
 import json
+import logging
 import os
+from pprint import pprint
 from typing import Dict, Type
 from cli.commands.bridges.aws.s3_bridge import evaluate_object_storage_containers
 from cli.commands.command_manager import CommandPlugin, SubCommandPlugin
@@ -20,6 +22,7 @@ from src.scrutinycspm.providers.azure.policy_check import vulernabilities
 
 from cli.commands.bridges.azure.azure_storage_bridge import storage_trasformation   
 
+logging.getLogger("msal").setLevel(logging.ERROR)
 
 class Nsg(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
@@ -111,14 +114,19 @@ class StorageAccount(SubCommandPlugin):
         json_data = storage_scanner.fetch_data()
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4, sort_keys=True)
+        if len(args) == 0:
+            print(f"Storage Information for subscription_id: {subscription_id}\n\n")
+            print(json_data) 
+            return None, None
 
         if len(args) > 0 and args[0] == "scan":
             storage_dict = storage_trasformation(json_data)
             evaluate_object_storage_containers(storage_dict)
-    
-
+        if len(args) > 1 and args[1] == "verbose":
+            print(json_data)
+        if len(args) > 2 and args[2] == "raw":
             return json_data, None
-        return json_data, None
+        return "Scan completed!", None
 
 
 class Vnet(SubCommandPlugin):

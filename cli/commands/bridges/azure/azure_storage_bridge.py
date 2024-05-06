@@ -14,7 +14,6 @@ def storage_trasformation(json_content: str):
             "region": storage_account["location"],
             "all_public_access_blocked": (storage_account.get("allow_blob_public_access", False) and storage_account.get("public_network_access", False) == "Disabled"),
             "versioning_enabled": False if storage_account.get("versioning_enabled", False) is None else True,
-            "provider_specific": {'MFADeleteEnabled': False},
             "id": storage_account["id"]
         }
 

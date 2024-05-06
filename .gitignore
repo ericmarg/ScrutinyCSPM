@@ -18,6 +18,7 @@ private_data_dir/artifacts
 .recalcitrant
 
 env/extravars
+.metals
 
 .terraform
 .terraform.lock.hcl
@@ -39,8 +40,6 @@ venv/
 ENV/
 scrutiny_env/
 .scrutiny_env
-.scrutiny_3
-.scruntiyx7
 .scrutiyx7
 .scrutinyx8
 .recalcitrant2
@@ -50,6 +49,7 @@ config/private/
 
 # Virtual env bytecode
 *.pyc
+.pyc
 
 # Virtual env packages
 .venv/lib/python*/site-packages/

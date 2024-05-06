@@ -4,6 +4,7 @@ from src.scrutinycspm.providers.aws.resources.account import AWSAccount
 import json
 import jmespath
 
+
 def evaluate_object_storage_containers(containers, repository: str=None) -> None:
     
     opa = OpaClient()
@@ -51,8 +52,8 @@ def evaluate_object_storage_containers(containers, repository: str=None) -> None
             print()
             print(f"Remediations for {name}")
             for decision in decisions:
-                result = decision["result"]
-                if result["status"] == "Not Compliant":
+                result = decision.get("result", "Not Applicable")
+                if result != "Not Applicable" and result["status"] == "Not Compliant":
                     remediation_path = result["remediation_guidance"]
                     cloud_provider = result["provider"]
                     remediation_file = open(
