@@ -1,6 +1,6 @@
 import re
 
-def find_aws_region(*args):
+def find_aws_region(args):
     aws_regions = [
         "us-east-1", "us-east-2", "us-west-1", "us-west-2",
         "af-south-1", "ap-east-1", "ap-south-1", "ap-northeast-1",

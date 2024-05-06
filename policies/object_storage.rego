@@ -73,7 +73,6 @@ enforce_public_access_block := compliant_decision if {
 # custom:
 #  remediation_guidance: obj_storage/enable_mfa_delete.txt
 enforce_aws_s3_mfa_enabled := non_compliant_decision if {
-	input.provider = "aws"
 	input.provider_specific.MFADeleteEnabled = false
 
 	annotation := rego.metadata.rule()
@@ -89,7 +88,6 @@ enforce_aws_s3_mfa_enabled := non_compliant_decision if {
 # title: Enforce MFA Delete on S3 Buckets (Compliant Decision)
 # description: S3 Buckets must have MFA delete enabled
 enforce_aws_s3_mfa_enabled := compliant_decision if {
-	input.provider = "aws"
 	input.provider_specific.MFADeleteEnabled = true
 
 	annotation := rego.metadata.rule()

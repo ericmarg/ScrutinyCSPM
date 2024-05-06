@@ -1,6 +1,8 @@
 import logging
 import os
 from typing import Dict, Type
+import json
+from pprint import pprint
 
 from cli.commands.command_manager import CommandPlugin, SubCommandPlugin
 from hydra import compose, initialize
@@ -13,7 +15,7 @@ from src.scrutinycspm.resources.development.aws_s3bucket_scan import S3BucketRet
 from src.scrutinycspm.resources.development.aws_security_group_scan import AWSSecurityGroupScanner
 from src.scrutinycspm.utils.logging_util import add_logging
 from src.scrutinycspm.resources.development.aws_root_scan import AWSRootScanner
-from cli.commands.bridges.aws.s3_bridge import evaluate_object_storage_containers
+from cli.commands.bridges.aws.s3_bridge import evaluate_object_storage_containers, s3_transformation
 from src.scrutinycspm.utils.aws_credential_file import get_aws_credentials
 from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
@@ -99,10 +101,12 @@ class S3(SubCommandPlugin):
 
         print(f"Retrieving S3 buckets, region: {region}...")
         json_data = S3BucketRetriever(region=region, access_key=access_key, secret_key=secret_key).run_scan()
+        s3_dict = s3_transformation(json_data)
 
         if len(args) > 0 and args[0] == 'scan':
-            evaluate_object_storage_containers()
-
+            evaluate_object_storage_containers(s3_dict)
+            json_data = json.dumps(json_data, indent=4, sort_keys=True)
+            pprint(json_data)
             return json_data, None
         return json_data, None
     

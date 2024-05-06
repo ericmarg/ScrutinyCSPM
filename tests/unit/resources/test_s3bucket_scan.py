@@ -5,9 +5,10 @@ import os
 
 from tests.unit.base_test_case import BaseTestCase
 
+
 class TestAWSEc2Scan(BaseTestCase):
     def setUp(self):
-        super().setUp(config_path="../../conf", config_name="base-config") 
+        super().setUp(config_path="../../conf", config_name="base-config")
 
     def test_ec2_scan(self):
 
@@ -20,7 +21,8 @@ class TestAWSEc2Scan(BaseTestCase):
         access_key = config["default"]["aws_access_key_id"]
         secret_key = config["default"]["aws_secret_access_key"]
         region = "us-east-2"
-        results = S3BucketRetriever(region=region, access_key=access_key, secret_key=secret_key).run_scan()
+        results = S3BucketRetriever(
+            region=region, access_key=access_key, secret_key=secret_key
+        ).run_scan()
         print(results)
         self.assertIsNotNone(results)
-

@@ -1,0 +1,31 @@
+MFA (Multi-Factor Authentication) delete
+
+In Azure Storage Accounts, there is no direct configuration related to MFA (Multi-Factor Authentication) delete. However, Azure Storage Accounts have a feature called "Soft Delete" that provides a way to protect against accidental or malicious deletion of data.
+Soft Delete is a data recovery feature that enables you to recover deleted blobs, containers, or file shares within a specified retention period. When Soft Delete is enabled, deleted data is not permanently removed from the storage account but instead is marked as deleted and kept for a specified retention period. During this period, you can restore the deleted data if needed.
+Here are a few key points about Soft Delete in Azure Storage Accounts:
+
+https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
+https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-enable
+https://learn.microsoft.com/en-us/azure/storage/blobs/security-recommendations
+https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-auth-hybrid-identities-enable
+
+Soft Delete in Azure Storage Accounts:
+
+Blob Soft Delete: When enabled, deleted blobs and blob snapshots are retained in the storage account for a specified retention period. You can recover the deleted blobs within that period.
+Container Soft Delete: When enabled, deleted containers and their contents (blobs and blob snapshots) are retained in the storage account for a specified retention period. You can recover the deleted containers and their contents within that period.
+File Share Soft Delete: When enabled, deleted file shares and their contents (files and directories) are retained in the storage account for a specified retention period. You can recover the deleted file shares and their contents within that period.
+
+MFA and Soft Delete:
+
+While Soft Delete provides data protection against accidental or malicious deletion, it does not directly involve MFA authentication for delete operations.
+MFA is typically used for user authentication and access control, rather than specific delete actions.
+Security Measures for Azure Storage Accounts:
+To enhance security, consider using other features such as:
+
+Azure AD authentication: 
+
+This allows you to control access to storage resources using Azure Active Directory.
+
+Role-Based Access Control (RBAC): Assign specific permissions to users based on their roles.
+Azure Active Directory Domain Services (Azure AD DS): Provides domain services for Azure resources.
+For more detailed information, you can refer to the following resources:

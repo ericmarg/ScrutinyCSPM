@@ -32,6 +32,7 @@ setup(
         "azure-storage-blob",
         "azure-mgmt-storage",
         "tabulate",
+        "jmespath",
         
         # other dependencies...
     ],
