@@ -3,6 +3,7 @@ import os
 from typing import Dict, Type
 import json
 from pprint import pprint
+from src.scrutinycspm.utils.args import is_arg_present
 
 from cli.commands.command_manager import CommandPlugin, SubCommandPlugin
 from hydra import compose, initialize
@@ -99,16 +100,25 @@ class S3(SubCommandPlugin):
         access_key, secret_key, profile_name = get_aws_credentials()
         region = find_aws_region(args)
 
+
         print(f"Retrieving S3 buckets, region: {region}...")
         json_data = S3BucketRetriever(region=region, access_key=access_key, secret_key=secret_key).run_scan()
-        s3_dict = s3_transformation(json_data)
+    
+        if len(args == 0):
+            print(json.dumps(json_data, indent=4, sort_keys=True))
+            return None, None
 
-        if len(args) > 0 and args[0] == 'scan':
+        if is_arg_present('scan'):
+            s3_dict = s3_transformation(json_data)
             evaluate_object_storage_containers(s3_dict)
+
+        if is_arg_present('verbose'):
             json_data = json.dumps(json_data, indent=4, sort_keys=True)
-            pprint(json_data)
+            print(json_data)
+        if is_arg_present('raw'):
             return json_data, None
-        return json_data, None
+        
+        return "Scan completed", None
     
 class AWSRootCommand(CommandPlugin):
     

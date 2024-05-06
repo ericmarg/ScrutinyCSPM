@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from pprint import pprint
+from src.scrutinycspm.utils.args import is_arg_present
 from typing import Dict, Type
 from cli.commands.bridges.aws.s3_bridge import evaluate_object_storage_containers
 from cli.commands.command_manager import CommandPlugin, SubCommandPlugin
@@ -119,12 +119,12 @@ class StorageAccount(SubCommandPlugin):
             print(json_data) 
             return None, None
 
-        if len(args) > 0 and args[0] == "scan":
+        if is_arg_present("scan"):
             storage_dict = storage_trasformation(json_data)
             evaluate_object_storage_containers(storage_dict)
-        if len(args) > 1 and args[1] == "verbose":
+        if is_arg_present("verbose"):
             print(json_data)
-        if len(args) > 2 and args[2] == "raw":
+        if is_arg_present("raw"):
             return json_data, None
         return "Scan completed!", None
 
