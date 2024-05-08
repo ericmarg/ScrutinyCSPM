@@ -17,10 +17,7 @@ from src.scrutinycspm.resources.development.aws_security_group_scan import (
 from src.scrutinycspm.utils.args import is_arg_present
 from src.scrutinycspm.utils.logging_util import add_logging
 from src.scrutinycspm.resources.development.aws_root_scan import AWSRootScanner
-from cli.commands.bridges.aws.s3_bridge import (
-    evaluate_object_storage_containers,
-    s3_transformation,
-)
+from cli.commands.bridges.aws.s3_bridge import (evaluate_object_storage_containers, s3_transformation)
 from src.scrutinycspm.utils.aws_credential_file import get_aws_credentials
 from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
@@ -46,18 +43,24 @@ class Root(SubCommandPlugin):
         Executes the 'summary' command.
         """
         access_key, secret_key, profile = get_aws_credentials()
-        region = args[0]
+        region = find_aws_region(args)
+
         json_data = AWSRootScanner(
             region=region, access_key=access_key, secret_key=secret_key
         ).run_scan()
 
-        if len(args) > 0 and args[0] == "scan":
+        data = json.loads(json_data)
+        json_data = json.dumps(data, indent=4, sort_keys=True)
+
+        print(json_data)
+
+        if is_arg_present(args=args, arg_value="scan"):
             vulernabilities_json_data = vulernabilities(
                 json_data, "azure.nsg", "policies/azure/nsg.rego"
             )
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed!", None
 
 
 class Ec2(SubCommandPlugin):
@@ -79,13 +82,17 @@ class Ec2(SubCommandPlugin):
             region=region, access_key=access_key, secret_key=secret_key
         ).run_scan()
 
+        data = json.loads(json_data)
+        json_data = json.dumps(data, indent=4, sort_keys=True)
+        print(json_data)
+
         if len(args) > 0 and args[0] == "scan":
             vulernabilities_json_data = vulernabilities(
                 json_data, "azure.nsg", "policies/azure/nsg.rego"
             )
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed!", None
 
 
 class SecurityGroup(SubCommandPlugin):
@@ -102,18 +109,22 @@ class SecurityGroup(SubCommandPlugin):
         Executes the 'security-group' command.
         """
         access_key, secret_key, profile_name = get_aws_credentials()
-        region = args[0]
+        region = find_aws_region(args)
         json_data = AWSSecurityGroupScanner(
             region=region, access_key=access_key, secret_key=secret_key
         ).run_scan()
 
-        if len(args) > 0 and args[0] == "scan":
+        data = json.loads(json_data)
+        json_data = json.dumps(data, indent=4, sort_keys=True)
+        print(json_data)
+
+        if is_arg_present(args=args, arg_value="scan"):
             vulernabilities_json_data = vulernabilities(
                 json_data, "azure.nsg", "policies/azure/nsg.rego"
             )
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed!", None
 
 
 class S3(SubCommandPlugin):
@@ -155,7 +166,7 @@ class S3(SubCommandPlugin):
             region,
             s3_transformation,
             evaluate_object_storage_containers,
-            file_path="policies/object_storage.rego",
+            policy_file_path="policies/object_storage.rego",
             endpoint="obj_storage",
         )
 
@@ -212,25 +223,31 @@ class AWSRootCommand(CommandPlugin):
         """
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4, sort_keys=True)
-
-        if len(args) == 1 and args[0] == region:
-            print(json_data)
+            
+        if is_arg_present(args=args, arg_value="region"):
+            print("Please specify a region")
             return None, None
+
 
         if is_arg_present(args=args, arg_value="scan"):
             if transforming_function:
-                s3_dict = transforming_function(json_data)
+                resource_dict = transforming_function(json_data)
             else:
                 raise ValueError("Transformation function not found")
 
             if processing_function:
-                with open(kwargs.get("file_path"), "r") as file:
-                    policy_file = file.read()
-                    endpoint = kwargs.get("endpoint")
-                    processing_function(
-                        s3_dict, policy_file=policy_file, endpoint=endpoint
-                    )
-
+                if kwargs.get("policy"):
+                    with open(kwargs.get("policy"), "r") as file:
+                        policy = file.read()
+                        endpoint = kwargs.get("endpoint")
+                        processing_function(
+                            resource_dict, policy=policy, endpoint=endpoint
+                        )
+                if kwargs.get("policy_file_path"):
+                        endpoint = kwargs.get("endpoint")
+                        processing_function(
+                            resource_dict, policy_file_path=kwargs.get("policy_file_path"), endpoint=endpoint)
+            
             else:
                 raise ValueError("Processing function not found")
 

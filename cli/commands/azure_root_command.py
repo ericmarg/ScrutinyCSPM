@@ -48,14 +48,15 @@ class Nsg(SubCommandPlugin):
         json_data = nsg_scanner.fetch_data()
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4)
+        print(json_data)
 
-        if len(args) > 0 and args[0] == "scan":
+        if is_arg_present(args=args, arg_value="scan"):
             vulernabilities_json_data = vulernabilities(
                 json_data, "azure.nsg", "policies/azure/nsg.rego"
             )
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed!", None
 
 
 class VirtualMachine(SubCommandPlugin):
@@ -81,6 +82,7 @@ class VirtualMachine(SubCommandPlugin):
         json_data = vm_scanner.fetch_data()
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4)
+        print(json_data)
 
         if len(args) > 0 and args[0] == "scan":
             vulernabilities_json_data = vulernabilities(
@@ -88,7 +90,7 @@ class VirtualMachine(SubCommandPlugin):
             )
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed!", None
 
 
 class StorageAccount(SubCommandPlugin):
@@ -121,7 +123,7 @@ class StorageAccount(SubCommandPlugin):
 
         if is_arg_present(args=args, arg_value="scan"):
             storage_dict = storage_trasformation(json_data)
-            evaluate_object_storage_containers(storage_dict)
+            evaluate_object_storage_containers(storage_dict, policy_file_path = "policies/object_storage.rego", endpoint="object_storage")
         if is_arg_present(args=args, arg_value="verbose"):
             print(json_data)
         if is_arg_present(args=args, arg_value="raw"):
@@ -152,14 +154,14 @@ class Vnet(SubCommandPlugin):
         json_data = vnet_scanner.fetch_data()
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4)
+        print(json_data)
 
-        if len(args) > 0 and args[0] == "scan":
+        if is_arg_present(args=args, arg_value="scan"):
             vulernabilities_json_data = vulernabilities(
-                json_data, "azure.nsg", "policies/azure/nsg.rego"
-            )
+                json_data, "azure.nsg", "policies/azure/nsg.rego")
 
             return json_data, vulernabilities_json_data
-        return json_data, None
+        return "Command completed", None
 
 
 @add_logging

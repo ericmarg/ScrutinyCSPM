@@ -5,7 +5,7 @@ import json
 import jmespath
 
 
-def evaluate_object_storage_containers(containers, repository: str=None) -> None:
+def evaluate_object_storage_containers(containers, policy_file_path:str = None, endpoint:str=None, repository: str=None) -> None:
     
     opa = OpaClient()
 
@@ -17,11 +17,10 @@ def evaluate_object_storage_containers(containers, repository: str=None) -> None
         try:
             if repository:
                 opa.update_opa_policy_fromfile(
-                    filepath="policies/object_storage.rego", endpoint="obj_storage"
-                )   
+                    filepath=policy_file_path, endpoint=endpoint) 
             else:
                 opa.update_opa_policy_fromfile(
-                    filepath="policies/object_storage.rego", endpoint="obj_storage"
+                    filepath=policy_file_path, endpoint=endpoint
                 )
             versioning_decision = opa.check_policy_rule(
                 input_data=container,
