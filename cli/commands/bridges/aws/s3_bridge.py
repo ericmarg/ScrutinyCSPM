@@ -1,3 +1,4 @@
+import os
 from opa_client.opa import OpaClient
 from opa_client.errors import ConnectionsError
 from src.scrutinycspm.providers.aws.resources.account import AWSAccount
@@ -5,7 +6,7 @@ import json
 import jmespath
 
 
-def evaluate_object_storage_containers(containers, policy_file_path:str = None, endpoint:str=None, repository: str=None) -> None:
+def evaluate_object_storage_containers(containers, policy_file_path:str = None, policy:str=None, endpoint:str=None, repository: str=None, remediation_path:str="obj_storage") -> None:
     
     opa = OpaClient()
 
@@ -16,8 +17,7 @@ def evaluate_object_storage_containers(containers, policy_file_path:str = None, 
         # Attempts to evaluate all found Object Storage containers with three hardcoded Rego policies
         try:
             if repository:
-                opa.update_opa_policy_fromfile(
-                    filepath=policy_file_path, endpoint=endpoint) 
+                opa.update_opa_policy_fromstring(policy, endpoint=endpoint) 
             else:
                 opa.update_opa_policy_fromfile(
                     filepath=policy_file_path, endpoint=endpoint
@@ -55,8 +55,10 @@ def evaluate_object_storage_containers(containers, policy_file_path:str = None, 
                 if result != "Not Applicable" and result["status"] == "Not Compliant":
                     remediation_path = result["remediation_guidance"]
                     cloud_provider = result["provider"]
+                    remediations = os.environ["SCRUTINY_REMEDIATION_PATH"]
+
                     remediation_file = open(
-                        f"remediations/{cloud_provider}/{remediation_path}", "r"
+                        f"{remediations}/{cloud_provider}/{remediation_path}", "r"
                     )
                     remediation_file_contents = remediation_file.read()
                     print(remediation_file_contents)

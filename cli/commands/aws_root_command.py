@@ -175,6 +175,8 @@ class S3(SubCommandPlugin):
         access_key, secret_key, profile_name = get_aws_credentials()
         region = find_aws_region(args)
 
+        policy_file_path = os.environ.get("SCRUTINY_POLICY_PATH")
+
         if region is None:
             return "Region not found", None
 
@@ -185,19 +187,27 @@ class S3(SubCommandPlugin):
 
         if is_arg_present(args=args, arg_value="github"):
             github = GitHubRepository('robertfischer3/scrutiny-policies')
+            print("Retrieving policies from GitHub...")
             policies = github.get_files_by_extension('storage', '.rego')
             for policy in policies:
-                print(f"Policy group retrieved: {policy}")
+                print(f"Policy content retrieved: {policy}")
                 policy_content = github.get_file_contents(policy, 'main')
-                print(policy_content)
-
-        policy_file_path = os.environ.get("SCRUTINY_POLICY_PATH")
+                
+                AWSRootCommand.process_data_github(self,
+                                                    json_data,
+                                                    args,
+                                                    s3_transformation,
+                                                    evaluate_object_storage_containers,
+                                                    policy=policy_content,
+                                                    endpoint="obj_storage",
+                                                    repository=True)
+                return None, None
+                                                
 
         AWSRootCommand.process_data_internal(
             self,
             json_data,
             args,
-            region,
             s3_transformation,
             evaluate_object_storage_containers,
             policy_file_path=policy_file_path,
@@ -248,7 +258,6 @@ class AWSRootCommand(CommandPlugin):
         self,
         json_data,
         args,
-        region,
         transforming_function,
         processing_function,
         **kwargs,
@@ -299,7 +308,6 @@ class AWSRootCommand(CommandPlugin):
         self,
         json_data,
         args,
-        region,
         transforming_function,
         processing_function,
         **kwargs,
@@ -310,24 +318,22 @@ class AWSRootCommand(CommandPlugin):
         data = json.loads(json_data)
         json_data = json.dumps(data, indent=4, sort_keys=True)
 
-        if len(args) == 1 and args[0] == region:
-            print(json_data)
+        if is_arg_present(args=args, arg_value="region"):
+            print("Please specify a region")
             return None, None
 
         if is_arg_present(args=args, arg_value="scan"):
             if transforming_function:
-                s3_dict = transforming_function(json_data)
+                resource_dict = transforming_function(json_data)
             else:
                 raise ValueError("Transformation function not found")
 
             if processing_function:
-                with open(kwargs.get("file_path"), "r") as file:
-                    policy_file = file.read()
-                    endpoint = kwargs.get("endpoint")
+                if kwargs.get("policy") and kwargs.get("endpoint"):
                     processing_function(
-                        s3_dict, policy_file=policy_file, endpoint=endpoint
-                    )
-
+                            resource_dict, policy=kwargs.get("policy"), endpoint=kwargs.get("endpoint"), repository=True)
+                else: 
+                    raise ValueError("Policy content or endpoint not found")
             else:
                 raise ValueError("Processing function not found")
 

@@ -11,5 +11,8 @@
     "python.analysis.extraPaths": [
         "./cli/commands"
     ],
-    "ansible.python.interpreterPath": "/home/robert/Documents/python_projects/scrutinize/ScrutinyCSPM/.scrutiny_3/bin/python"
+    "ansible.python.interpreterPath": "/home/robert/Documents/python_projects/scrutinize/ScrutinyCSPM/.scrutiny_3/bin/python",
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }

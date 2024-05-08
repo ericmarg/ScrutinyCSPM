@@ -30,10 +30,26 @@ class Nsg(SubCommandPlugin):
         self.kwargs = kwargs
     
     def help(self) -> str:
+        """
+        Returns the help message for the 'nsg' subcommand.
+        """
         return super().help()
 
     def execute(self, *args, **kwargs):
+        """
+        Executes the 'nsg' subcommand.
 
+        Args:
+            args: Additional arguments passed to the subcommand.
+            kwargs: Additional keyword arguments passed to the subcommand.
+
+        Returns:
+            A tuple containing the JSON data and vulnerabilities JSON data, if the 'scan' argument is provided.
+            Otherwise, a tuple containing only the JSON data and None.
+
+        Raises:
+            ValueError: If any of the required environment variables are missing.
+        """
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
         client_id = os.environ.get("AZURE_CLIENT_ID")
@@ -68,9 +84,26 @@ class VirtualMachine(SubCommandPlugin):
         self.kwargs = kwargs
     
     def help(self) -> str:
-        return super().help()
+        """
+        Returns the help message for the 'vm' subcommand.
+        """
+        return "aure vm: Scans Azure Virtual Machines and retrieves their details."
 
     def execute(self, *args, **kwargs):
+        """
+        Executes the 'vm' subcommand.
+
+        Args:
+            args: Additional arguments passed to the subcommand.
+            kwargs: Additional keyword arguments passed to the subcommand.
+
+        Returns:
+            A tuple containing the JSON data and vulnerabilities JSON data, if the 'scan' argument is provided.
+            Otherwise, a tuple containing only the JSON data and None.
+
+        Raises:
+            ValueError: If any of the required environment variables are missing.
+        """
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
         client_id = os.environ.get("AZURE_CLIENT_ID")
@@ -105,9 +138,26 @@ class StorageAccount(SubCommandPlugin):
         self.kwargs = kwargs
 
     def help(self) -> str:
-        return super().help()
+        """
+        Returns the help message for the 'storage' subcommand.
+        """
+        return "azure storage: Scans Azure Storage Accounts and retrieves their details."
 
     def execute(self, *args, **kwargs):
+        """
+        Executes the 'storage' subcommand.
+
+        Args:
+            args: Additional arguments passed to the subcommand.
+            kwargs: Additional keyword arguments passed to the subcommand.
+
+        Returns:
+            A tuple containing the JSON data and None, if no arguments are provided.
+            Otherwise, performs the specified actions based on the provided arguments.
+
+        Raises:
+            ValueError: If any of the required environment variables are missing.
+        """
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
         client_id = os.environ.get("AZURE_CLIENT_ID")
@@ -148,9 +198,26 @@ class Vnet(SubCommandPlugin):
         self.kwargs = kwargs
     
     def help(self) -> str:
+        """
+        Returns the help message for the 'vnet' subcommand.
+        """
         return super().help()
 
     def execute(self, *args, **kwargs):
+        """
+        Executes the 'vnet' subcommand.
+
+        Args:
+            args: Additional arguments passed to the subcommand.
+            kwargs: Additional keyword arguments passed to the subcommand.
+
+        Returns:
+            A tuple containing the JSON data and vulnerabilities JSON data, if the 'scan' argument is provided.
+            Otherwise, a tuple containing only the JSON data and None.
+
+        Raises:
+            ValueError: If any of the required environment variables are missing.
+        """
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
         client_id = os.environ.get("AZURE_CLIENT_ID")
@@ -188,8 +255,7 @@ class AzureRootCommand(CommandPlugin):
         kwargs: Additional keyword arguments passed to the command.
 
     Returns:
-        A tuple containing the JSON data and vulnerabilities JSON data, if the 'scan' argument is provided.
-        Otherwise, a tuple containing only the JSON data and None.
+        The JSON data fetched from the Azure Network Security Group.
 
     Raises:
         ValueError: If any of the required environment variables are missing.
@@ -204,6 +270,19 @@ class AzureRootCommand(CommandPlugin):
         }
 
     def execute(self, args, *kwargs) -> any:
+        """
+        Executes the Azure root command.
+
+        Args:
+            args: Additional arguments passed to the command.
+            kwargs: Additional keyword arguments passed to the command.
+
+        Returns:
+            The JSON data fetched from the Azure Network Security Group.
+
+        Raises:
+            ValueError: If any of the required environment variables are missing.
+        """
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
         client_id = os.environ.get("AZURE_CLIENT_ID")
@@ -222,6 +301,11 @@ class AzureRootCommand(CommandPlugin):
         return json_data
 
     def help(self) -> str:
+        """
+        Returns the help message for the Azure root command.
+        """
         return (
             "Scans Azure Network Security Groups and retrieves their security details."
         )
+
+
