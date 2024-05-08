@@ -28,6 +28,9 @@ class Nsg(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+    
+    def help(self) -> str:
+        return super().help()
 
     def execute(self, *args, **kwargs):
 
@@ -63,6 +66,9 @@ class VirtualMachine(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+    
+    def help(self) -> str:
+        return super().help()
 
     def execute(self, *args, **kwargs):
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
@@ -98,6 +104,9 @@ class StorageAccount(SubCommandPlugin):
         self.args = args
         self.kwargs = kwargs
 
+    def help(self) -> str:
+        return super().help()
+
     def execute(self, *args, **kwargs):
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
         tenant_id = os.environ.get("AZURE_TENANT")
@@ -121,9 +130,11 @@ class StorageAccount(SubCommandPlugin):
             print(json_data) 
             return None, None
 
+        policy_file_path = os.environ.get("SCRUTINY_POLICY_PATH")
+
         if is_arg_present(args=args, arg_value="scan"):
             storage_dict = storage_trasformation(json_data)
-            evaluate_object_storage_containers(storage_dict, policy_file_path = "policies/object_storage.rego", endpoint="object_storage")
+            evaluate_object_storage_containers(storage_dict, policy_file_path = policy_file_path, endpoint="object_storage")
         if is_arg_present(args=args, arg_value="verbose"):
             print(json_data)
         if is_arg_present(args=args, arg_value="raw"):
@@ -135,6 +146,9 @@ class Vnet(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+    
+    def help(self) -> str:
+        return super().help()
 
     def execute(self, *args, **kwargs):
         subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")

@@ -38,6 +38,9 @@ class Root(SubCommandPlugin):
         self.args = args
         self.kwargs = kwargs
 
+    def help(self) -> str:
+        return super().help()
+
     def execute(self, *args, **kwargs):
         """
         Executes the 'summary' command.
@@ -62,6 +65,26 @@ class Root(SubCommandPlugin):
             return json_data, vulernabilities_json_data
         return "Command completed!", None
 
+class Help(SubCommandPlugin):
+    """
+    Subcommand class for the 'help' command.
+    """
+    def __init__(self, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
+    def execute(self, *args, **kwargs):
+        """
+        Executes the 'help' command.
+        """
+        command_name = args[0] if len(args) > 0 else None
+        if command_name:
+            if command_name in self.parent.subcommands:
+                subcommand = self.parent.subcommands[command_name]
+                return subcommand.help()
+            else:
+                return f"Command '{command_name}' not found."
+        else:
+            return self.parent.help()
 
 class Ec2(SubCommandPlugin):
     """
@@ -71,6 +94,9 @@ class Ec2(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+    
+    def help(self) -> str:
+        return super().help()
 
     def execute(self, *args, **kwargs):
         """
@@ -103,6 +129,9 @@ class SecurityGroup(SubCommandPlugin):
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+    
+    def help(self) -> str:
+        return super().help()
 
     def execute(self, *args, **kwargs):
         """
@@ -136,6 +165,9 @@ class S3(SubCommandPlugin):
         self.args = args
         self.kwargs = kwargs
 
+    def help(self) -> str:
+        return super().help()
+    
     def execute(self, *args, **kwargs):
         """
         Executes the 's3' command.
@@ -159,6 +191,8 @@ class S3(SubCommandPlugin):
                 policy_content = github.get_file_contents(policy, 'main')
                 print(policy_content)
 
+        policy_file_path = os.environ.get("SCRUTINY_POLICY_PATH")
+
         AWSRootCommand.process_data_internal(
             self,
             json_data,
@@ -166,7 +200,7 @@ class S3(SubCommandPlugin):
             region,
             s3_transformation,
             evaluate_object_storage_containers,
-            policy_file_path="policies/object_storage.rego",
+            policy_file_path=policy_file_path,
             endpoint="obj_storage",
         )
 
@@ -183,6 +217,7 @@ class AWSRootCommand(CommandPlugin):
             "s3": S3,
             "security-group": SecurityGroup,
             "rds-mysql": RDSMySQL,
+            "help": Help,
         }
 
     def execute(self, args, *kwargs) -> any:
