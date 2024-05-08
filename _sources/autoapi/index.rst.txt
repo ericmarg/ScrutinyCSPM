@@ -7,7 +7,7 @@ This page contains auto-generated API reference documentation [#f1]_.
    :titlesonly:
 
    /autoapi/src/index
-   /autoapi/azure_policy_check/index
+   /autoapi/policy_check/index
    /autoapi/ansible_vault_encryption/index
    /autoapi/resource_generator/index
    /autoapi/aws_rds_scan/index
@@ -19,5 +19,9 @@ This page contains auto-generated API reference documentation [#f1]_.
    /autoapi/azure_vnet_scan/index
    /autoapi/azure_virtual_machine_scan/index
    /autoapi/azure_storage_scan/index
+   /autoapi/execute_bucket_info/index
+   /autoapi/aws_ec2_ansible_scan/index
+   /autoapi/aws_s3_bucket_ansible_scan/index
+   /autoapi/aws_rds_mysql_scan/index
 
 .. [#f1] Created with `sphinx-autoapi <https://github.com/readthedocs/sphinx-autoapi>`_

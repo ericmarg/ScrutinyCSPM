@@ -17,7 +17,7 @@ Classes
 
 
 
-.. py:class:: AzureResource
+.. py:class:: AzureResource(subscription_id: str, tenant_id: str, client_id: str, client_secret: str, client_certificate: str)
 
 
    Bases: :py:obj:`Protocol`

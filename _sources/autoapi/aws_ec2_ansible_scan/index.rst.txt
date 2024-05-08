@@ -1,0 +1,26 @@
+:py:mod:`aws_ec2_ansible_scan`
+==============================
+
+.. py:module:: aws_ec2_ansible_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_ec2_ansible_scan.AWSEC2Scanner
+
+
+
+
+.. py:class:: AWSEC2Scanner(region, access_key, secret_key)
+
+
+   .. py:method:: run_scan()
+
+
+

@@ -32,4 +32,7 @@ Classes
    .. py:method:: run_scan()
 
 
+   .. py:method:: format_rds_data(rds_data)
+
+
 

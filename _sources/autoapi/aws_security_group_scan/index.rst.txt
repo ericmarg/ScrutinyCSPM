@@ -20,9 +20,7 @@ Classes
 .. py:class:: AWSSecurityGroupScanner(region, access_key, secret_key)
 
 
-   .. py:method:: run_scan(private_data_dir='src/scrutinycspm/resources/playbooks/')
-
-      Run the security group scan using Ansible Runner
+   .. py:method:: run_scan()
 
 
 

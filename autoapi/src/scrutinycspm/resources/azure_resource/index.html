@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="src.scrutinycspm.resources.cloud_account" href="../cloud_account/index.html" />
-    <link rel="prev" title="src.scrutinycspm.resources" href="../index.html" /> 
+    <link rel="prev" title="src.scrutinycspm.resources.azure_cloud_account" href="../azure_cloud_account/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,7 +55,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../azure_policy_check/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_policy_check</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../policy_check/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">policy_check</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../ansible_vault_encryption/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansible_vault_encryption</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../resource_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource_generator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../aws_rds_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_rds_scan</span></code></a></li>
@@ -67,6 +67,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_vnet_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_vnet_scan</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_virtual_machine_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_virtual_machine_scan</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_storage_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_storage_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../execute_bucket_info/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">execute_bucket_info</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_ec2_ansible_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_ec2_ansible_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_s3_bucket_ansible_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_s3_bucket_ansible_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_rds_mysql_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_rds_mysql_scan</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -114,7 +118,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.scrutinycspm.resources.azure_resource.AzureResource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.scrutinycspm.resources.azure_resource.</span></span><span class="sig-name descname"><span class="pre">AzureResource</span></span><a class="headerlink" href="#src.scrutinycspm.resources.azure_resource.AzureResource" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.scrutinycspm.resources.azure_resource.</span></span><span class="sig-name descname"><span class="pre">AzureResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscription_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tenant_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.scrutinycspm.resources.azure_resource.AzureResource" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Protocol</span></code></p>
 <p>Represents an Azure resource.</p>
 <dl class="simple">
@@ -177,7 +181,7 @@ client_certificate (str): The client certificate for accessing the Azure resourc
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="src.scrutinycspm.resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../azure_cloud_account/index.html" class="btn btn-neutral float-left" title="src.scrutinycspm.resources.azure_cloud_account" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../cloud_account/index.html" class="btn btn-neutral float-right" title="src.scrutinycspm.resources.cloud_account" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

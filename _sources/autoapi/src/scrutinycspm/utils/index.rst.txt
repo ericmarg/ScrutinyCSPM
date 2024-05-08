@@ -10,7 +10,6 @@ Subpackages
    :titlesonly:
    :maxdepth: 3
 
-   development/index.rst
    encryption/index.rst
    policy_verification/index.rst
 
@@ -21,8 +20,10 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
+   args/index.rst
    aws_credential_file/index.rst
    azure_credentials/index.rst
    logging_util/index.rst
+   region/index.rst
 
 

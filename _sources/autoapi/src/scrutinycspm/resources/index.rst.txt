@@ -10,8 +10,10 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
+   azure_cloud_account/index.rst
    azure_resource/index.rst
    cloud_account/index.rst
+   generic_data_fetcher/index.rst
    obj_storage_container/index.rst
    resource/index.rst
    security_group/index.rst

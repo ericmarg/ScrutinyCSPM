@@ -1,0 +1,28 @@
+:py:mod:`aws_s3_bucket_ansible_scan`
+====================================
+
+.. py:module:: aws_s3_bucket_ansible_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_s3_bucket_ansible_scan.AWSS3Scanner
+
+
+
+
+.. py:class:: AWSS3Scanner(region, access_key, secret_key)
+
+
+   .. py:method:: run_scan(private_data_dir='src/scrutinycspm/resources/playbooks/')
+
+      Run the RDS bucket scan using Ansible Runner
+
+
+

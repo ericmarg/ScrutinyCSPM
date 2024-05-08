@@ -1,0 +1,32 @@
+:py:mod:`src.scrutinycspm.resources.generic_data_fetcher`
+=========================================================
+
+.. py:module:: src.scrutinycspm.resources.generic_data_fetcher
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.resources.generic_data_fetcher.GenericDataFetcher
+
+
+
+
+.. py:class:: GenericDataFetcher
+
+
+   Bases: :py:obj:`abc.ABC`
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+   .. py:method:: fetch_data()
+      :abstractmethod:
+
+
+

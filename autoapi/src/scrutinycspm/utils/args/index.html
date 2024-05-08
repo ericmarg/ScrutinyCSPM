@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scrutinycspm.utils.development &mdash; ScrutinyCSPM  documentation</title>
+  <title>src.scrutinycspm.utils.args &mdash; ScrutinyCSPM  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
@@ -22,8 +22,8 @@
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="src.scrutinycspm.utils.development.resource_generator" href="resource_generator/index.html" />
-    <link rel="prev" title="src.scrutinycspm.utils" href="../index.html" /> 
+    <link rel="next" title="src.scrutinycspm.utils.aws_credential_file" href="../aws_credential_file/index.html" />
+    <link rel="prev" title="src.scrutinycspm.utils.policy_verification.verify_policy_integrity" href="../policy_verification/verify_policy_integrity/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,7 +55,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../azure_policy_check/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_policy_check</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../policy_check/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">policy_check</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../ansible_vault_encryption/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansible_vault_encryption</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../resource_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource_generator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../aws_rds_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_rds_scan</span></code></a></li>
@@ -67,6 +67,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_vnet_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_vnet_scan</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_virtual_machine_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_virtual_machine_scan</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../azure_storage_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure_storage_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../execute_bucket_info/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">execute_bucket_info</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_ec2_ansible_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_ec2_ansible_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_s3_bucket_ansible_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_s3_bucket_ansible_scan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../aws_rds_mysql_scan/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aws_rds_mysql_scan</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -89,9 +93,9 @@
           <li class="breadcrumb-item"><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src</span></code></a></li>
           <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm</span></code></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils</span></code></a></li>
-      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils.development</span></code></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils.args</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../../../../_sources/autoapi/src/scrutinycspm/utils/development/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../../_sources/autoapi/src/scrutinycspm/utils/args/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -99,15 +103,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-src.scrutinycspm.utils.development">
-<span id="src-scrutinycspm-utils-development"></span><h1><a class="reference internal" href="#module-src.scrutinycspm.utils.development" title="src.scrutinycspm.utils.development"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils.development</span></code></a><a class="headerlink" href="#module-src.scrutinycspm.utils.development" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="resource_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils.development.resource_generator</span></code></a></li>
-</ul>
-</div>
+  <section id="module-src.scrutinycspm.utils.args">
+<span id="src-scrutinycspm-utils-args"></span><h1><a class="reference internal" href="#module-src.scrutinycspm.utils.args" title="src.scrutinycspm.utils.args"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.scrutinycspm.utils.args</span></code></a><a class="headerlink" href="#module-src.scrutinycspm.utils.args" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.scrutinycspm.utils.args.is_arg_present" title="src.scrutinycspm.utils.args.is_arg_present"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_arg_present</span></code></a>(→ bool)</p></td>
+<td><p>Check if a given argument value is present in the tuple of arguments.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.scrutinycspm.utils.args.is_arg_present">
+<span class="sig-prename descclassname"><span class="pre">src.scrutinycspm.utils.args.</span></span><span class="sig-name descname"><span class="pre">is_arg_present</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.scrutinycspm.utils.args.is_arg_present" title="Link to this definition"></a></dt>
+<dd><p>Check if a given argument value is present in the tuple of arguments.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>args (tuple): The tuple of arguments to check.
+arg_value: The argument value to search for.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if the argument value is present in the tuple of arguments, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 </section>
 
@@ -115,8 +137,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="src.scrutinycspm.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="resource_generator/index.html" class="btn btn-neutral float-right" title="src.scrutinycspm.utils.development.resource_generator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../policy_verification/verify_policy_integrity/index.html" class="btn btn-neutral float-left" title="src.scrutinycspm.utils.policy_verification.verify_policy_integrity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../aws_credential_file/index.html" class="btn btn-neutral float-right" title="src.scrutinycspm.utils.aws_credential_file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

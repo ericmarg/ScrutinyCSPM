@@ -1,0 +1,22 @@
+:py:mod:`src.scrutinycspm.utils.region`
+=======================================
+
+.. py:module:: src.scrutinycspm.utils.region
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.region.find_aws_region
+
+
+
+.. py:function:: find_aws_region(args)
+
+

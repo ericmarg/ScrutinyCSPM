@@ -1,0 +1,6 @@
+:py:mod:`src.scrutinycspm.resources.azure_cloud_account`
+========================================================
+
+.. py:module:: src.scrutinycspm.resources.azure_cloud_account
+
+

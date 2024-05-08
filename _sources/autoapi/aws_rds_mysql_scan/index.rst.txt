@@ -1,0 +1,28 @@
+:py:mod:`aws_rds_mysql_scan`
+============================
+
+.. py:module:: aws_rds_mysql_scan
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   aws_rds_mysql_scan.AwsRdsMySQLScanner
+
+
+
+
+.. py:class:: AwsRdsMySQLScanner(region, access_key, secret_key)
+
+
+   .. py:method:: run_scan(private_data_dir='src/scrutinycspm/resources/playbooks')
+
+      Run the RDS bucket scan using Ansible Runner
+
+
+

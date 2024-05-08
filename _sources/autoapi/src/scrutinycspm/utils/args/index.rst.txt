@@ -1,0 +1,31 @@
+:py:mod:`src.scrutinycspm.utils.args`
+=====================================
+
+.. py:module:: src.scrutinycspm.utils.args
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.scrutinycspm.utils.args.is_arg_present
+
+
+
+.. py:function:: is_arg_present(args: tuple, arg_value) -> bool
+
+   Check if a given argument value is present in the tuple of arguments.
+
+   Args:
+       args (tuple): The tuple of arguments to check.
+       arg_value: The argument value to search for.
+
+   Returns:
+       bool: True if the argument value is present in the tuple of arguments, False otherwise.
+
+

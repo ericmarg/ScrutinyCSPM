@@ -1,0 +1,52 @@
+:py:mod:`policy_check`
+======================
+
+.. py:module:: policy_check
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   policy_check.OPAPolicyEval
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   policy_check.vulernabilities
+
+
+
+.. py:class:: OPAPolicyEval
+
+
+   .. py:method:: start_opa_server()
+
+
+   .. py:method:: is_opa_server_running()
+
+
+   .. py:method:: check_connection()
+
+
+   .. py:method:: update_opa_policy_fromfile(filepath, endpoint)
+
+
+   .. py:method:: get_policies_info()
+
+
+   .. py:method:: check_policy_rule(input_data, package_path, rule_name)
+
+
+
+.. py:function:: vulernabilities(configuration_data, endpoint: str, rego_policy: str)
+
+
