@@ -5,7 +5,6 @@ from hydra.core.global_hydra import GlobalHydra
 import json
 import os
 from src.scrutinycspm.resources.development.ansible_scanning.aws_s3_bucket_ansible_scan import AWSS3Scanner
-from src.scrutinycspm.resources.development.bridges.execute_bucket_info import transformation
 
 from tests.unit.base_test_case import BaseTestCase
 

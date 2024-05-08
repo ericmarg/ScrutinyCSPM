@@ -119,12 +119,12 @@ class StorageAccount(SubCommandPlugin):
             print(json_data) 
             return None, None
 
-        if is_arg_present("scan"):
+        if is_arg_present(args=args, arg_value="scan"):
             storage_dict = storage_trasformation(json_data)
             evaluate_object_storage_containers(storage_dict)
-        if is_arg_present("verbose"):
+        if is_arg_present(args=args, arg_value="verbose"):
             print(json_data)
-        if is_arg_present("raw"):
+        if is_arg_present(args=args, arg_value="raw"):
             return json_data, None
         return "Scan completed!", None
 

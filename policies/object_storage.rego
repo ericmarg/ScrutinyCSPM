@@ -74,7 +74,8 @@ enforce_public_access_block := compliant_decision if {
 #  remediation_guidance: obj_storage/enable_mfa_delete.txt
 enforce_aws_s3_mfa_enabled := non_compliant_decision if {
 	input.provider_specific.MFADeleteEnabled = false
-
+	
+	input.provider == "aws"	
 	annotation := rego.metadata.rule()
 	non_compliant_decision := {
 		"provider": input.provider,
