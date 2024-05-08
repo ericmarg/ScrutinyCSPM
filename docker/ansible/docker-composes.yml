@@ -1,0 +1,54 @@
+version: '3'
+name: 'scrutiny-cspm-w-ansible'
+
+services:
+
+  opa:
+    container_name: opa
+    image: openpolicyagent/opa:latest-debug
+    ports:
+      - "8181:8181"
+    command: ["run", "--server"]
+    stdin_open: true
+    tty: true
+    networks:
+      scrutiny-network-1:
+        ipv4_address: 172.16.238.10
+
+  awx-postgres:
+    image: postgres:13
+    container_name: awx-postgres
+    environment:
+      - POSTGRES_DB=awx
+      - POSTGRES_USER=awx
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      scrutiny-network-1:
+        ipv4_address: 172.16.238.20
+
+  awx-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: awx-rabbitmq
+    ports:
+      - "15672:15672" # Map RabbitMQ management port
+    networks:
+      scrutiny-network-1:
+        ipv4_address: 172.16.238.30
+
+  ansible:
+    build:
+      context: ./ansible-svr
+      dockerfile: Dockerfile
+    image: python
+    container_name: ansible
+    command: tail -f /dev/null # Keep container running
+    networks:
+      scrutiny-network-1:
+        ipv4_address: 172.16.238.40
+
+networks:
+  scrutiny-network-1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24

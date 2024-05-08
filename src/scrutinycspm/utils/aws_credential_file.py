@@ -13,7 +13,6 @@ def get_aws_credentials(profile_name: str = "default") -> tuple:
         if profile_name in config.sections():
             access_key = config.get(profile_name, "aws_access_key_id")
             secret_key = config.get(profile_name, "aws_secret_access_key")
-           
 
             return access_key, secret_key, profile_name
         else:

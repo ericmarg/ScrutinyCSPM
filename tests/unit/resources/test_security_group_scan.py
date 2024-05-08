@@ -1,10 +1,10 @@
 import configparser
 import os
 
-from src.scrutinycspm.resources.development.aws_security_group_scan import AWSSecurityGroupScanner
 from hydra.core.global_hydra import GlobalHydra
 import json
 import os
+from src.scrutinycspm.resources.development.aws_security_group_scan import AWSSecurityGroupScanner
 
 from tests.unit.base_test_case import BaseTestCase
 

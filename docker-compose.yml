@@ -17,3 +17,4 @@ services:
     image: openpolicyagent/opa:latest-debug
     ports:
       - "8181:8181"
+      

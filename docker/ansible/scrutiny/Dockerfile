@@ -9,7 +9,7 @@ RUN apt-get update && \
 WORKDIR /scrutinycspm
 
 # Copy the project files to the working directory
-COPY . .
+COPY ../../../. .
 
 # Create a virtual environment
 RUN python3 -m venv venv

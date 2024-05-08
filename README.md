@@ -27,13 +27,13 @@ It provides resource scanning and remediation based on Rego policy rules. Scruti
 
 3. Create a .env file to store your Azure credentials        
    ```bash
-   touch .env
+   nano .env
    ```
 Enter the following into your .env file:    \
    AZURE_SUBSCRIPTION_ID=<your_subscription_id>\
    AZURE_TENANT=<your_tenant_id>\
    AZURE_CLIENT_ID=<your_client_id>\
-   AZURE_SECRET=<your_secret>
+   AZURE_SECRET=<your_secret>\
 
 
 4. Add credentials to the running container.

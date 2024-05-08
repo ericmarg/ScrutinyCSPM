@@ -1,4 +1,3 @@
-from src.scrutinycspm.utils.development.resource_generator import generate_resource_classes
 import boto3
 import json
 
@@ -65,5 +64,4 @@ class EC2InstanceRetriever:
         }
         return json.dumps(scan_results, default=str)
 
-
-
+    

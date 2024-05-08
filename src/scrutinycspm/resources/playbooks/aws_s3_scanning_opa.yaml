@@ -1,0 +1,51 @@
+---
+- name: Gather AWS S3 bucket information
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Get list of S3 buckets
+      amazon.aws.s3_bucket_info:
+        bucket_facts:
+          bucket_acl: true
+          bucket_cors: true
+          bucket_encryption: true
+          bucket_tagging: true
+          bucket_versioning: true
+          bucket_location: true
+          bucket_logging: true
+          bucket_policy: true
+          bucket_policy_status: true
+          public_access_block: true
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: s3_buckets
+
+
+    - name: Bucket Data
+      ansible.builtin.debug:
+        msg: "{{ s3_buckets }}"
+
+    - name: Pull Rego policy from GitHub repository
+      uri:
+        url: "https://raw.githubusercontent.com/robertfischer3/scrutiny-policies/main/storage/obj_storage.rego"
+        return_content: true
+      register: rego_policy_response
+
+    - name: Store Rego policy in a variable
+      set_fact:
+        rego_policy_content: "{{ rego_policy_response.content }}"
+        cacheable: true
+
+    - name: Retreived Rego policy content
+      ansible.builtin.debug:
+        msg: "{{ rego_policy_content }}"
+
+    - name: Raw Results AWS S3 bucket information
+      set_fact:
+        raw_s3_results: "{{ s3_buckets | to_json }}"
+        cacheable: true
+
+
+

@@ -1,7 +1,6 @@
 import json
 from azure.identity import ClientSecretCredential
 from azure.mgmt.storage import StorageManagementClient
-
 from src.scrutinycspm.resources.azure_resource import AzureResource
 
 class AzureStorageAccount(AzureResource):
@@ -45,11 +44,17 @@ class AzureStorageAccount(AzureResource):
                 client_secret=self.client_secret
             )
             storage_client = StorageManagementClient(credential, self.subscription_id)
-
             account_details = storage_client.storage_accounts.get_properties(
                 resource_group_name=storage_account.id.split('/')[4],
                 account_name=storage_account.name
             )
+
+            # Get versioning information
+            blob_service_properties = storage_client.blob_services.get_service_properties(
+                resource_group_name=storage_account.id.split('/')[4],
+                account_name=storage_account.name
+            )
+            versioning_enabled = blob_service_properties.is_versioning_enabled
 
             storage_account_details.append({
                 'id': storage_account.id,
@@ -65,7 +70,11 @@ class AzureStorageAccount(AzureResource):
                     'default_action': account_details.network_rule_set.default_action,
                     'ip_rules': [rule.ip_address_or_range for rule in account_details.network_rule_set.ip_rules],
                     'virtual_network_rules': [rule.virtual_network_resource_id for rule in account_details.network_rule_set.virtual_network_rules]
-                }
+                },
+                'versioning_enabled': versioning_enabled,
+                'public_network_access': account_details.public_network_access,
+                'minimum_tls_version': account_details.minimum_tls_version,
+                'allow_shared_key_access': account_details.allow_shared_key_access
             })
 
         return json.dumps(storage_account_details, indent=4)
@@ -84,5 +93,4 @@ class AzureStorageAccount(AzureResource):
             client_secret=client_secret
         )
         storage_client = StorageManagementClient(credential, subscription_id)
-
         return list(storage_client.storage_accounts.list())

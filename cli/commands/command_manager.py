@@ -9,7 +9,7 @@ class SubCommandPlugin(Protocol):
         ...
 
     def help(self) -> str:
-        ...
+        return "No help available yet"
 @add_logging
 class CommandPlugin(Protocol):
 
